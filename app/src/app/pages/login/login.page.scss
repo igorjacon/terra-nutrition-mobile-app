@@ -1,3 +1,8 @@
+
+ion-content {
+
+}
+
 ion-row.login-title {
     padding-left: 2.5vh;
     margin-top: 6vh;
@@ -54,4 +59,18 @@ form {
         --border-radius: 10px;
         
     }   
+}
+
+ion-row.sign-up {
+    ion-col {
+        text-align: center;
+        ion-text {
+            color: #757171;
+            font-size: 0.8rem;
+            font-weight: 600;
+            span {
+                color: black;
+            }
+        }
+    }
 }
