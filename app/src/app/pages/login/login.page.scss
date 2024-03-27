@@ -1,0 +1,57 @@
+ion-row.login-title {
+    padding-left: 2.5vh;
+    margin-top: 6vh;
+    ion-col {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        ion-label {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        ion-icon {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+ion-row.login-logo {
+    margin-top: 8vh;
+    ion-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            height: 150px;
+            margin-bottom: 20px;
+            
+        }
+    }
+    
+}
+
+form {
+    margin: 2.5vh;
+    ion-input {
+        --border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    ion-text {
+     text-align: right;
+     font-weight: 600;
+     font-size: 0.8rem;
+    }
+    ion-button {
+        --background: #05E279;
+        --color: black;
+        text-transform: none;
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: 0;
+        margin-top: 20px;
+        --padding-top: 15px;
+        --padding-bottom: 15px;
+        --border-radius: 10px;
+        
+    }   
+}
