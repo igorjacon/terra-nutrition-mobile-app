@@ -19,23 +19,24 @@
     <ion-input
     fill="outline"
     placeholder="Email"
-    type="email"
-    >
+    type="email">
     </ion-input>
   
     <ion-input
     fill="outline"
     placeholder="Password"
     type="password"
-    >
+    [type]="passIsVisible ? 'text' : 'password'">
+    <ion-button  (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
+      <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
+    </ion-button>
     </ion-input>
-
 
     <ion-text>
       <p>Forgot Password?</p>
     </ion-text>
 
-    <ion-button expand="block">Login</ion-button>
+    <ion-button shape="round" class="login" expand="block">Login</ion-button>
  </form>
    
   <ion-row class="sign-up">
