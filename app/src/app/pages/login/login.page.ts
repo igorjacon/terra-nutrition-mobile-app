@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonRow, IonText, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonButton, IonInput, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem]
+  imports: [IonContent, RouterLink, IonButton, IonInput, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem]
 })
 export class LoginPage implements OnInit {
   passIsVisible: boolean = false;
   currentIconName = "eye-off-outline"
+
+
 
   constructor() {
     addIcons({
