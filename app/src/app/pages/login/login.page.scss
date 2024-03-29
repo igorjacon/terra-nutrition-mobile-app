@@ -1,7 +1,9 @@
-
 ion-content {
+    background: url('/assets/imgs/backgroundtest.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-}
 
 ion-row.login-title {
     margin-left: 2.5vh;
@@ -35,44 +37,6 @@ ion-row.login-logo {
     
 }
 
-// form {
-//     margin: 2.5vh;
-//     ion-input {
-//         --border-radius: 10px;
-//         margin-bottom: 10px;
-//     }
-//     ion-item {
-//         ion-input {
-//             --border-radius: 10px;
-//             margin-bottom: 10px;
-//             ion-button {
-//                 --background: red;
-//                 ion-icon {
-                    
-//                 }
-//             }
-//         }
-//     }
-//     ion-text {
-//      text-align: right;
-//      font-weight: 600;
-//      font-size: 0.8rem;
-//     }
-//     ion-button {
-//         --background: #05E279;
-//         --color: black;
-//         text-transform: none;
-//         font-size: 1.2rem;
-//         font-weight: 400;
-//         letter-spacing: 0;
-//         margin-top: 20px;
-//         --padding-top: 15px;
-//         --padding-bottom: 15px;
-//         --border-radius: 10px;
-        
-//     }   
-// }
-
 form {
     margin-left: 1.5vh;
     margin-right: 1.5vh;
@@ -82,11 +46,11 @@ form {
             --border-radius: 10px;
             ion-button {
                 ion-icon {
-                //  color: #ffc003;
                 color:  #44aa79;
                 }
             }
         }
+
     ion-text {
         padding-right: 40px;
         text-align: right;
@@ -94,11 +58,14 @@ form {
         font-size: 0.8rem;
     }
     ion-button.login {
-        font-size: 0.9rem;
-        // --background: #44aa79;
+        color: black;
+        --border-radius: 10px;
+        letter-spacing: 0;
+        font-size: 1.3rem;
         --background: #44aa79;
         --padding-top: 20px;
         --padding-bottom: 20px;
+        text-transform: none;
     }
 }
 

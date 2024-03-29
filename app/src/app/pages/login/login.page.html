@@ -15,14 +15,16 @@
     </ion-col>
   </ion-row>
 
-  <form class="login-form">
+  <form> 
     <ion-input
+    mode="md"
     fill="outline"
     placeholder="Email"
     type="email">
     </ion-input>
   
     <ion-input
+    mode="md"
     fill="outline"
     placeholder="Password"
     type="password"
@@ -31,13 +33,15 @@
       <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
     </ion-button>
     </ion-input>
-
+  
     <ion-text>
       <p>Forgot Password?</p>
     </ion-text>
+  
+    <ion-button class="login" expand="block">Login</ion-button>
+  </form>
+ 
 
-    <ion-button shape="round" class="login" expand="block">Login</ion-button>
- </form>
    
   <ion-row class="sign-up">
     <ion-col>

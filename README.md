@@ -61,3 +61,14 @@ In Xcode, ensure you have a simulator connected or launched (use the "Window" ->
 
 Click the "Run" button (triangle icon) in the top left corner of Xcode. This will build and launch your Ionic Angular app on the connected simulator.
 
+----- Run Ionic app on xCode --------
+
+Ensure the Xcode is installed, this can be done here: https://developer.apple.com/xcode/
+
+in the termnial execute:
+
+'ng build' to build the web app
+
+'npx capy sync' to copy web assets
+
+and 'npx casp run ios' to run the app on ios
