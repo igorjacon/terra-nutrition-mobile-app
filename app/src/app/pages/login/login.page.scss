@@ -7,7 +7,7 @@ ion-content {
 
 ion-row.login-title {
     margin-left: 2.5vh;
-    margin-top: 6vh;
+    margin-top: 4vh;
     ion-col {
         display: flex;
         align-items: center;
@@ -38,8 +38,8 @@ ion-row.login-logo {
 }
 
 form {
-    margin-left: 1.5vh;
-    margin-right: 1.5vh;
+    padding-left: 2.5vh;
+    padding-right: 2.5vh;
         ion-input {
             margin-bottom: 10px;
             --padding-start: 20px;
@@ -63,8 +63,7 @@ form {
         letter-spacing: 0;
         font-size: 1.3rem;
         --background: #44aa79;
-        --padding-top: 20px;
-        --padding-bottom: 20px;
+        --background-activated: #60b48b;
         text-transform: none;
     }
 }
