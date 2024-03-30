@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="ion-padding">
 
   <ion-row class="login-title">
     <ion-col>
@@ -8,18 +8,19 @@
       <ion-icon name="person-outline"></ion-icon>
     </ion-col>
   </ion-row>
-
+  
   <ion-row class="login-logo">
     <ion-col>
-    <img src="assets/imgs/logo.png">
+      <img src="assets/imgs/logo.png">
     </ion-col>
   </ion-row>
 
+  
   <form> 
     <ion-input
     mode="md"
     fill="outline"
-    placeholder="Email"
+    placeholder="Email address"
     type="email">
     </ion-input>
   
@@ -38,14 +39,14 @@
       <p>Forgot Password?</p>
     </ion-text>
   
-    <ion-button class="login" size="large" expand="block">Login</ion-button>
+    <ion-button [routerLink]="['/forgot-password']" class="login" size="large" expand="block">Login</ion-button>
   </form>
  
 
    
   <ion-row class="sign-up">
     <ion-col>
-      <ion-text>Don't have an account? <span [routerLink]="['/sign-up']">Sign Up</span></ion-text>
+      <ion-text>Don't have an account? <span [routerLink]="['/forgot-password']">Sign Up</span></ion-text>
     </ion-col>
   </ion-row>
 
