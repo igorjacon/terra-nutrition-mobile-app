@@ -21,7 +21,12 @@ ion-row.login-title {
     }
 }
 
-ion-row.login-logo {
+ion-toast {
+    --background: rgb(253, 181, 181);
+    color:  rgb(179, 23, 23);
+}
+
+ion-row.logo {
     margin-top: 8vh;
     ion-col {
         display: flex;
@@ -37,7 +42,7 @@ ion-row.login-logo {
 }
 
 form {
-        ion-input {
+        ion-input:first-child {
             margin-bottom: 10px;
             --padding-start: 20px;
             --border-radius: 10px;
@@ -48,12 +53,32 @@ form {
             }
         }
 
-    ion-text {
-        padding-right: 40px;
-        text-align: right;
-        font-weight: 600;
-        font-size: 0.8rem;
-    }
+        ion-input {
+            --padding-start: 20px;
+            --border-radius: 10px;
+            ion-button {
+                ion-icon {
+                color:  #44aa79;
+                }
+            }
+        }
+        
+
+        ion-row {
+
+            margin-bottom: 20px;
+            ion-col {
+                padding: 0;
+                margin: 0;
+                p {
+                    font-weight: 600;
+                    font-size: 0.8rem;
+                    display: inline-block;
+                }
+            }
+        }
+        
+    
     ion-button.login {
         color: black;
         --border-radius: 10px;

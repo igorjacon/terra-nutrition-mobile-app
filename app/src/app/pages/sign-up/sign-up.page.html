@@ -1,13 +1,61 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>sign-up</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="ion-padding">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">sign-up</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-row class="login-title">
+    <ion-col>
+      <ion-label>
+        Sign Up
+      </ion-label>
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row class="logo">
+    <ion-col>
+      <img src="assets/imgs/logo.png">
+    </ion-col>
+  </ion-row>
+
+  
+  <form> 
+
+
+    <ion-input
+    mode="md"
+    fill="outline"
+    placeholder="Email address"
+    type="email">
+    </ion-input>
+  
+    <ion-input
+    mode="md"
+    fill="outline"
+    placeholder="Password"
+    type="password"
+    [type]="passIsVisible ? 'text' : 'password'"
+    
+    >
+    <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
+      <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
+    </ion-button>
+    </ion-input>
+
+      
+    <ion-input
+    mode="md"
+    fill="outline"
+    placeholder="Confirm Password"
+    type="password">
+    </ion-input>
+
+    <ion-button class="sign-up" size="large" expand="block">Sign Up</ion-button>
+  </form>
+ 
+
+   
+  <ion-row class="log-in">
+    <ion-col>
+      <ion-text>Already have an account? <span [routerLink]="['/login']">Log in</span></ion-text>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

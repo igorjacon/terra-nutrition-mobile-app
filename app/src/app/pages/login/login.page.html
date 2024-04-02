@@ -8,38 +8,52 @@
       <ion-icon name="person-outline"></ion-icon>
     </ion-col>
   </ion-row>
+
+  <ion-toast
+  isOpen="{{showErrorToast}}"
+  message="{{errorToastText}}"
+  duration="2000"
+  position="top"
+  (ionToastDidDismiss)="showErrorToast = false">
+  </ion-toast>
   
-  <ion-row class="login-logo">
+  <ion-row class="logo">
     <ion-col>
       <img src="assets/imgs/logo.png">
     </ion-col>
   </ion-row>
 
   
-  <form> 
+  <form [formGroup]="applyForm" (submit)="submitLogin($event)"> 
     <ion-input
+    formControlName="email"
+    id="email"
+    type="email"
     mode="md"
     fill="outline"
-    placeholder="Email address"
-    type="email">
+    placeholder="Email address">
     </ion-input>
   
     <ion-input
+    formControlName="password"
+    id="password"
+    type="password"
     mode="md"
     fill="outline"
     placeholder="Password"
-    type="password"
     [type]="passIsVisible ? 'text' : 'password'">
-    <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
+    <ion-button type="submit" (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
       <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
     </ion-button>
     </ion-input>
   
-    <ion-text [routerLink]="['/forgot-password']">
-      <p>Forgot Password?</p>
-    </ion-text>
-  
-    <ion-button [routerLink]="['/forgot-password']" class="login" size="large" expand="block">Login</ion-button>
+    <ion-row>
+      <ion-col class="ion-text-end">
+        <p [routerLink]="['/forgot-password']">Forgot Password?</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-button type="submit" class="login" size="large" expand="block">Login</ion-button>
   </form>
  
 
