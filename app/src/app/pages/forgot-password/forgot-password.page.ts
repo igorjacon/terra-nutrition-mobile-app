@@ -13,16 +13,18 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [IonContent, ReactiveFormsModule, IonToast, IonButtons, IonBackButton, RouterLink, IonButton, IonInput, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem]
 })
 export class ForgotPasswordPage implements OnInit {
-  showErrorToast = false;
-  errorToastText = "";
-  showSuccessToast = false;
-  successToastText = "";
+  showErrorToast = false; //boolean value on whether or not to show the errorToast
+  errorToastText = ""; //the text that will be used in the errorToast
+  showSuccessToast = false; //boolean value on whether or not to show the successToast
+  successToastText = ""; //the text that will be used in the successToast
 
    //representation of form controls that make up a form
+   //allows easy access to the values in the form
    applyForm = new FormGroup({
     email: new FormControl('')
   });
 
+  //adds icons to the page for use
   constructor() {
     addIcons({lockClosedOutline, arrowBack})
    }
@@ -31,6 +33,7 @@ export class ForgotPasswordPage implements OnInit {
   }
 
     //uses a regular expression to check the email is valid
+    //if the input the user matches the expression, then the email is valid otherwise returns null
     checkEmail(email: string) {
       return String(email)
       .toLowerCase()
@@ -40,6 +43,13 @@ export class ForgotPasswordPage implements OnInit {
     }
   
 
+    /**
+     * The sendEmail method
+     * @param event 
+     * 
+     * This method is called when the send email button is pressed so a user can get an email to recover their password
+     * 
+     */
   sendEmail(event: Event) {
     event.preventDefault();
     if(!this.applyForm.value.email) {

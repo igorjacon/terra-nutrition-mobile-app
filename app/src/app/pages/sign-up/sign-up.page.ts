@@ -13,11 +13,26 @@ import { RouterLink } from '@angular/router';
   imports: [IonContent, RouterLink, IonButton, IonInput, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem]
 })
 export class SignUpPage implements OnInit {
-  passIsVisible: boolean = false;
-  currentIconName: string = "eye-off-outline";
-  password: string = "";
+  passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not
+  currentIconName: string = "eye-off-outline"; //name of the icon that will be displayed in the password input
+  password: string = ""; 
 
-  
+  //if already a user, display toast saying you already have an account? --> connect to back end 
+  //if email not valid, say email is not valid in toast --> regex
+  //if passwords do not match, say passwords are not the same in toast --js ==
+  //if password is too weak (8 letters, one capital letter, one number, one symbol) display toast that says need better password --> regex
+
+
+     //uses a regular expression to check the email is valid
+    //if the input the user matches the expression, then the email is valid otherwise returns null
+    checkEmail(email: string) {
+      return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+    }
+
   constructor() {
     addIcons({
       personOutline,

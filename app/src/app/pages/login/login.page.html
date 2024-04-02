@@ -42,9 +42,9 @@
     fill="outline"
     placeholder="Password"
     [type]="passIsVisible ? 'text' : 'password'">
-    <ion-button type="submit" (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
+    <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
       <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
-    </ion-button>
+     </ion-button>
     </ion-input>
   
     <ion-row>
