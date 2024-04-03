@@ -1,7 +1,18 @@
-ion-content {
-    --background: url('/assets/imgs/page-graphic.png') no-repeat center top;
-    
+.graphic {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+
+ion-content {
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+}
+      
+
 
 
 ion-row.login-title {
