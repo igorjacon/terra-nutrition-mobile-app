@@ -20,6 +20,8 @@ export class SignUpPage implements OnInit {
   errorToastText = ""; //the text that will be used in the errorToast
   showSuccessToast = false; //boolean value on whether or not to show the successToast
   successToastText = ""; //the text that will be used in the successToast
+  showPasswordToast = false;
+  passwordToastText = ""
 
   //Form related
   signupForm: FormGroup;
@@ -78,8 +80,8 @@ export class SignUpPage implements OnInit {
         this.errorToastText = "Invalid email format.";
         this.showErrorToast = true;
       } else if (errors?.['passwordstrengtherror']) {
-        this.errorToastText = "Your password requires a minimum length of 8 characters and needs an uppercase and lowercase character.";
-        this.showErrorToast = true;
+        this.passwordToastText = "Your password requires a minimum length of 8 characters and needs an uppercase and lowercase character.";
+        this.showPasswordToast = true;
       } 
     } else {
       this.successToastText = "Sign up email sent."

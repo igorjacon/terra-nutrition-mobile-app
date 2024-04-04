@@ -5,7 +5,7 @@
     width: 100%;
 }
 
-ion-toast.error-toast {
+ion-toast.error-toast, ion-toast.password-toast {
     --background: rgb(253, 181, 181);
     color:  rgb(179, 23, 23);
 }

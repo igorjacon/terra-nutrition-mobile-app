@@ -18,6 +18,15 @@
   (ionToastDidDismiss)="showSuccessToast = false">
   </ion-toast>
   
+  <ion-toast
+  class="password-toast"
+  isOpen="{{showPasswordToast}}"
+  message="{{passwordToastText}}"
+  duration="11000"
+  position="top"
+  (ionToastDidDismiss)="showPasswordToast = false">
+  </ion-toast>
+  
   <img class="graphic" src="/assets/imgs/page-graphic.png"/>
   <ion-row class="login-title">
     <ion-col>
