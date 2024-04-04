@@ -3,7 +3,7 @@ import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonImg, IonInput, Io
 import {personOutline, eyeOutline, eyeOffOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 
 @Component({
@@ -22,8 +22,8 @@ export class LoginPage implements OnInit {
 
   //representation of form controls that make up a form
   applyForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl('')
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
   
   //adds the icons that will be used in the page

@@ -1,4 +1,23 @@
 <ion-content>
+
+  <ion-toast
+  class="error-toast"
+  isOpen="{{showErrorToast}}"
+  message="{{errorToastText}}"
+  duration="2000"
+  position="top"
+  (ionToastDidDismiss)="showErrorToast = false">
+  </ion-toast>
+  
+  <ion-toast
+  class="success-toast"
+  isOpen="{{showSuccessToast}}"
+  message="{{successToastText}}"
+  duration="2000"
+  position="top"
+  (ionToastDidDismiss)="showSuccessToast = false">
+  </ion-toast>
+  
   <img class="graphic" src="/assets/imgs/page-graphic.png"/>
   <ion-row class="login-title">
     <ion-col>
@@ -16,10 +35,12 @@
   </ion-row>
 
   
-  <form> 
+  <form [formGroup]="signupForm" (ngSubmit)="signUp()" novalidate> 
 
 
     <ion-input
+    formControlName="email"
+    id="email"
     mode="md"
     fill="outline"
     placeholder="Email address"
@@ -27,6 +48,8 @@
     </ion-input>
   
     <ion-input
+    formControlName="password"
+    id="password"
     mode="md"
     fill="outline"
     placeholder="Password"
@@ -41,13 +64,15 @@
 
       
     <ion-input
+    formControlName="confirmPassword"
+    id="confirmPassword"
     mode="md"
     fill="outline"
     placeholder="Confirm Password"
     type="password">
     </ion-input>
 
-    <ion-button class="sign-up" size="large" expand="block">Sign Up</ion-button>
+    <ion-button type="submit" class="sign-up" size="large" expand="block">Sign Up</ion-button>
   </form>
  
 

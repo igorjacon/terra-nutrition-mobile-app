@@ -3,7 +3,7 @@ import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonHeader, Io
 import {arrowBack, lockClosedOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,7 +21,7 @@ export class ForgotPasswordPage implements OnInit {
    //representation of form controls that make up a form
    //allows easy access to the values in the form
    applyForm = new FormGroup({
-    email: new FormControl('')
+    email: new FormControl('', Validators.required)
   });
 
   //adds icons to the page for use

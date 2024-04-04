@@ -2,6 +2,17 @@
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+}
+
+ion-toast.error-toast {
+    --background: rgb(253, 181, 181);
+    color:  rgb(179, 23, 23);
+}
+
+ion-toast.success-toast {
+    --background: rgb(127, 216, 127);
+    color:  rgb(18, 80, 18);
 }
 
 
