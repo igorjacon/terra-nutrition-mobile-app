@@ -17,5 +17,13 @@ export const routes: Routes = [
   {
     path: 'sign-up',
     loadComponent: () => import('./pages/sign-up/sign-up.page').then( m => m.SignUpPage)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.routes').then( m => m.routes)
+  },
+  {
+    path: 'intake-form',
+    loadComponent: () => import('./pages/intake-form/intake-form.page').then( m => m.IntakeFormPage)
   }
 ];

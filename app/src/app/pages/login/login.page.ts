@@ -19,9 +19,16 @@ export class LoginPage implements OnInit {
   showErrorToast = false; //whether or not the popup toast is showing or not
   errorToastText = ""; //text which will display in the toast
 
+  userID = "";
+
+  //THIS PAGE WILL USE API CONTROLLER SERVICE TO:
+  //- CHECK IF A USER EXISTS IN THE DATABASE by looking at email value compared to database values
+  //-- if they exist, check if the email and password match the database
+  //---if they match, 
+
 
   //representation of form controls that make up a form
-  applyForm = new FormGroup({
+  loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   });
@@ -54,15 +61,22 @@ export class LoginPage implements OnInit {
    }
 
 
-  submitLogin(event: Event) {
-    event.preventDefault();
-    if(!this.applyForm.value.email || !this.applyForm.value.password) {
+   //this method will probs be await/async as we wait for database response
+  submitLogin() {
+    if(!this.loginForm.valid) {
       this.errorToastText = "You must provide an email and password to log in."
       this.showErrorToast = true;
+    } 
+      //use the email and password to get a userID
+      //set the this.userID 
+
+      //check if email and password match
+      //this.api.login()
+
     }
 
   }
 
-  }
+  
 
 

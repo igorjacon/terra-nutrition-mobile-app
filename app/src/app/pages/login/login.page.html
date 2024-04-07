@@ -25,7 +25,7 @@
   </ion-row>
 
   
-  <form [formGroup]="applyForm" (submit)="submitLogin($event)"> 
+  <form [formGroup]="loginForm" (ngSubmit)="submitLogin()"> 
     <ion-input
     formControlName="email"
     id="email"
