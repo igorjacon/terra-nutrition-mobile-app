@@ -15,8 +15,8 @@ import { AuthConstants } from 'src/app/config/auth-constants';
   styleUrls: ['./login.page.scss'],
   standalone: true,
   imports: [
-    IonContent, IonToast, RouterLink, IonButton, IonInput, 
-    IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, 
+    IonContent, IonToast, RouterLink, IonButton, IonInput,
+    IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle,
     IonIcon, IonText, IonItem, ReactiveFormsModule, CommonModule
   ]
 })
@@ -30,15 +30,15 @@ export class LoginPage implements OnInit {
   isInvalid: boolean = false;
 
   //representation of form controls that make up a form
-  loginForm: FormGroup = this.formBuilder.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
+  loginForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
-  
+
   //adds the icons that will be used in the page
   constructor(
-    private authService: AuthService, 
-    private formBuilder: FormBuilder, 
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
     private storageService: StorageService,
     private router: Router
     ) {

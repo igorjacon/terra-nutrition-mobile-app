@@ -3,8 +3,8 @@ import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, I
 import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline, personAddOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { RouterLink } from '@angular/router';
-import { FormControl, AbstractControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { passwordMatchValidator, passwordStrengthValidator, emailRegex, emailValidator, passwordRegexStrong } from './form-validation';
+import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import { FormValidationService } from 'src/app/services/form-validation.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,18 +25,13 @@ export class SignUpPage implements OnInit {
 
   //Form related
   signupForm: FormGroup;
-  emailRegex = emailRegex;
-  passwordRegexStrong = passwordRegexStrong;
-  passwordMatchValidator = passwordMatchValidator;
-  emailValidator = emailValidator;
-  passwordStrengthValidtor = passwordStrengthValidator;
 
   //if already a user, display toast saying you already have an account? --> connect to back end 
   //if email not valid, say email is not valid in toast --> regex
   //if passwords do not match, say passwords are not the same in toast --js ==
   //if password is too weak (8 letters, one capital letter, one number, one symbol) display toast that says need better password --> regex
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private formValidator: FormValidationService ) {
     addIcons({
       personOutline,
       personCircleOutline,
@@ -45,13 +40,13 @@ export class SignUpPage implements OnInit {
       personAddOutline
     });
     
-
-    this.signupForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.pattern(this.emailRegex)]),
-      password: new FormControl(null, [Validators.required, Validators.pattern(this.passwordRegexStrong)]),
+    //sets up the form consisting of three input fields which take data from the user so they can create an account/sign up (email, password, confirm passwrd)
+    this.signupForm = this.formBuilder.group({
+      email: new FormControl(null, [Validators.required, Validators.pattern(this.formValidator.emailRegex)]),
+      password: new FormControl(null, [Validators.required, Validators.pattern(this.formValidator.passwordRegexStrong)]),
       confirmPassword: new FormControl(null, [Validators.required])
     },
-    {validators: [this.emailValidator, this.passwordMatchValidator, this.passwordStrengthValidtor]}
+    {validators: [this.formValidator.emailValidator, this.formValidator.passwordMatchValidator, this.formValidator.passwordStrengthValidator]}
     );
 
   }
