@@ -12,9 +12,6 @@ ion-content {
     --padding-start: 20px;
     --padding-end: 20px;
 }
-      
-
-
 
 ion-row.login-title {
     margin-top: 6vh;
@@ -53,6 +50,15 @@ ion-row.logo {
         }
     }
     
+}
+
+ion-col.danger-warning {
+    background: var(--ion-color-warning-soft);
+    color: var(--ion-color-warning-danger);
+    padding: 15px;
+    margin: 20px;
+    border-radius: 0.25rem;
+    border-color: #f5c6cb;
 }
 
 form {
