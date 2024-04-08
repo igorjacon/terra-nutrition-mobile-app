@@ -4,14 +4,15 @@
   </ion-toolbar>
 </ion-header>
 
-  <ion-content class="ion-padding">
-    @if (userHasCompletedIntakeForm) {
-      @if (userHasMealPlans) {
-        <p>Look at these cool af meal plans!</p>
-      } @else {
-        <p>Your intake form has been submitted. <br><br> Camila is currently implementing your meal plan! Once complete, it will appear here.</p>
-      }
+<ion-content class="ion-padding">
+  <ion-title size="large">Hello {{ user?.firstName }}</ion-title>
+  @if (userHasCompletedIntakeForm) {
+    @if (userHasMealPlans) {
+      <p>Look at these cool af meal plans!</p>
     } @else {
-      <p>pretend this is an intake form</p>
+      <p>Your intake form has been submitted. <br><br> Camila is currently implementing your meal plan! Once complete, it will appear here.</p>
     }
-  </ion-content>
+  } @else {
+    <p>pretend this is an intake form</p>
+  }
+</ion-content>
