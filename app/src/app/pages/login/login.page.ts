@@ -24,8 +24,6 @@ import { AuthConstants } from 'src/app/config/auth-constants';
 export class LoginPage implements OnInit {
   passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not
   currentIconName: string = "eye-off-outline"; //name of the icon that will be displayed in the password input
-  showErrorToast = false; //whether or not the popup toast is showing or not
-  errorToastText = ""; //text which will display in the toast
   errorMsg: string = "";
   isInvalid: boolean = false;
 
@@ -67,43 +65,45 @@ export class LoginPage implements OnInit {
   loginAction(event: Event) {
     event.preventDefault();
     if(!this.loginForm.value.email || !this.loginForm.value.password) {
-      this.errorToastText = "You must provide an email and password to log in."
-      this.showErrorToast = true;
-    }
-
-    const payload = {
-      'username': this.loginForm.value.email,
-      'password': this.loginForm.value.password
-    }
-
-    this.authService.authenticate(payload).subscribe(
-      (response) => {
-        // Handle successful authentication
-        this.isInvalid = false;
-        this.errorMsg = "";
-        this.loginForm.reset();
-
-        // Store token in storage
-        let token = response.token;
-        let refreshToken = response.refreshToken;
-        this.storageService.store(AuthConstants.ACCESS_TOKEN,token);
-        this.storageService.store(AuthConstants.REFRESH_TOKEN,refreshToken);
-
-        // Get user data
-        this.authService.fetchUserInfo(response.userId, token, refreshToken).subscribe((res) => {
-          if (res) {
-            this.storageService.store(AuthConstants.USER_DATA, res);
-            // Redirect user to dashboard
-            this.router.navigate(['/customer/dashboard']);
-          }
-        });
-      },
-      (error) => {
-        // Handle authentication error
-        this.isInvalid = true;
-        this.errorMsg = error.error.message;
+      this.isInvalid = true;
+      this.errorMsg = "You must provide an email and password before logging in."
+    } else {
+      const payload = {
+        'username': this.loginForm.value.email,
+        'password': this.loginForm.value.password
       }
-    );
+  
+      this.authService.authenticate(payload).subscribe(
+        (response) => {
+          // Handle successful authentication
+          this.isInvalid = false;
+          this.errorMsg = "";
+          this.loginForm.reset();
+  
+          // Store token in storage
+          let token = response.token;
+          let refreshToken = response.refreshToken;
+          this.storageService.store(AuthConstants.ACCESS_TOKEN,token);
+          this.storageService.store(AuthConstants.REFRESH_TOKEN,refreshToken);
+  
+          // Get user data
+          this.authService.fetchUserInfo(response.userId, token, refreshToken).subscribe((res) => {
+            if (res) {
+              this.storageService.store(AuthConstants.USER_DATA, res);
+              // Redirect user to dashboard
+              this.router.navigate(['/customer/dashboard']);
+            }
+          });
+        },
+        (error) => {
+          // Handle authentication error
+          this.isInvalid = true;
+          this.errorMsg = error.error.message;
+        }
+      );
+    }
+
+    
   }
 }
 
