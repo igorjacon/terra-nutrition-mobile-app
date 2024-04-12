@@ -27,9 +27,9 @@ export class HttpService {
   get(serviceName: string, accessToken: string | null = null, refreshToken: string | null = null) {
     let headers = {}
     if (accessToken) {
-      headers = {
-        Authorization: 'Bearer' + accessToken
-      }
+      headers = new HttpHeaders({
+        'Authorization': `Bearer ${accessToken}`
+      });
     }
     const options = { headers: headers};
     const url = environment.api_base_url + serviceName;
