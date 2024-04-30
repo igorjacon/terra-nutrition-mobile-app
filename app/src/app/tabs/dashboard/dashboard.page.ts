@@ -17,6 +17,7 @@ export class DashboardPage implements OnInit {
   userHasCompletedIntakeForm = true;
   userHasMealPlans = false;
   user: any;
+  test: any;
 
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
@@ -26,6 +27,8 @@ export class DashboardPage implements OnInit {
 
     this.authService.userData$.subscribe((res:any) => {
       this.user = res;
+      console.log(res.id)
+      console.log(res)
     });
   }
 

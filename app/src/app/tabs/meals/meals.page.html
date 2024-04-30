@@ -1,10 +1,93 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Meal plan</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content class="ion-padding" >
-  Meal plans here
+<ion-content>
+  <div class="meal-page-header">
+    <p class="meal-page-title">Meal Plan</p>
+    <div class="date-today">
+      <div class="date-circle">
+        <p class="date-circle-number">10</p>
+      </div>
+      <p class="date-day">Mon</p>
+    </div>
+  </div>
+
+
+  <swiper-container space-between="10" slides-per-view="2.3">
+    <swiper-slide>Breakfast</swiper-slide>
+    <swiper-slide>Lunch</swiper-slide>
+    <swiper-slide>Snack</swiper-slide>
+    <swiper-slide>Dinner</swiper-slide>
+  </swiper-container>
+
+  <div class="row-container">
+        <ion-list>
+          <ion-item lines="none" class="list-header">
+            <ion-label>
+              <h2>Option 1</h2>
+            </ion-label>
+            <ion-radio-group slot="end" [allowEmptySelection]="true">
+              <ion-radio></ion-radio>
+            </ion-radio-group>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>Oatmeal</h2>
+              <p>350 calories</p>
+            </ion-label>
+            <ion-avatar>
+              <img src="assets/imgs/oatmeal.jpg"/>
+            </ion-avatar>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>Protein shake</h2>
+              <p>250 calories</p>
+            </ion-label>
+            <ion-avatar>
+              <img src="assets/imgs/protein-shake.jpg"/>
+            </ion-avatar>
+          </ion-item>
+          <ion-item lines="none" class="meal-footer">
+            Notes
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item lines="none" class="list-header">
+            <ion-label>
+              <h2>Option 2</h2>
+            </ion-label>
+            <ion-note slot="end">600 calories</ion-note>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>Oatmeal</h2>
+              <p>350 calories</p>
+            </ion-label>
+            <ion-avatar>
+              <img src="assets/imgs/oatmeal.jpg"/>
+            </ion-avatar>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>Protein shake</h2>
+              <p>250 calories</p>
+            </ion-label>
+            <ion-avatar>
+              <img src="assets/imgs/protein-shake.jpg"/>
+            </ion-avatar>
+          </ion-item>
+          <ion-item class="meal-footer">
+            Test
+          </ion-item>
+        </ion-list>
+  </div>
+
 </ion-content>
