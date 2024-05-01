@@ -1,17 +1,29 @@
 ion-header { 
-    --background: green;
     ion-toolbar {
-        --background: rgb(19, 129, 19);
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-        --padding-start: 20px;
-        --padding-end: 20px;
+        --background: #45b683;
+        --padding-top: 5px;
+        --padding-bottom: 5px;
         ion-title {
 
         }
         ion-icon {
             font-size: 40px;
-            color: white;
+            color: rgb(255, 255, 255);
+        }
+        .logo {
+            margin: 0 auto;
+            background-color: rgb(219, 243, 219);
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 60px;
+
+            img {
+                height: 40px;
+            }
+
         }
     }
 }
@@ -21,38 +33,51 @@ ion-content {
     --padding-start: 35px;
     --padding-end: 35px;
     .meal-page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        // margin-bottom: 10px;
+        .banner {
+            // background-color: red;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         .meal-page-title {
             font-size: 30px;
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
             font-weight: 600;
         }
-        .date-today {
-            // margin-top: ;
-            .date-circle {
-                height: 45px;
-                width: 45px;
-                // background-color: red;
-                border-radius: 30px;
-                border: 1px solid rgb(182, 182, 182);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-weight: 600;
-                margin-top: 30px;
-                .date-circle-number {
-                    color: green;
-                }
-            }
-            .date-day {
-                position: relative;
-                left: 10px;
-                top: -8px;
-                font-size: 12px;
-            }
+        .meal-page-description {
+            margin: 0 0 40px 0;
+            padding: 0;
+            // background-color: red;
+            // grid-column: 1/2;
+        }
+        .date-circle {
+            // gap: 4px;
+            // background-color: red;
+            height: 55px;
+            width: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            // gap: 2px;
+            // background-color: red;
+            border: 1px solid grey;
+            border-radius: 30px;
+            border: 1px solid rgb(182, 182, 182);
+            font-weight: 600;
+            // margin-top: 30px;
+        .date-circle-number {
+            padding: 0;
+            margin: 0;
+            color: green;
+            font-size: 15px;
+        }
+        .date-day {
+            padding: 0;
+            margin: 0;
+            font-size: 10px;
+            font-weight: 600;
+        }
         }
     }
         swiper-container {
@@ -61,48 +86,81 @@ ion-content {
             // height: 100%
             margin-bottom: 40px;
             swiper-slide {
+                padding: 15px;
                 display: flex;
                 align-items: center;
                 justify-content:center;
                 height: 35px;
                 border: 1px solid rgb(182, 182, 182);
                 border-radius: 20px;
+                .meal-category {
+
+                }
+                .meal-time {
+
+                }
             }
         }
 
         .row-container {
-            // border: 1px solid black;
-            
             ion-list {
                 margin-bottom: 20px;
+                // border-left: 1px solid green;
+                // border-right: 1px solid green;
+                // border-bottom: 1px solid green;
                 .list-header {
-                    --background: green;
+                    --background: #44aa79;
                     color: white;
                     border-top-left-radius: 20px;
                     border-top-right-radius: 20px;
+                    // border-bottom-left-radius: 20px;
+                    // border-bottom-right-radius: 20px;
                 }
                     ion-item {
-                        // border: 1px solid black;
                         border-right: 1px solid green;
-                        border-bottom: 1px solid green;
+                        // border-bottom: 1px solid green;
                         border-left: 1px solid green;
-                        
+                        // border-bottom: 1px solid green;
+                        .add-meal {
+                            // color: #034226;
+                            font-size: 30px;
+                            // position: absolute;
+                            // top: -px;
+                            // right: 10px;
+                            // top: 10px;
+                            // box-shadow: -4px 9px 25px -6px rgba(0,0,0,0.62);
+                            // -webkit-box-shadow: -4px 9px 25px -6px rgba(0,0,0,0.62);
+                            // -moz-box-shadow: -4px 9px 25px -6px rgba(0,0,0,0.62);
+                        }
                         ion-note {
                             color: white;
                         }
-                        ion-radio {
-                           
-                          }
                         label {
                             font-size: 11px;
                             // margin-left: 40px;
                         }
+                        .macros {
+                            color: black;
+                            font-size: 10px;
+                            display: flex;
+                            gap: 8px;
+                        }
                     }
                     .meal-footer {
-                        font-size: 14px;
+                        font-size: 12px;
                         border-bottom-left-radius: 20px;
                         border-bottom-right-radius: 20px;
+                        border-bottom: 1px solid green;
+                        ion-icon {
+                            font-size: 25px;
+                        }
                     }
+                }
+                ion-item:last-of-type {
+                    border-bottom: 1px solid green;
+                    border-bottom-left-radius: 20px;
+                    border-bottom-right-radius: 20px;
+                    --padding-bottom: 5px;
                 }
             }
         

@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {register} from 'swiper/element/bundle';
-
+import { personOutline, addCircle, eyeOutline, eyeOffOutline, warningOutline, chevronForwardCircleOutline, chevronDownCircleOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 register();
 
@@ -18,7 +19,13 @@ register();
 })
 export class MealsPage implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    addIcons({
+      chevronDownCircleOutline,
+      chevronForwardCircleOutline,
+      addCircle
+    })
+  }
 
   ngOnInit() {
   }
