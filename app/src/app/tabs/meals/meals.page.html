@@ -31,25 +31,27 @@
 
   <div class="row-container">
 
-    <ion-list *ngFor="let meal of mealData[0].optionGroups; let i = index"> 
-
-      <ion-item lines="none" class="list-header">
-        <ion-label><h2>{{meal.name}}</h2></ion-label>
-        <ion-icon class="add-meal" name="add-circle"></ion-icon>        
-      </ion-item> 
-
-      <ion-item lines="none" *ngFor="let option of meal.options"> 
-        <ion-label>
-          <h2>{{option.name}}</h2>
-          <p>{{option.calories}} Calories</p>
-          <p class="macros"><span class="protein">Protien {{option.proteinGrams}}g</span><span class="fats">Fats {{option.fatGrams}}g</span><span class="carbs">Carbs {{option.carbsGrams}}g</span></p>
-          </ion-label>
-        <ion-avatar>
-          <img src="{{option.img}}"/>
-        </ion-avatar>
-      </ion-item>
-
-    </ion-list>
+    @if(mealsShowing) {
+      <ion-list *ngFor="let meal of mealData[0].optionGroups; let i = index"> 
+  
+        <ion-item lines="none" class="list-header">
+          <ion-label><h2>{{meal.name}}</h2></ion-label>
+          <ion-icon class="add-meal" name="add-circle"></ion-icon>        
+        </ion-item> 
+  
+        <ion-item lines="none" *ngFor="let option of meal.options"> 
+          <ion-label>
+            <h2>{{option.name}}</h2>
+            <p>{{option.calories}} Calories</p>
+            <p class="macros"><span class="protein">Protien {{option.proteinGrams}}g</span><span class="fats">Fats {{option.fatGrams}}g</span><span class="carbs">Carbs {{option.carbsGrams}}g</span></p>
+            </ion-label>
+          <ion-avatar>
+            <img src="{{option.img}}"/>
+          </ion-avatar>
+        </ion-item>
+  
+      </ion-list>
+    }
   </div>
 
 </ion-content>

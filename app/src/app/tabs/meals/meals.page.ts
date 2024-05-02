@@ -22,6 +22,8 @@ export class MealsPage implements OnInit {
   swiperRef: ElementRef | undefined;
   swiperModule = [IonicSlides];
 
+  mealsShowing = false;
+
   mealData = [
     {
       name: "Breakfast",
@@ -46,7 +48,7 @@ export class MealsPage implements OnInit {
       name: "Lunch",
       optionGroups: [
         { 
-          name: "Oatmeal Power Breakfast Lunchh", // Example group name
+          name: "Oatmeal Power Breakfast Lunchh", 
           options: [ 
             { id: 0, name: "Oat Meal", calories: "350", proteinGrams: "20", fatGrams: "10", carbsGrams: "80", img: "assets/imgs/oatmeal.jpg"}, 
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
@@ -54,7 +56,7 @@ export class MealsPage implements OnInit {
           ] 
         },
         { 
-          name: "Oatmeal Power Breakfast 2323223", // Example group name
+          name: "Oatmeal Power Breakfast 2323223", 
           options: [ 
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"}
@@ -66,7 +68,7 @@ export class MealsPage implements OnInit {
       name: "Snacks",
       optionGroups: [
         { 
-          name: "Snackss ooptuin", // Example group name
+          name: "Snackss ooptuin", 
           options: [ 
             { id: 0, name: "Oat Meal", calories: "350", proteinGrams: "20", fatGrams: "10", carbsGrams: "80", img: "assets/imgs/oatmeal.jpg"}, 
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
@@ -74,7 +76,7 @@ export class MealsPage implements OnInit {
           ] 
         },
         { 
-          name: "Scnaks snacks snacks!", // Example group name
+          name: "Scnaks snacks snacks!", 
           options: [ 
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"}
           ] 
@@ -85,14 +87,14 @@ export class MealsPage implements OnInit {
       name: "Dinner",
       optionGroups: [
         { 
-          name: "DINDINDIN ooptuin", // Example group name
+          name: "DINDINDIN ooptuin", 
           options: [ 
             { id: 0, name: "Oat Meal", calories: "350", proteinGrams: "20", fatGrams: "10", carbsGrams: "80", img: "assets/imgs/oatmeal.jpg"}, 
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
           ] 
         },
         { 
-          name: "Dinner 222", // Example group name
+          name: "Dinner 222", 
           options: [ 
             {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
             {id: 0, name: "Oat Meal", calories: "350", proteinGrams: "20", fatGrams: "10", carbsGrams: "80", img: "assets/imgs/oatmeal.jpg"}, 
@@ -100,14 +102,14 @@ export class MealsPage implements OnInit {
          ] 
        },
        { 
-        name: "DINDINDIN ooptuin", // Example group name
+        name: "DINDINDIN ooptuin", 
         options: [ 
           { id: 0, name: "Oat Meal", calories: "350", proteinGrams: "20", fatGrams: "10", carbsGrams: "80", img: "assets/imgs/oatmeal.jpg"}, 
           {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
         ] 
       },
       { 
-        name: "DINDINDIN ooptuin", // Example group name
+        name: "DINDINDIN ooptuin",
         options: [ 
           { id: 0, name: "Oat Meal", calories: "350", proteinGrams: "20", fatGrams: "10", carbsGrams: "80", img: "assets/imgs/oatmeal.jpg"}, 
           {id: 2, name: "Protein Shake", calories: "150", proteinGrams: "50", fatGrams: "15", carbsGrams: "80", img: "assets/imgs/protein-shake.jpg"},
@@ -119,120 +121,6 @@ export class MealsPage implements OnInit {
 
     // ... other meals
   ];
-  
-
-  // mealData = [
-  //   {
-  //     name: "Breakfast",
-  //     options: [
-  //        [ {
-  //         id: 0,
-  //         name: "Oat Meal",
-  //         calories: "350",
-  //         proteinGrams: "20",
-  //         fatGrams: "10",
-  //         carbsGrams: "80",
-  //         img: "assets/imgs/oatmeal.jpg"
-  //       }, 
-  //       {
-  //         id: 1,
-  //         name: "Avocado Toast",
-  //         calories: "250",
-  //         proteinGrams: "10",
-  //         fatGrams: "15",
-  //         carbsGrams: "60",
-  //         img: "assets/imgs/oatmeal.jpg"
-  //       }],
-
-  //       [ {
-  //         id: 0,
-  //         name: "Avocado Toast",
-  //         calories: "250",
-  //         proteinGrams: "10",
-  //         fatGrams: "15",
-  //         carbsGrams: "60",
-  //         img: "assets/imgs/oatmeal.jpg"
-  //       },
-  //       {
-  //         id: 1,
-  //         name: "Protein Shake",
-  //         calories: "150",
-  //         proteinGrams: "50",
-  //         fatGrams: "15",
-  //         carbsGrams: "80",
-  //         img: "assets/imgs/protein-shake.jpg"
-  //       }]
-  //     ]
-  //   }
-  // ]
-    // },
-    // {
-    //   name: "Lunch",
-    //   options: [
-    //     {
-    //       id: 0,
-    //       name: "Oat Meal",
-    //       calories: "350",
-    //       proteinGrams: "20",
-    //       fatGrams: "10",
-    //       carbsGrams: "80",
-    //       img: "assets/imgs/oatmeal.jpg"
-    //     }, 
-    //     {
-    //       id: 1,
-    //       name: "Oat Meal",
-    //       calories: "350",
-    //       proteinGrams: "20",
-    //       fatGrams: "10",
-    //       carbsGrams: "80",
-    //       img: "assets/imgs/oatmeal.jpg"
-    //     }
-    //   ]
-    // },  {
-    //   name: "Snacks",
-    //   options: [
-    //     {
-    //       id: 0,
-    //       name: "Oat Meal",
-    //       calories: "350",
-    //       proteinGrams: "20",
-    //       fatGrams: "10",
-    //       carbsGrams: "80",
-    //       img: "assets/imgs/oatmeal.jpg"
-    //     }, 
-    //     {
-    //       id: 1,
-    //       name: "Oat Meal",
-    //       calories: "350",
-    //       proteinGrams: "20",
-    //       fatGrams: "10",
-    //       carbsGrams: "80",
-    //       img: "assets/imgs/oatmeal.jpg"
-    //     }
-    //   ]
-    // },  {
-    //   name: "Dinner",
-    //   options: [
-    //     {
-    //       id: 0,
-    //       name: "Oat Meal",
-    //       calories: "350",
-    //       proteinGrams: "20",
-    //       fatGrams: "10",
-    //       carbsGrams: "80",
-    //       img: "assets/imgs/oatmeal.jpg"
-    //     }, 
-    //     {
-    //       id: 1,
-    //       name: "Oat Meal",
-    //       calories: "350",
-    //       proteinGrams: "20",
-    //       fatGrams: "10",
-    //       carbsGrams: "80",
-    //       img: "assets/imgs/oatmeal.jpg"
-    //     }
-    //   ]
-    // }]
 
   constructor() { 
     addIcons({
@@ -248,9 +136,14 @@ export class MealsPage implements OnInit {
   slideClick(event: any) {
     // console.log(event)
     const currentIndex = event.detail[0].clickedIndex;
-    const currentSlideName = this.mealData[currentIndex].name
+    // const currentSlideName = this.mealData[currentIndex].name
+    const clickedSlide = this.swiperRef?.nativeElement.swiper.slides[currentIndex]
 
-    console.log(currentSlideName)
+    // if(this.mealsShowing && )
+    clickedSlide.classList.toggle('active');
+    this.mealsShowing = !this.mealsShowing;
+
+    // console.log(currentSlideName)
 
   }
 }
