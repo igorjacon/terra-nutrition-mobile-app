@@ -8,6 +8,7 @@
 
 
 <ion-content>
+
   <div class="meal-page-header">
 
     <div class="banner">
@@ -18,95 +19,37 @@
         </div>
     </div>
 
-    <p class="meal-page-description">Choose an option from each category to track your meals for today</p>
+    <p class="meal-page-description">Choose an option from each category to add to your meal tracker</p>
 
   </div>
 
-
-  <swiper-container space-between="10" slides-per-view="2.3">
-    <swiper-slide>
-        <p class="meal-category">Breakfast</p>
+  <swiper-container #swiper (swipertap)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
+    <swiper-slide *ngFor="let meal of mealData">
+      <p>{{meal.name}}</p>
     </swiper-slide>
-    <swiper-slide>Lunch</swiper-slide>
-    <swiper-slide>Snacks</swiper-slide>
-    <swiper-slide>Dinner</swiper-slide>
   </swiper-container>
 
   <div class="row-container">
-        <ion-list>
-          <ion-item lines="none" class="list-header">
-            <ion-label>
-              <h2>Option 1</h2>
-            </ion-label>
-            <ion-icon class="add-meal" name="add-circle"></ion-icon>
-          </ion-item>
 
-          <ion-item lines="none">
-            <ion-label>
-              <h2>Oatmeal</h2>
-              <p>350 calories</p>
-              <p class="macros"><span style="color: green;">5g Protein</span><span style="color: red;">5g Fat</span> <span style="color: orangered;">60g Carbs</span></p>
+    <ion-list *ngFor="let meal of mealData[0].optionGroups; let i = index"> 
 
-            </ion-label>
-            <ion-avatar>
-              <img src="assets/imgs/oatmeal.jpg"/>
-            </ion-avatar>
-          </ion-item>
+      <ion-item lines="none" class="list-header">
+        <ion-label><h2>{{meal.name}}</h2></ion-label>
+        <ion-icon class="add-meal" name="add-circle"></ion-icon>        
+      </ion-item> 
 
-          <ion-item lines="none">
-            <ion-label>
-              <h2>Protein shake</h2>
-              <p>250 Calories</p>
-              <p class="macros"><span style="color: green;">25g Protein</span><span style="color: red;">20g Fat</span> <span style="color: orangered;">60g Carbs</span></p>
-            </ion-label>
-            <ion-avatar>
-              <img src="assets/imgs/protein-shake.jpg"/>
-            </ion-avatar>
-          </ion-item>
+      <ion-item lines="none" *ngFor="let option of meal.options"> 
+        <ion-label>
+          <h2>{{option.name}}</h2>
+          <p>{{option.calories}} Calories</p>
+          <p class="macros"><span class="protein">Protien {{option.proteinGrams}}g</span><span class="fats">Fats {{option.fatGrams}}g</span><span class="carbs">Carbs {{option.carbsGrams}}g</span></p>
+          </ion-label>
+        <ion-avatar>
+          <img src="{{option.img}}"/>
+        </ion-avatar>
+      </ion-item>
 
-          <!-- <ion-item lines="none" class="meal-footer" detail-icon="chevron-forward-circle-outline">
-            <ion-label slot="start">
-              Nutrition 
-            </ion-label>
-            <ion-icon slot="start" name="chevron-forward-circle-outline"></ion-icon>
-
-            <ion-label slot="end">
-              Notes 
-            </ion-label>
-            <ion-icon slot="end" name="chevron-forward-circle-outline"></ion-icon>
-            
-          </ion-item> -->
-        </ion-list>
-
-        <ion-list>
-          <ion-item lines="none" class="list-header">
-            <ion-label>
-              <h2>Option 1</h2>
-            </ion-label>
-            <ion-icon class="add-meal" name="add-circle"></ion-icon>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>
-              <h2>Oatmeal</h2>
-              <p>350 calories</p>
-            </ion-label>
-            <ion-avatar>
-              <img src="assets/imgs/oatmeal.jpg"/>
-            </ion-avatar>
-          </ion-item>
-          <ion-item lines="none">
-            <ion-label>
-              <h2>Protein shake</h2>
-              <p>250 calories</p>
-            </ion-label>
-            <ion-avatar>
-              <img src="assets/imgs/protein-shake.jpg"/>
-            </ion-avatar>
-          </ion-item>
-          <!-- <ion-item class="meal-footer">
-            Test
-          </ion-item> -->
-        </ion-list>
+    </ion-list>
   </div>
 
 </ion-content>
