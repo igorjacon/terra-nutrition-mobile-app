@@ -32,6 +32,14 @@ ion-content {
     --padding-bottom: 15px;
     --padding-start: 35px;
     --padding-end: 35px;
+    // ion-segment {
+    //     margin-top: 30px;
+    //     ion-segment-button {
+    //         ion-label {
+
+    //         }
+    //     }
+    // }
     .meal-page-header {
         .banner {
             // background-color: red;
@@ -86,8 +94,9 @@ ion-content {
             // height: 100%
             margin-bottom: 30px;
             swiper-slide {
-                color: white;
-                background-color: rgb(57, 155, 52);
+                border: 1px solid rgb(181, 181, 181);
+                font-weight: 600;
+                color: black;
                 padding: 15px;
                 display: flex;
                 align-items: center;
@@ -104,7 +113,9 @@ ion-content {
                 }
             }
             swiper-slide.active {
-                background-color: rgb(68, 182, 62);
+                color: green;
+                border: 1px solid green;
+                font-weight: 600;
             }
         }
 

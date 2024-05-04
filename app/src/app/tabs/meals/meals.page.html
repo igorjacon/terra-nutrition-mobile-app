@@ -8,11 +8,18 @@
 
 
 <ion-content>
-
+  <!-- <ion-segment color="success" value="default">
+    <ion-segment-button value="default">
+      <ion-label>Selection</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Recipes</ion-label>
+    </ion-segment-button>
+  </ion-segment> -->
   <div class="meal-page-header">
 
     <div class="banner">
-      <p class="meal-page-title">My Meals</p>
+      <p class="meal-page-title">Meal Plan</p>
         <div class="date-circle">
           <p class="date-circle-number">10</p>
           <p class="date-day">Mon</p>
@@ -23,35 +30,41 @@
 
   </div>
 
-  <swiper-container #swiper (swipertap)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
-    <swiper-slide *ngFor="let meal of mealData">
+  <swiper-container #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
+    <swiper-slide *ngFor="let meal of mealData; let i = index" [class.active]="i === currentSlideIndex">
       <p>{{meal.name}}</p>
     </swiper-slide>
   </swiper-container>
 
   <div class="row-container">
 
-    @if(mealsShowing) {
-      <ion-list *ngFor="let meal of mealData[0].optionGroups; let i = index"> 
+
+      <ion-list *ngFor="let meal of mealData[currentSlideIndex].optionGroups; let i = index"> 
   
         <ion-item lines="none" class="list-header">
           <ion-label><h2>{{meal.name}}</h2></ion-label>
-          <ion-icon class="add-meal" name="add-circle"></ion-icon>        
+          <!-- <ion-icon class="add-meal" name="add-circle"></ion-icon>    -->
+          <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
+
         </ion-item> 
   
         <ion-item lines="none" *ngFor="let option of meal.options"> 
           <ion-label>
             <h2>{{option.name}}</h2>
             <p>{{option.calories}} Calories</p>
-            <p class="macros"><span class="protein">Protien {{option.proteinGrams}}g</span><span class="fats">Fats {{option.fatGrams}}g</span><span class="carbs">Carbs {{option.carbsGrams}}g</span></p>
+            <!-- <p class="macros"><span class="protein">Protien {{option.proteinGrams}}g</span><span class="fats">Fats {{option.fatGrams}}g</span><span class="carbs">Carbs {{option.carbsGrams}}g</span></p> -->
             </ion-label>
-          <ion-avatar>
+          <ion-avatar slot="start">
             <img src="{{option.img}}"/>
           </ion-avatar>
+          <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
+          <!-- <ion-radio slot="end" aria-label="test"></ion-radio> -->
+          <!-- <ion-radio slot="start" [value]="item.id" [(ngModel)]="selectedItemId" (ionChange)="onRadioChange($event)"></ion-radio> -->
         </ion-item>
+        <!-- <div>yo</div> -->
   
       </ion-list>
-    }
+    
   </div>
 
 </ion-content>
