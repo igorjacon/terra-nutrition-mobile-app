@@ -43,7 +43,7 @@ export class MealsPage implements OnInit {
         {
           name: "Avocado Protein Booster",
           options: [ 
-            { id: 2, name: "Avocado Toast", calories: 250, proteinGrams: 10, fatGrams: 15, carbsGrams: 70, img: "assets/imgs/oatmeal.jpg"}, 
+            { id: 2, name: "Avocado Toast", calories: 250, proteinGrams: 10, fatGrams: 15, carbsGrams: 70, img: "assets/imgs/avocado-toast.jpg"}, 
             { id: 3, name: "Protein Shake", calories: 250, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"}
           ]
         }
@@ -53,18 +53,18 @@ export class MealsPage implements OnInit {
       name: "Lunch",
       optionGroups: [
         { 
-          name: "Oatmeal Power Breakfast Lunchh", 
+          name: "High protein salmon lunch", 
           options: [ 
-            { id: 4, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-            { id: 5, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-            { id: 6, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"}
+            { id: 4, name: "Salmon", calories: 200, proteinGrams: 40, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/salmon.jpg"}, 
+            { id: 5, name: "Scrambled eggs", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/scrambled-eggs.jpg"},
+            { id: 6, name: "Berry Salad", calories: 150, proteinGrams: 20, fatGrams: 5, carbsGrams: 30, img: "assets/imgs/berry-salad.jpg"}
           ] 
         },
         { 
-          name: "Oatmeal Power Breakfast 2323223", 
+          name: "Low-fat cheese burger and fries", 
           options: [ 
-            { id: 7, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-            { id: 8, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"}
+            { id: 7, name: "Cheese burger", calories: 150, proteinGrams: 50, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/cheeseburger.jpg"},
+            { id: 8, name: "Fries", calories: 150, proteinGrams: 50, fatGrams: 5, carbsGrams: 80, img: "assets/imgs/fries.jpg"}
           ] 
         },
       ]
