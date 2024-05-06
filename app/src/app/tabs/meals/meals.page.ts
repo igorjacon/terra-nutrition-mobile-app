@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicSlides } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {register} from 'swiper/element/bundle';
-import { addCircle, chevronForwardCircleOutline, chevronDownCircleOutline } from 'ionicons/icons';
+import { addCircle, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { ModalController } from '@ionic/angular';
 
 register();
 
@@ -26,6 +27,12 @@ export class MealsPage implements OnInit {
   isActive = true;
   currentSlideIndex: number = 0; 
   previousSlideIndex: number = 0;
+  itemIsActive = false;
+  calendarShowing = true;
+  selectedDate = "";
+  currentDate = "";
+  customerMealPlanDate = "2024-04-20T00:00:00"; //this will be the date the customer first recieves their mealplan - make it a minimum value in the date calander
+
 
 
   //temporary static data
@@ -128,13 +135,20 @@ export class MealsPage implements OnInit {
 ];
 
 
-  constructor() { 
+  constructor(private modalController: ModalController) { 
     addIcons({
       chevronDownCircleOutline,
       chevronForwardCircleOutline,
-      addCircle
+      addCircle,
+      calendarOutline
     })
 
+  }
+
+  toggleCalendar() {
+    this.calendarShowing = !this.calendarShowing;
+    console.log('clicked')
+    console.log(this.calendarShowing)
   }
 
   // toggleSlide(slideIndex) {
@@ -142,6 +156,8 @@ export class MealsPage implements OnInit {
   // }
 
   ngOnInit() {
+    this.currentDate = new Date().toISOString();
+    console.log(this.currentDate)
   }
 
   //colour now changes through template binding using currentIndex

@@ -1,8 +1,8 @@
 ion-header { 
     ion-toolbar {
         --background: #45b683;
-        --padding-top: 5px;
-        --padding-bottom: 5px;
+        --padding-top: 15px;
+        --padding-bottom: 15px;
         ion-title {
 
         }
@@ -13,15 +13,15 @@ ion-header {
         .logo {
             margin: 0 auto;
             background-color: rgb(219, 243, 219);
-            width: 55px;
-            height: 55px;
+            width: 35px;
+            height: 35px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 60px;
 
             img {
-                height: 40px;
+                height: 25px;
             }
 
         }
@@ -33,30 +33,58 @@ ion-content {
     --padding-start: 35px;
     --padding-end: 35px;
     // ion-segment {
-    //     margin-top: 30px;
-    //     ion-segment-button {
-    //         ion-label {
 
-    //         }
-    //     }
-    // }
     .meal-page-header {
+        // background-color: green;
+       
+        
+        ion-datetime-button::part(native) {
+            background-color: #58c956;
+            color: white;
+        }
+        
+        
+        ion-datetime {
+            // background-color: red;
+            // --background-rgb: 255, 241, 242;
+            border-radius: 16px;
+            // position: absolute;
+            // top: 50%;
+            // left: 50%;
+            // transform: translate(-50%, -50%);
+            // z-index: 1;
+        }
         .banner {
+            // margin-bottom: 40px;
+            // background-color: blue;
+            // padding: 0;
             // background-color: red;
             display: flex;
-            justify-content: space-between;
+            // flex-direction: column;
+            // align-items: start;
+            // gap: 20px;
             align-items: center;
+            justify-content: space-between;
+            ion-button {
+                font-size: 14px;
+                // width: 47%;
+                margin: 0;
+                padding: 0;
+                --background: #45b683;
+                color: white;
+                font-weight: 600;
+                --background-activated: #7acea8;
+                ion-icon {
+                    margin-left: 10px;
+                }
+           }
+
         }
         .meal-page-title {
             font-size: 30px;
             // margin-bottom: 30px;
             font-weight: 600;
-        }
-        .meal-page-description {
-            margin: 0 0 30px 0;
-            padding: 0;
-            // background-color: red;
-            // grid-column: 1/2;
+            // background-color: orange;
         }
         .date-circle {
             // gap: 4px;
@@ -169,6 +197,9 @@ ion-content {
                             font-size: 25px;
                         }
                     }
+                }
+                .item-is-not-active {
+                    display: none;
                 }
                 ion-item:last-of-type {
                     border-bottom: 1px solid #cbd5d0;
