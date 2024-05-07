@@ -36,11 +36,12 @@ ion-content {
 
     .meal-page-header {
         // background-color: green;
-       
         
         ion-datetime-button::part(native) {
-            background-color: #58c956;
+            background-color: #40b53e;
             color: white;
+            // font-weight: 600;
+            // padding-right: 35px;
         }
         
         
@@ -65,19 +66,7 @@ ion-content {
             // gap: 20px;
             align-items: center;
             justify-content: space-between;
-            ion-button {
-                font-size: 14px;
-                // width: 47%;
-                margin: 0;
-                padding: 0;
-                --background: #45b683;
-                color: white;
-                font-weight: 600;
-                --background-activated: #7acea8;
-                ion-icon {
-                    margin-left: 10px;
-                }
-           }
+            
 
         }
         .meal-page-title {
@@ -86,40 +75,9 @@ ion-content {
             font-weight: 600;
             // background-color: orange;
         }
-        .date-circle {
-            // gap: 4px;
-            // background-color: red;
-            height: 50px;
-            width: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            // gap: 2px;
-            // background-color: red;
-            border: 1px solid grey;
-            border-radius: 30px;
-            border: 1px solid rgb(182, 182, 182);
-            font-weight: 600;
-            // margin-top: 30px;
-        .date-circle-number {
-            padding: 0;
-            margin: 0;
-            color: green;
-            font-size: 15px;
-        }
-        .date-day {
-            padding: 0;
-            margin: 0;
-            font-size: 10px;
-            font-weight: 600;
-        }
-        }
+        
     }
         swiper-container {
-            // background-color: red;
-            // width: 100%;
-            // height: 100%
             margin-bottom: 30px;
             swiper-slide {
                 border: 1px solid rgb(181, 181, 181);
@@ -130,8 +88,6 @@ ion-content {
                 align-items: center;
                 justify-content:center;
                 height: 40px;
-                // box-shadow: -4px 9px 25px -6px rgba(0,0,0,0.62);
-                // border: 1px solid rgb(182, 182, 182);
                 border-radius: 20px;
                 .meal-category {
 
