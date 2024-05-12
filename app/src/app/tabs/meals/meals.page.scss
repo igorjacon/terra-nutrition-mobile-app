@@ -1,8 +1,8 @@
 ion-header { 
     ion-toolbar {
         --background: #45b683;
-        --padding-top: 15px;
-        --padding-bottom: 15px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
         ion-title {
 
         }
@@ -13,15 +13,15 @@ ion-header {
         .logo {
             margin: 0 auto;
             background-color: rgb(219, 243, 219);
-            width: 35px;
-            height: 35px;
+            width: 50px;
+            height: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 60px;
 
             img {
-                height: 25px;
+                height: 40px;
             }
 
         }
@@ -29,10 +29,12 @@ ion-header {
 }
 
 ion-content {
-    --padding-bottom: 15px;
-    --padding-start: 35px;
-    --padding-end: 35px;
-    // ion-segment {
+    
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --padding-start: 30px;
+        --padding-end: 30px;
+    
 
     .meal-page-header {
         // background-color: green;
@@ -55,6 +57,7 @@ ion-content {
             // transform: translate(-50%, -50%);
             // z-index: 1;
         }
+        
         .banner {
             // margin-bottom: 40px;
             // background-color: blue;

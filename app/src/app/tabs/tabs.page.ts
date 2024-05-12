@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {personCircleOutline, menuOutline, settingsOutline, statsChartOutline, nutritionOutline, reorderThreeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { IonTabs, IonTabBar,IonTabButton, IonIcon, IonContent, IonLabel, IonMenu, IonMenuToggle, IonButton } from '@ionic/angular/standalone';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonTabs, IonLabel, IonTabBar, IonTabButton, IonButton, IonIcon, IonContent]
+  imports: [IonTabs, IonLabel, IonTabBar, IonTabButton, IonIcon]
 })
 export class TabsPage implements OnInit {
 
@@ -17,8 +17,6 @@ export class TabsPage implements OnInit {
       personCircleOutline,
       statsChartOutline,
       nutritionOutline,
-      reorderThreeOutline,
-      menuOutline,
       settingsOutline
     })
   }

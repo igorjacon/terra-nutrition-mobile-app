@@ -1,10 +1,12 @@
 <ion-header>
-<ion-toolbar>
-  <ion-title>Dashboard</ion-title>
-</ion-toolbar>
+  <ion-toolbar>
+    <div class="logo">
+      <img src="assets/imgs/logo.png">
+    </div>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <h1>Hello {{ user?.firstName }}</h1>
   @if (userHasCompletedIntakeForm) {
     @if (userHasMealPlans) {
