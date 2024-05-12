@@ -137,6 +137,7 @@ constructor(private modalController: ModalController) {
   this.selectedOptionIndex = Array(this.mealData.length).fill(null);
 }
 
+
 ngOnInit() {
   this.currentDate = new Date().toISOString();
 }

@@ -1,6 +1,6 @@
 ion-header { 
     ion-toolbar {
-        --background: #45b683;
+        --background: #0fa469;
         --padding-top: 10px;
         --padding-bottom: 10px;
         ion-title {
@@ -110,7 +110,8 @@ ion-content {
             ion-list {
                 margin-bottom: 20px;
                 .list-header {
-                    --background: #44aa79;
+                    // --background: #44aa79;
+                    --background: #1eae77;
                     color: white;
                     border-top-left-radius: 20px;
                     border-top-right-radius: 20px;
@@ -120,6 +121,16 @@ ion-content {
                         // border-bottom: 1px solid green;
                         border-left: 1px solid#cbd5d0;
                         // border-bottom: 1px solid green;
+                        ion-checkbox {
+                            --checkmark-color: rgb(37, 87, 29);
+                            --checkbox-background-checked: #69d567;
+                            --border-color: white;
+                            --border-color-checked: white;
+                          }
+                          ion-checkbox::part(mark) {
+                            display: none;
+                          }
+                          
                         .add-meal {
                             // color: #034226;
                             font-size: 30px;
