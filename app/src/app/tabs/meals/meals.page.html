@@ -45,7 +45,9 @@
           <ion-label><h2>{{meal.name}}</h2></ion-label>
           <!-- <ion-icon class="add-meal" name="add-circle"></ion-icon>    -->
           <!-- <ion-checkbox [name]="'option' + i" (click)="toggleCheckbox(i)"  aria-label="Label" slot="end"></ion-checkbox> -->
-          <ion-checkbox [checked]="isChecked(i)" (ionChange)="toggleCheckbox(i)" aria-label="Label" slot="end"></ion-checkbox>
+          <!-- <ion-checkbox [checked]="isChecked(i)" (ionChange)="toggleCheckbox(i)" aria-label="Label" slot="end"></ion-checkbox> -->
+          <ion-checkbox [checked]="isChecked(currentSlideIndex, i)" (ionChange)="toggleCheckbox(i)" aria-label="Label" slot="end"></ion-checkbox>
+
         </ion-item> 
   
         <ion-item lines="none" *ngFor="let option of meal.options"> 

@@ -25,7 +25,7 @@ export class MealsPage implements OnInit {
   currentDate = "";
   customerMealPlanDate = "2024-04-20T00:00:00";
   notes = "These are notes for this meal. Be sure to do this and that, so you can gain this benefit because of this hehe.";
-  selectedOptionIndex: number | null = null; // Variable to store the index of the selected checkbox
+  selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   //temporary static data
   mealData = [
     {
@@ -133,6 +133,8 @@ constructor(private modalController: ModalController) {
     addCircle,
     calendarOutline
   });
+  // Initialize selectedOptionIndex with the correct length
+  this.selectedOptionIndex = Array(this.mealData.length).fill(null);
 }
 
 ngOnInit() {
@@ -140,11 +142,11 @@ ngOnInit() {
 }
 
 toggleCheckbox(index: number) {
-  this.selectedOptionIndex = index;
+  this.selectedOptionIndex[this.currentSlideIndex] = index;
 }
 
-isChecked(index: number): boolean {
-  return this.selectedOptionIndex === index;
+isChecked(slideIndex: number, optionIndex: number): boolean {
+  return this.selectedOptionIndex[slideIndex] === optionIndex;
 }
 
 slideClick(event: any) {
