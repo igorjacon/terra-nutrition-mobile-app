@@ -6,7 +6,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { addCircle, menu, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { ModalController } from '@ionic/angular';
 import {AuthService} from "../../services/auth.service";
 import {StorageService} from "../../services/storage.service";
 import {AuthConstants} from "../../config/auth-constants";
@@ -50,7 +49,7 @@ export class MealsPage implements OnInit {
       menu
     });
     // Initialize selectedOptionIndex with the correct length
-    this.selectedOptionIndex = Array(this.mealData.length).fill(null);
+    this.selectedOptionIndex = Array(this.mealPlans.length).fill(null);
   }
 
   ngOnInit() {
@@ -80,12 +79,6 @@ export class MealsPage implements OnInit {
 
   isChecked(slideIndex: number, optionIndex: number): boolean {
     return this.selectedOptionIndex[slideIndex] === optionIndex;
-  }
-
-  toggleCalendar() {
-    this.calendarShowing = !this.calendarShowing;
-    console.log('clicked')
-    console.log(this.calendarShowing)
   }
 
   slideClick(event: any): void {
