@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicSlides } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
-import { addCircle, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
+import { addCircle, menu, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { IonHeader, ModalController, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
 register();
@@ -131,31 +131,31 @@ constructor(private modalController: ModalController) {
     chevronForwardCircleOutline,
     chevronForward,
     addCircle,
-    calendarOutline
+    calendarOutline,
+    menu
   });
   // Initialize selectedOptionIndex with the correct length
   this.selectedOptionIndex = Array(this.mealData.length).fill(null);
 }
 
 
-ngOnInit() {
-  this.currentDate = new Date().toISOString();
-}
-
-toggleCheckbox(index: number) {
-  this.selectedOptionIndex[this.currentSlideIndex] = index;
-}
-
-isChecked(slideIndex: number, optionIndex: number): boolean {
-  return this.selectedOptionIndex[slideIndex] === optionIndex;
-}
-
-slideClick(event: any) {
-  const swiper = this.swiperRef?.nativeElement.swiper;
-
-  if (swiper.clickedIndex!== undefined) {
-    this.previousSlideIndex = this.currentSlideIndex;
-    this.currentSlideIndex = swiper.clickedIndex;
+  ngOnInit() {
+    this.currentDate = new Date().toISOString();
   }
-}
+
+  toggleCheckbox(index: number): void {
+    this.selectedOptionIndex[this.currentSlideIndex] = index;
+  }
+
+  isChecked(slideIndex: number, optionIndex: number): boolean {
+    return this.selectedOptionIndex[slideIndex] === optionIndex;
+  }
+
+  slideClick(event: any): void {
+    const swiper = this.swiperRef?.nativeElement.swiper;
+    if (swiper.clickedIndex!== undefined) {
+      this.previousSlideIndex = this.currentSlideIndex;
+      this.currentSlideIndex = swiper.clickedIndex;
+    }
+  }
 }
