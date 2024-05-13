@@ -7,6 +7,13 @@ import {register} from 'swiper/element/bundle';
 import { addCircle, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { ModalController } from '@ionic/angular';
+import {AuthService} from "../../services/auth.service";
+import {StorageService} from "../../services/storage.service";
+import {AuthConstants} from "../../config/auth-constants";
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
+import { MealPlan } from 'src/app/model/meal-plan';
+import { MealPlanService } from 'src/app/services/meal-plan.service';
 
 register();
 
@@ -32,132 +39,48 @@ export class MealsPage implements OnInit {
   selectedDate = "";
   currentDate = "";
   customerMealPlanDate = "2024-04-20T00:00:00"; //this will be the date the customer first recieves their mealplan - make it a minimum value in the date calander
+  user: any;
+  mealPlans : MealPlan[] = [];
 
-
-
-  //temporary static data
-  mealData = [
-    {
-      name: "Breakfast",
-      optionGroups: [
-        { 
-          name: "Oatmeal Power Breakfast", 
-          options: [ 
-            { id: 0, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-            { id: 1, name: "Protein Shake", calories: 350, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"}
-          ] 
-        },
-        {
-          name: "Avocado Protein Booster",
-          options: [ 
-            { id: 2, name: "Avocado Toast", calories: 250, proteinGrams: 10, fatGrams: 15, carbsGrams: 70, img: "assets/imgs/avocado-toast.jpg"}, 
-            { id: 3, name: "Protein Shake", calories: 250, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"}
-          ]
-        }
-      ]
-    },
-    {
-      name: "Lunch",
-      optionGroups: [
-        { 
-          name: "High protein salmon lunch", 
-          options: [ 
-            { id: 4, name: "Salmon", calories: 200, proteinGrams: 40, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/salmon.jpg"}, 
-            { id: 5, name: "Scrambled eggs", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/scrambled-eggs.jpg"},
-            { id: 6, name: "Berry Salad", calories: 150, proteinGrams: 20, fatGrams: 5, carbsGrams: 30, img: "assets/imgs/berry-salad.jpg"}
-          ] 
-        },
-        { 
-          name: "Low-fat cheese burger and fries", 
-          options: [ 
-            { id: 7, name: "Cheese burger", calories: 150, proteinGrams: 50, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/cheeseburger.jpg"},
-            { id: 8, name: "Fries", calories: 150, proteinGrams: 50, fatGrams: 5, carbsGrams: 80, img: "assets/imgs/fries.jpg"}
-          ] 
-        },
-      ]
-    },
-    {
-      name: "Snacks",
-      optionGroups: [
-        { 
-          name: "Snackss ooptuin", 
-          options: [ 
-            { id: 9, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-            { id: 10, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-            { id: 11, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"}
-          ] 
-        },
-        { 
-          name: "Scnaks snacks snacks!", 
-          options: [ 
-            { id: 12, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-          ] 
-        },
-      ]
-    },
-    {
-      name: "Dinner",
-      optionGroups: [
-        { 
-          name: "DINDINDIN ooptuin", 
-          options: [ 
-            { id: 13, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-            { id: 14, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-          ] 
-        },
-        { 
-          name: "Dinner 222", 
-          options: [ 
-            { id: 15, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-            { id: 16, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-            { id: 17, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-         ] 
-       },
-       { 
-        name: "DINDINDIN ooptuin", 
-        options: [ 
-          { id: 18, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-          { id: 19, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-        ] 
-      },
-      { 
-        name: "DINDINDIN ooptuin",
-        options: [ 
-          { id: 20, name: "Oat Meal", calories: 350, proteinGrams: 20, fatGrams: 10, carbsGrams: 80, img: "assets/imgs/oatmeal.jpg"}, 
-          { id: 21, name: "Protein Shake", calories: 150, proteinGrams: 50, fatGrams: 15, carbsGrams: 80, img: "assets/imgs/protein-shake.jpg"},
-        ] 
-      }
-
-      ]
-    }
-
-    // ... other meals
-];
-
-
-  constructor(private modalController: ModalController) { 
+  constructor(
+    private route: ActivatedRoute, 
+    private modalController: ModalController, 
+    private authService: AuthService, 
+    private mealPlanService : MealPlanService,
+    private storageService: StorageService) { 
     addIcons({
       chevronDownCircleOutline,
       chevronForwardCircleOutline,
       addCircle,
       calendarOutline
     })
+  }
 
+  ngOnInit() {
+    this.currentDate = new Date().toISOString();
+    this.loadData();
+  }
+
+  async loadData()
+  {
+    await this.mealPlanService.mealPlanData$.subscribe(async (res:any) => {
+      if (res) {
+        this.mealPlans = res;
+      } else {
+        await this.route.data.pipe(map(response => response['mealPlans'])).subscribe(mealPlansData => {
+          mealPlansData.subscribe((mealPlans : MealPlan[]) => {
+            this.mealPlans = mealPlans;
+            // this.storageService.store(AuthConstants.MEAL_PLAN_DATA, mealPlans);
+          });
+        });
+      }  
+    });
   }
 
   toggleCalendar() {
     this.calendarShowing = !this.calendarShowing;
     console.log('clicked')
     console.log(this.calendarShowing)
-  }
-
-  // toggleSlide(slideIndex) {
-
-  // }
-
-  ngOnInit() {
-    this.currentDate = new Date().toISOString();
-    console.log(this.currentDate)
   }
 
   //colour now changes through template binding using currentIndex

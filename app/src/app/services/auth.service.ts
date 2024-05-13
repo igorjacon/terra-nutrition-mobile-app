@@ -13,6 +13,7 @@ import { AuthConstants } from '../config/auth-constants';
 
 export class AuthService
 { 
+  customerData$ = new BehaviorSubject<any>('');
   userData$ = new BehaviorSubject<any>('');
 
   constructor(
@@ -22,7 +23,7 @@ export class AuthService
   ) {}
 
   authenticate(body: any): Observable<any> {
-    return this.httpService.post('/login_check', body);
+    return this.httpService.post('/api/login_check', body);
   }
 
   getAccessToken() {
@@ -31,8 +32,18 @@ export class AuthService
     });
   }
 
-  fetchUserInfo(id:number, accessToken: string|null, refreshToken: string|null): Observable<any> {
-    return this.httpService.get('/users/'+id, accessToken, refreshToken);
+  fetchCustomerInfo(id:number): Promise<Observable<any>> {
+    return this.httpService.get('/api/customers/'+id);
+  }
+
+  fetchUserInfo(url:string) {
+    return this.httpService.get(url);
+  }
+
+  getCustomerData() {
+    this.storageService.get(AuthConstants.CUSTOMER_DATA).then(res => {
+      this.customerData$.next(res);
+    });
   }
 
   getUserData() {
@@ -41,11 +52,12 @@ export class AuthService
     });
   }
 
-  logout(refreshToken: string|null) {
-    this.storageService.removeItem(AuthConstants.ACCESS_TOKEN).then((res) => {
-      const body = {"refreshToken": refreshToken};
-      this.httpService.post('/token/invalidate', body).subscribe();
-      this.router.navigate(['login']);
-    });
+  async logout(refreshToken: string|null) {
+    await this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
+    await this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
+
+    const body = {"refreshToken": refreshToken};
+    this.httpService.post('/api/token/invalidate', body).subscribe();
+    this.router.navigate(['login']);
   }
 }

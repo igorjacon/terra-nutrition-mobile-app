@@ -16,8 +16,7 @@ import {AuthConstants} from "../../config/auth-constants";
 export class DashboardPage implements OnInit {
   userHasCompletedIntakeForm = true;
   userHasMealPlans = false;
-  user: any;
-  test: any;
+  customer: any;
 
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
@@ -25,10 +24,8 @@ export class DashboardPage implements OnInit {
     const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
     const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
 
-    this.authService.userData$.subscribe((res:any) => {
-      this.user = res;
-      console.log(res.id)
-      console.log(res)
+    this.authService.customerData$.subscribe((res:any) => {
+      this.customer = res;
     });
   }
 

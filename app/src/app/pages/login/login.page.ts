@@ -62,7 +62,7 @@ export class LoginPage implements OnInit {
   }
 
 
-  loginAction(event: Event) {
+  async loginAction(event: Event) {
     event.preventDefault();
     if(!this.loginForm.value.email || !this.loginForm.value.password) {
       this.isInvalid = true;
@@ -74,7 +74,7 @@ export class LoginPage implements OnInit {
       }
   
       this.authService.authenticate(payload).subscribe(
-        (response) => {
+        async (response) => {
           // Handle successful authentication
           this.isInvalid = false;
           this.errorMsg = "";
@@ -83,13 +83,14 @@ export class LoginPage implements OnInit {
           // Store token in storage
           let token = response.token;
           let refreshToken = response.refreshToken;
-          this.storageService.store(AuthConstants.ACCESS_TOKEN,token);
-          this.storageService.store(AuthConstants.REFRESH_TOKEN,refreshToken);
+          await this.storageService.store(AuthConstants.ACCESS_TOKEN,token);
+          await this.storageService.store(AuthConstants.REFRESH_TOKEN,refreshToken);
   
           // Get user data
-          this.authService.fetchUserInfo(response.userId, token, refreshToken).subscribe((res) => {
+          const customerInfo = await this.authService.fetchCustomerInfo(response.userId);
+          customerInfo.subscribe((res) => {
             if (res) {
-              this.storageService.store(AuthConstants.USER_DATA, res);
+              this.storageService.store(AuthConstants.CUSTOMER_DATA, res);
               // Redirect user to dashboard
               this.router.navigate(['/customer/dashboard']);
             }
