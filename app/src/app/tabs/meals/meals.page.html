@@ -7,12 +7,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-spinner *ngIf="!mealPlans.length"></ion-spinner>
+  <!-- <ion-spinner *ngIf="!mealPlans.length"></ion-spinner> -->
   <div class="meal-page-header">
     <div class="banner">
       <p class="meal-page-title">Meal Plan</p>
       <ion-datetime-button datetime="datetime"></ion-datetime-button>
     </div>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-select (ionChange)="handleSelectChange($event)" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+          <!-- <ion-select-option value="default">Default</ion-select-option>
+          <ion-select-option value="oranges">Detox</ion-select-option>
+          <ion-select-option value="bananas">Migraines</ion-select-option> -->
+          <ion-select-option *ngFor="let meal of mealPlans">{{meal.title}}</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+    </ion-list>
   </div>
 
   <ion-modal [keepContentsMounted]="true">
@@ -27,8 +38,8 @@
     </ng-template>
   </ion-modal>
 
-  <swiper-container *ngIf="mealPlans.length" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="1">
-    <swiper-slide *ngFor="let meal of mealPlans[0]?.mealObjects; let i = index" [class.active]="i === currentSlideIndex">
+  <swiper-container *ngIf="mealPlans.length" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
+    <swiper-slide *ngFor="let meal of selectedMealPlanObject? selectedMealPlanObject.mealObjects : mealPlans[0].mealObjects; let i = index" [class.active]="i === currentSlideIndex">
       <p>{{meal.type}}</p>
     </swiper-slide>
   </swiper-container>
@@ -36,7 +47,7 @@
   <div class="row-container" *ngIf="mealPlans.length">
       <ion-list *ngFor="let option of mealPlans[0].mealObjects[currentSlideIndex]?.optionObjects; let i = index">
 
-        <ion-item mode="ios" lines="none" class="list-header">
+        <ion-item lines="none" class="list-header">
           <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
           <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
 
@@ -52,11 +63,13 @@
           </ion-avatar>
         </ion-item>
 
-        <ion-item [button]="true" class="more-info-item" lines="none">
+        <ion-item [button]="true" class="more-info-item" lines="none" (click)="toggleInfo(i)">
           <ion-label slot="start">
             <h2 class="more-info" >More info</h2>
           </ion-label>
-          <ion-icon name="menu" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item class="more-info" lines="none" *ngIf="currentInfoIndex === i">
+         <p class="more-info" >{{option.notes? option.notes : "no notes available"}}</p> 
         </ion-item>
       </ion-list>
   </div>
