@@ -56,11 +56,11 @@
         <ion-item lines="none" *ngFor="let item of option.foodItemEntryObjects">
           <ion-label>
             <h2>{{ item?.foodItemObject?.name }}</h2>
-            <p>{{ item?.foodItemObject?.description }}</p>
+            <p>{{item?.quantity}} {{item?.measurement}}</p>
             </ion-label>
-          <ion-avatar slot="start">
+          <!-- <ion-avatar slot="start">
             <img src="assets/imgs/avocado-toast.jpg"/>
-          </ion-avatar>
+          </ion-avatar> -->
         </ion-item>
 
         <ion-item [button]="true" class="more-info-item" lines="none" (click)="toggleInfo(i)">
