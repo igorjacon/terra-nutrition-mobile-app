@@ -6,17 +6,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { addCircle, menu, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import {AuthService} from "../../services/auth.service";
-import {StorageService} from "../../services/storage.service";
-import {AuthConstants} from "../../config/auth-constants";
+import { AuthService } from "../../services/auth.service";
+import { StorageService } from "../../services/storage.service";
+import { AuthConstants } from "../../config/auth-constants";
 import { ActivatedRoute } from '@angular/router';
 import { Observable, delay, finalize, flatMap, forkJoin, map, of, tap } from 'rxjs';
 import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
-import { IonHeader, ModalController, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
 import { FoodItemEntry } from 'src/app/model/food-item-entry';
 import { MealOption } from 'src/app/model/meal-option';
 import { Meal } from 'src/app/model/meal';
+import { IonHeader, ModalController, IonSelect, IonSelectOption, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
 register();
 
 @Component({
@@ -24,7 +24,7 @@ register();
   templateUrl: './meals.page.html',
   styleUrls: ['./meals.page.scss'],
   standalone: true,
-  imports: [IonHeader, CommonModule, FormsModule, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar],
+  imports: [IonHeader, IonSelect, IonSelectOption, CommonModule, FormsModule, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MealsPage implements OnInit {
@@ -37,12 +37,16 @@ export class MealsPage implements OnInit {
   customerMealPlanDate = "2024-04-20T00:00:00"; //this will be the date the customer first recieves their mealplan - make it a minimum value in the date calander
   selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   mealPlans : MealPlan[] = [];
+  selectedMealPlan: any; // Default valu
+  selectedMealPlanObject: any;
+  defaultMealPlanObject: any;
+  infoShowing= false;
+  currentInfoIndex: number | null = null; // Initialize to null
+
 
   constructor(
     private route: ActivatedRoute,
-    private modalController: ModalController,
-    private authService: AuthService,
-    private mealPlanService : MealPlanService,
+    private mealPlanService: MealPlanService,
     private storageService: StorageService) {
     addIcons({
       chevronDownCircleOutline,
@@ -52,7 +56,6 @@ export class MealsPage implements OnInit {
       calendarOutline,
       menu
     });
-    // Initialize selectedOptionIndex with the correct length
     this.selectedOptionIndex = Array(this.mealPlans.length).fill(null);
   }
 
@@ -76,6 +79,40 @@ export class MealsPage implements OnInit {
         this.mealPlans = res;
       });
     });
+  }
+
+  handleSelectChange(event: any) {
+    this.selectedMealPlan = event.detail.value;
+    console.log(event.detail.value)
+    this.updateSwiperAndMealInfo();
+  }
+
+  setDefaultMealPlanObject() {
+    this.defaultMealPlanObject = this.mealPlans[0];
+  }
+
+  kjsToCalories(kjs: any) {
+
+      return Math.trunc(kjs/4.18);
+
+  }
+
+
+  toggleInfo(index:number) {
+    this.currentInfoIndex = this.currentInfoIndex === index? null : index;
+    this.infoShowing = !this.infoShowing;
+  }
+
+  updateSwiperAndMealInfo() {
+    // Find the selected meal plan object
+    this.selectedMealPlanObject = this.mealPlans.find(plan => plan.title === this.selectedMealPlan);
+    if (this.selectedMealPlanObject) {
+      // Update the Swiper slides and meal info based on the selected meal plan
+      // This is a placeholder for your logic to update the Swiper and meal info
+      console.log('Selected Meal Plan:', this.selectedMealPlanObject);
+    } else {
+      console.log('no meals defined yet')
+    }
   }
 
   toggleCheckbox(index: number): void {

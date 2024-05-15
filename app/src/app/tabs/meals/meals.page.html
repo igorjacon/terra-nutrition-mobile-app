@@ -35,20 +35,31 @@
         <p class="meal-page-title">Meal Plan</p>
         <ion-datetime-button datetime="datetime"></ion-datetime-button>
       </div>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-select (ionChange)="handleSelectChange($event)" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+            <!-- <ion-select-option value="default">Default</ion-select-option>
+            <ion-select-option value="oranges">Detox</ion-select-option>
+            <ion-select-option value="bananas">Migraines</ion-select-option> -->
+            <ion-select-option *ngFor="let meal of mealPlans">{{meal.title}}</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+      </ion-list>
     </div>
-  
+
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
         <ion-datetime
-        id="datetime"
-        color="success"
-        presentation="date"
-        [value]="currentDate"
-        [min]="customerMealPlanDate"
-        max="2028-02-08T00:00:00"></ion-datetime>
+          id="datetime"
+          color="success"
+          presentation="date"
+          [value]="currentDate"
+          [min]="customerMealPlanDate"
+          max="2028-02-08T00:00:00"></ion-datetime>
       </ng-template>
     </ion-modal>
-  
+
     <swiper-container *ngIf="loaded" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
       <swiper-slide *ngFor="let meal of mealPlans[0]?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
         <p style="text-align: center;">
@@ -58,16 +69,16 @@
         </p>
       </swiper-slide>
     </swiper-container>
-  
+
     <div class="row-container" *ngIf="loaded">
         <ion-list *ngFor="let option of mealPlans[0].meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
-  
+
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
             <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
-  
+
           </ion-item>
-  
+
           <ion-item lines="none" *ngFor="let itemEntry of option.foodItemEntries; trackBy:trackItems">
             <ion-label>
               <h2>{{ itemEntry?.foodItem?.name }}</h2>
@@ -77,7 +88,7 @@
               <img src="assets/imgs/avocado-toast.jpg"/>
             </ion-avatar>
           </ion-item>
-  
+
           <ion-item [button]="true" class="more-info-item" lines="none">
             <ion-label slot="start">
               <h2 class="more-info" >More info</h2>
@@ -87,5 +98,5 @@
         </ion-list>
     </div>
   </div>
-  
+
 </ion-content>

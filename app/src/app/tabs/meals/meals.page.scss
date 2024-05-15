@@ -30,15 +30,30 @@ ion-header {
 
 ion-content {
     
-        --padding-top: 10px;
+        --padding-top: 30px;
         --padding-bottom: 10px;
         --padding-start: 30px;
         --padding-end: 30px;
-    
 
     .meal-page-header {
-        // background-color: green;
-        
+            margin-bottom: 20px;
+        ion-list {
+            border-bottom: 1px solid gray;
+            margin-bottom: 30px;
+            ion-item {
+                padding: 0;
+                    margin: 0 auto;
+                    text-align: center;
+                ion-select {
+                    padding: 0;
+                    margin: 0 auto;
+                    ion-select-option {
+                        padding: 0;
+                    margin: 0;
+                    }
+                }
+            }
+        }
         ion-datetime-button::part(native) {
             background-color: #40b53e;
             color: white;
@@ -51,6 +66,7 @@ ion-content {
             // background-color: red;
             // --background-rgb: 255, 241, 242;
             border-radius: 16px;
+        
             // position: absolute;
             // top: 50%;
             // left: 50%;
@@ -69,6 +85,8 @@ ion-content {
             // gap: 20px;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 0;
             
 
         }
@@ -77,6 +95,8 @@ ion-content {
             // margin-bottom: 30px;
             font-weight: 600;
             // background-color: orange;
+            padding: 0;
+            margin: 0;
         }
         
     }
