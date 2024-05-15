@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicSlides } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { ChangeDetectorRef } from '@angular/core';
 import { addCircle, menu, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { AuthService } from "../../services/auth.service";
@@ -41,13 +42,15 @@ export class MealsPage implements OnInit {
   selectedMealPlanObject: any;
   defaultMealPlanObject: any;
   infoShowing= false;
+  activeNoteIndex: number | null = null; // Initialize to null
   currentInfoIndex: number | null = null; // Initialize to null
 
 
   constructor(
     private route: ActivatedRoute,
     private mealPlanService: MealPlanService,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    private cdRef: ChangeDetectorRef) {
     addIcons({
       chevronDownCircleOutline,
       chevronForwardCircleOutline,
@@ -61,36 +64,55 @@ export class MealsPage implements OnInit {
 
   ngOnInit() {
     this.currentDate = new Date().toISOString();
+    this.setDefaultMealPlanObject(); // Call this method to initialize selectedMealPlanObject
     this.loadData();
     // this.mealPlanService.mealPlanData$.subscribe((res:any) => {
     //   this.mealPlans = res;
     // });
   }
 
-  loadData(){
-    this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-      this.mealPlanService.getMealPlans(token).pipe(
-        finalize(() => {
-          this.loaded = true;
-        })
-      ).subscribe((res : any) => {
-        console.log(res);
-        // this.storageService.store(AuthConstants.MEAL_PLAN_DATA, res);
-        this.mealPlans = res;
-      });
-    });
-  }
 
+loadData(){
+  this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
+    this.mealPlanService.getMealPlans(token).pipe(
+      finalize(() => {
+        this.loaded = true;
+        // Set the default meal plan object after loading the meal plans
+        this.setDefaultMealPlanObject();
+      })
+    ).subscribe((res : any) => {
+      console.log(res);
+      this.mealPlans = res;
+    });
+  });
+}
+
+  // handleSelectChange(event: any) {
+  //   this.selectedMealPlan = event.detail.value;
+  //   console.log(event.detail.value)
+  //   this.updateSwiperAndMealInfo();
+  // }
   handleSelectChange(event: any) {
     this.selectedMealPlan = event.detail.value;
-    console.log(event.detail.value)
-    this.updateSwiperAndMealInfo();
+    console.log(event.detail.value);
+    
+    // Find the selected meal plan object
+    this.selectedMealPlanObject = this.mealPlans.find(plan => plan.title === this.selectedMealPlan);
+    
+    if (this.selectedMealPlanObject) {
+      // Trigger change detection to update the UI
+      this.cdRef.detectChanges();
+    } else {
+      console.log('No matching meal plan found');
+    }
   }
 
   setDefaultMealPlanObject() {
-    this.defaultMealPlanObject = this.mealPlans[0];
+    if (this.mealPlans && this.mealPlans.length > 0) {
+      this.selectedMealPlanObject = this.mealPlans[0]; // Set to the first meal plan initially
+      this.selectedMealPlan = this.selectedMealPlanObject.title; // Set the title as the default selected value
+    }
   }
-
   kjsToCalories(kjs: any) {
 
       return Math.trunc(kjs/4.18);
@@ -98,9 +120,8 @@ export class MealsPage implements OnInit {
   }
 
 
-  toggleInfo(index:number) {
-    this.currentInfoIndex = this.currentInfoIndex === index? null : index;
-    this.infoShowing = !this.infoShowing;
+  toggleInfo(index: number): void {
+    this.activeNoteIndex = this.activeNoteIndex === index ? null : index;
   }
 
   updateSwiperAndMealInfo() {

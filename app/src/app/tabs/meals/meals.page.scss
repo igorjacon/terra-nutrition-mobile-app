@@ -106,23 +106,24 @@ ion-content {
                 border: 1px solid rgb(181, 181, 181);
                 font-weight: 600;
                 color: black;
-                padding: 15px;
+                padding: 25px 10px;
                 display: flex;
                 align-items: center;
                 justify-content:center;
                 height: 40px;
-                border-radius: 20px;
-                .meal-category {
-
-                }
-                .meal-time {
-
+                border-radius: 30px;
+                p {
+                    
+                    small {
+                        font-size: 11px;
+                        margin-bottom: 5px;
+                    }
                 }
             }
             swiper-slide.active {
                 color: green;
                 border: 1px solid green;
-                font-weight: 600;
+                // font-weight: 600;
             }
         }
 
@@ -152,6 +153,9 @@ border-top: 1px solid rgb(223, 218, 218);
                           
                     }
                     ion-item {
+                        p.notes {
+                            font-size: 14px;
+                        }
                         .more-info {
                             font-size: 14px;
                             // text-decoration: underline;
