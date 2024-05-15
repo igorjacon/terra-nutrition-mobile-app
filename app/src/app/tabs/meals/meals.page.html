@@ -37,12 +37,8 @@
       </div>
       <ion-list>
         <ion-item lines="none">
-          <ion-select (ionChange)="handleSelectChange($event)" aria-label="Meal Plan Options" placeholder="Meal plan options" >
-            <!-- <ion-select-option value="default">Default</ion-select-option>
-            <ion-select-option value="oranges">Detox</ion-select-option>
-            <ion-select-option value="bananas">Migraines</ion-select-option> -->
-            <ion-select-option *ngFor="let meal of mealPlans">{{meal.title}}</ion-select-option>
-
+          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan?.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+            <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
@@ -60,8 +56,8 @@
       </ng-template>
     </ion-modal>
 
-    <swiper-container *ngIf="loaded" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
-      <swiper-slide *ngFor="let meal of mealPlans[0]?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
+    <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
+      <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
         <p style="text-align: center;">
           {{ meal.type }}
           <br>
@@ -70,8 +66,8 @@
       </swiper-slide>
     </swiper-container>
 
-    <div class="row-container" *ngIf="loaded">
-        <ion-list *ngFor="let option of mealPlans[0].meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
+    <div class="row-container" *ngIf="selectedMealPlan">
+        <ion-list *ngFor="let option of selectedMealPlan.meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
 
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
