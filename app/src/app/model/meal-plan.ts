@@ -5,6 +5,5 @@ export interface MealPlan {
     active : boolean;
     title : string;
     days : number[];
-    meals: string[]; // Array of IRIs
-    mealObjects : Meal[];
+    meals : Meal[];
 }

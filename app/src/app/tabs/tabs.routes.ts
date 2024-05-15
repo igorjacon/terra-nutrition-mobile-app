@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { AuthGuard } from "../guards/auth.guard";
-import { CustomerDataResolver } from "../resolvers/CustomerData.resolver";
+import { CustomerResolver } from "../resolvers/customer.resolver";
 import { MealPlanResolver } from '../resolvers/meal-plan.resolver';
 
 export const routes: Routes = [
@@ -12,7 +12,7 @@ export const routes: Routes = [
     children: [
         {
             path: 'dashboard',
-            resolve: { customerData: CustomerDataResolver },
+            resolve: { customerData: CustomerResolver },
             loadComponent: () => import('./dashboard/dashboard.page').then((m) => m.DashboardPage)
         },
         {

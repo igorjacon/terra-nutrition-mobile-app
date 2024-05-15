@@ -4,8 +4,7 @@ export interface Meal {
     id : number;
     time : string;
     type : string;
-    options : string[]; // Array of IRIs
-    optionObjects : MealOption[];
+    options : MealOption[];
     createdAt : string;
     updatedAt : string;
 }

@@ -32,7 +32,7 @@ export class AuthService
     });
   }
 
-  fetchCustomerInfo(id:number): Promise<Observable<any>> {
+  fetchCustomerInfo(id:number) {
     return this.httpService.get('/api/customers/'+id);
   }
 
@@ -53,10 +53,8 @@ export class AuthService
   }
 
   async logout(refreshToken: string|null) {
-    await this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
-    await this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
-
-    const body = {"refreshToken": refreshToken};
+    const refreshToke = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
+    const body = {"refreshToken": refreshToke};
     this.httpService.post('/api/token/invalidate', body).subscribe();
     this.router.navigate(['login']);
   }

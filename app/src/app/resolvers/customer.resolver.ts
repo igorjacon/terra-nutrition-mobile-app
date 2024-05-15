@@ -10,7 +10,7 @@ import { StorageService } from '../services/storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerDataResolver implements Resolve<any> {
+export class CustomerResolver implements Resolve<any> {
   constructor(private authService: AuthService, private storageService: StorageService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

@@ -2,8 +2,7 @@ import { FoodItem } from "./food-item";
 
 export interface FoodItemEntry {
     id : number;
-    foodItem : string;
-    foodItemObject : FoodItem;
+    foodItem : FoodItem;
     measurement : string;
     quantity : number;
     mealOption : string;

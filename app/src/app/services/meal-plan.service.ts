@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, of } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, flatMap, forkJoin, map, of } from 'rxjs';
 import { HttpService } from './http.service';
 import { StorageService } from './storage.service';
 import { Router } from '@angular/router';
@@ -16,7 +16,6 @@ import { FoodItem } from '../model/food-item';
   providedIn: 'root'
 })
 export class MealPlanService {
-
   mealPlanData$ = new BehaviorSubject<any>('');
 
   constructor(
@@ -32,14 +31,13 @@ export class MealPlanService {
     });
   }
 
-  async getMealPlans() {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
+  getMealPlans(token : string) {
+    // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
 
     let headers = {}
-    if (accessToken) {
+    if (token) {
       headers = new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${token}`
       });
     }
     const options = { headers: headers};
@@ -54,14 +52,13 @@ export class MealPlanService {
     }));
   }
 
-  async getMeal($iri : string) {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
-
+  getMeal($iri : string, token : string) {
+    // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
+    
     let headers = {}
-    if (accessToken) {
+    if (token) {
       headers = new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${token}`
       });
     }
     const options = { headers: headers};
@@ -76,14 +73,12 @@ export class MealPlanService {
     }));
   }
 
-  async getMealOption($iri : string) {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
-
+  getMealOption($iri : string, token : string) {
+    // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
     let headers = {}
-    if (accessToken) {
+    if (token) {
       headers = new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${token}`
       });
     }
     const options = { headers: headers};
@@ -98,14 +93,12 @@ export class MealPlanService {
     }));
   }
 
-  async getFoodItemEntry($iri : string) {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
-
+  getFoodItemEntry($iri : string, token : string) {
+    // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
     let headers = {}
-    if (accessToken) {
+    if (token) {
       headers = new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${token}`
       });
     }
     const options = { headers: headers};
@@ -120,14 +113,13 @@ export class MealPlanService {
     }));
   }
 
-  async getFoodItem($iri : string) {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
+  getFoodItem($iri : string, token : string) {
+    // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
 
     let headers = {}
-    if (accessToken) {
+    if (token) {
       headers = new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${token}`
       });
     }
     const options = { headers: headers};

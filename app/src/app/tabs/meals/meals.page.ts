@@ -10,10 +10,13 @@ import {AuthService} from "../../services/auth.service";
 import {StorageService} from "../../services/storage.service";
 import {AuthConstants} from "../../config/auth-constants";
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { Observable, delay, finalize, flatMap, forkJoin, map, of, tap } from 'rxjs';
 import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
 import { IonHeader, ModalController, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
+import { FoodItemEntry } from 'src/app/model/food-item-entry';
+import { MealOption } from 'src/app/model/meal-option';
+import { Meal } from 'src/app/model/meal';
 register();
 
 @Component({
@@ -30,6 +33,7 @@ export class MealsPage implements OnInit {
   currentSlideIndex: number = 0;
   previousSlideIndex: number = 0;
   currentDate = "";
+  loaded = false;
   customerMealPlanDate = "2024-04-20T00:00:00"; //this will be the date the customer first recieves their mealplan - make it a minimum value in the date calander
   selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   mealPlans : MealPlan[] = [];
@@ -55,21 +59,22 @@ export class MealsPage implements OnInit {
   ngOnInit() {
     this.currentDate = new Date().toISOString();
     this.loadData();
+    // this.mealPlanService.mealPlanData$.subscribe((res:any) => {
+    //   this.mealPlans = res;
+    // });
   }
 
-  async loadData()
-  {
-    await this.mealPlanService.mealPlanData$.subscribe(async (res:any) => {
-      if (res) {
+  loadData(){
+    this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
+      this.mealPlanService.getMealPlans(token).pipe(
+        finalize(() => {
+          this.loaded = true;
+        })
+      ).subscribe((res : any) => {
+        console.log(res);
+        // this.storageService.store(AuthConstants.MEAL_PLAN_DATA, res);
         this.mealPlans = res;
-      } else {
-        await this.route.data.pipe(map(response => response['mealPlans'])).subscribe(mealPlansData => {
-          mealPlansData.subscribe((mealPlans : MealPlan[]) => {
-            this.mealPlans = mealPlans;
-            // this.storageService.store(AuthConstants.MEAL_PLAN_DATA, mealPlans);
-          });
-        });
-      }
+      });
     });
   }
 
@@ -87,5 +92,9 @@ export class MealsPage implements OnInit {
       this.previousSlideIndex = this.currentSlideIndex;
       this.currentSlideIndex = swiper.clickedIndex;
     }
+  }
+
+  trackItems(index: number, itemObject: any) {
+    return itemObject.id;
   }
 }

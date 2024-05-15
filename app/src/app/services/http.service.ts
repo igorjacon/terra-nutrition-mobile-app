@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class HttpService {
-
-  constructor(private http: HttpClient, private storageService: StorageService, private router: Router) { }
+  constructor(private http: HttpClient, private storageService: StorageService, private router: Router) {}
 
   post(serviceName: string, data: any) {
     // const headers = new HttpHeaders({
@@ -48,23 +47,22 @@ export class HttpService {
   }
 
   async refresh(serviceName:string) {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
     const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
-    
+
     this.post("/api/token/refresh", {"refreshToken": refreshToken}).subscribe(
       (res:any) => {
         if (res) {
-          this.storageService.store(AuthConstants.ACCESS_TOKEN,res.token);
+          this.storageService.store(AuthConstants.ACCESS_TOKEN, res.token);
           this.storageService.store(AuthConstants.REFRESH_TOKEN,res.refreshToken);
           return this.get(serviceName);
         } else {
           return of(null);
         }
       }, 
-      async (err) => {
+      (err) => {
         console.log("Error: Not able to refresh token. Logout!", err);
-        await this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
-        await this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
+        this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
+        this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
         this.router.navigate(['login']);
         return of(null);
       });
