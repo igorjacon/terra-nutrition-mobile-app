@@ -56,7 +56,8 @@ export class MealsPage implements OnInit, OnDestroy {
   selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   mealPlans : MealPlan[] = [];
   selectedMealPlan: MealPlan | null = null; // Default value
-  infoShowing= false;
+  // moreInfoShowing= false;
+  moreInfoShowing: Record<string, boolean> = {};
   activeNoteIndex: number | null = null; // Initialize to null
   currentInfoIndex: number | null = null; // Initialize to null
   slidesPerView : number | null = null;
@@ -89,6 +90,22 @@ export class MealsPage implements OnInit, OnDestroy {
     if (swiper) {
       swiper.destroy(true, true);
     }
+  }
+
+  toggleMoreInfoShowing(optionId: string) {
+    this.moreInfoShowing[optionId] =!this.moreInfoShowing[optionId];
+  }
+  
+
+  onDateChange(event: any) {
+    let date = event.detail.value;
+    console.log(date)
+    let dateObject = new Date(date);
+    console.log(dateObject)
+    let dayToday = dateObject.getDay()
+    console.log(dayToday)
+    this.loadData(dayToday);
+    
   }
 
   setSlidesPerView() {
