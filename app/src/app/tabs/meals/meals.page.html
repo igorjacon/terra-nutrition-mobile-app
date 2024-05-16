@@ -30,18 +30,30 @@
   </ion-list>
 
   <div *ngIf="loaded">
+
     <div class="meal-page-header">
+
       <div class="banner">
         <p class="meal-page-title">Meal Plan</p>
         <ion-datetime-button datetime="datetime"></ion-datetime-button>
       </div>
-      <ion-list>
-        <ion-item lines="none">
-          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan?.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
-            <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+    
+      <div *ngIf="test">
+        <div class="meal-selection-description">
+          <p>
+          Select a meal plan from the selection box below.
+          </p>
+        </div>
+
+        
+        <ion-list>
+          <ion-item lines="none">
+            <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan?.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+              <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
     </div>
 
     <ion-modal [keepContentsMounted]="true">
@@ -56,7 +68,7 @@
       </ng-template>
     </ion-modal>
 
-    <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
+    <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="slidesPerView" [observer]="true" [observeParents]="true">
       <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
         <p style="text-align: center;">
           {{ meal.type }}
@@ -65,6 +77,7 @@
         </p>
       </swiper-slide>
     </swiper-container>
+
   </div>
 
     <div class="row-container" *ngIf="selectedMealPlan">
@@ -94,6 +107,7 @@
           </ion-item>
         </ion-list>
     </div>
-  </div>
+
+  
 
 </ion-content>

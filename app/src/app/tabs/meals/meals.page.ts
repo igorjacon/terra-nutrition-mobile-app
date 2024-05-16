@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicSlides } from '@ionic/angular';
@@ -45,8 +45,8 @@ register();
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class MealsPage implements OnInit {
-  @ViewChild('swiper') swiperRef: ElementRef | undefined;
+export class MealsPage implements OnInit, OnDestroy {
+  @ViewChild('swiper', { static: false }) swiperRef: ElementRef | undefined;
   swiperModule = [IonicSlides];
   currentSlideIndex: number = 0;
   previousSlideIndex: number = 0;
@@ -59,6 +59,8 @@ export class MealsPage implements OnInit {
   infoShowing= false;
   activeNoteIndex: number | null = null; // Initialize to null
   currentInfoIndex: number | null = null; // Initialize to null
+  slidesPerView : number | null = null;
+  test = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,55 +81,61 @@ export class MealsPage implements OnInit {
   ngOnInit() {
     this.currentDate = new Date().toISOString();
     this.loadData();
-    // this.mealPlanService.mealPlanData$.subscribe((res:any) => {
-    //   this.mealPlans = res;
-    // });
   }
+
+  ngOnDestroy() {
+    const swiper = this.swiperRef?.nativeElement.swiper;
+    if (swiper) {
+      swiper.destroy(true, true);
+    }
+  }
+
+  setSlidesPerView() {
+    if (this.selectedMealPlan) {
+      this.slidesPerView = this.selectedMealPlan.meals.length <= 1 ? 1 : 1.3;
+      this.updateSwiper();
+    }
+  }
+
+  updateSwiper() {
+    const swiper = this.swiperRef?.nativeElement.swiper;
+    if (swiper) {
+      setTimeout(() => {
+        swiper.update();
+        swiper.init(); // Reinitialize Swiper
+      }, 100); // Adjust the delay as needed
+    }
+  }
+  
 
   loadData(){
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
       this.mealPlanService.getMealPlans(token).pipe(
         finalize(() => {
           this.loaded = true;
+          this.setSlidesPerView();
         })
       ).subscribe((mealPlans : any) => {
-        // this.storageService.store(AuthConstants.MEAL_PLAN_DATA, res);
         this.mealPlans = mealPlans;
         if (mealPlans.length) {
           this.selectedMealPlan = mealPlans[0];
+          this.setSlidesPerView();
         }
       });
     });
   }
 
-  // handleSelectChange(event: any) {
-  //   this.selectedMealPlan = event.detail.value;
-  //   console.log(event.detail.value)
-  //   this.updateSwiperAndMealInfo();
-  // }
   handleSelectChange(event: any) {
     const selectedMealPlanId = parseInt(event.detail.value);
     this.updateSwiperAndMealInfo(selectedMealPlanId);
   }
 
-
-  kjsToCalories(kjs: any) {
-      return Math.trunc(kjs/4.18);
-  }
-
-
-  toggleInfo(index: number): void {
-    this.activeNoteIndex = this.activeNoteIndex === index ? null : index;
-    this.currentInfoIndex = this.currentInfoIndex === index? null : index;
-    this.infoShowing = !this.infoShowing;
-  }
-
   updateSwiperAndMealInfo(selectedMealPlanId : number) {
-    // Find the selected meal plan object
     const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id === selectedMealPlanId);
-
     if (mealPlan) {
       this.selectedMealPlan = mealPlan;
+      console.log(this.selectedMealPlan)
+      this.setSlidesPerView();
     } else {
       console.log('no meals defined yet')
     }
