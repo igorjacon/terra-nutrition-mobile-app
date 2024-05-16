@@ -97,7 +97,7 @@ export class MealsPage implements OnInit, OnDestroy {
   toggleMoreInfoShowing(optionId: string) {
     this.moreInfoShowing[optionId] =!this.moreInfoShowing[optionId];
   }
-  
+
   onDateChange(event: any) {
     let date = event.detail.value;
     // console.log(date)
@@ -151,24 +151,24 @@ export class MealsPage implements OnInit, OnDestroy {
 
   getKjs() {
     //will need to loop through all the items, save their quantities and serviving sizes, and execute the getCaloriesFromKjs function
-   let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[0].foodItem.foodItemDetails.energyWithFibreKjs; //object
+   let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[0].foodItem.foodItemDetails.energyWithFibreKj; //object
 
    console.log(kjs)
   //  setTimeout(() => {
   //   console.log(quantity)
   //  }, 100)
   }
-  
+
   /* The getCaloriesFromKjls function
   This method will help us calculate the calories from a food item
   We have access to the food item
-  Takes in a number in Kjls, multiplies it with 
-  
+  Takes in a number in Kjls, multiplies it with
+
   */
   getCaloriesFromKjls(servingSizeKjls100: number, quantity: number) {
     //by default, we are provided with the kjs per 100ml/g of food items
     //by dividing by 100, we get the serving size per 1ml/g of food, which we can use to multiply by the serving size
-    let servingSize = servingSizeKjls100 / 100; 
+    let servingSize = servingSizeKjls100 / 100;
     console.log(servingSize)
     let calories = Math.trunc((servingSize * quantity));
     console.log(calories)

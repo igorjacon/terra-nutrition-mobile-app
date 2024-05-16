@@ -5,7 +5,4 @@ export interface MealOption {
     foodItemEntries : FoodItemEntry[];
     description : string;
     notes : string;
-    meals : string[];
-    createdAt : string;
-    updatedAt : string;
 }

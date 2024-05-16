@@ -5,7 +5,4 @@ export interface FoodItemEntry {
     foodItem : FoodItem;
     measurement : string;
     quantity : number;
-    mealOption : string;
-    createdAt : string;
-    updatedAt : string;
 }
