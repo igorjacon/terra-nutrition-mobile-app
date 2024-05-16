@@ -45,12 +45,18 @@
           presentation="date"
           [value]="currentDate"
           [min]="customerMealPlanDate"
-          max="2028-02-08T00:00:00"></ion-datetime>
+          max="2028-02-08T00:00:00"
+          (ionChange)="onDateChange($event)"
+          ></ion-datetime>
       </ng-template>
     </ion-modal>
 
+    <div class="selection-box-description">
+      <p>Select a meal plan from the selection box below.</p>
+    </div>
+
     <div *ngIf="selectedMealPlan">
-      <ion-list>
+      <ion-list class="select-option">
         <ion-item lines="none">
           <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
             <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
@@ -72,15 +78,14 @@
         <ion-list *ngFor="let option of selectedMealPlan.meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
 
           <ion-item mode="ios" lines="none" class="list-header">
-            <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
+            <ion-label><h2>Option {{ i + 1 }} <span>test</span></h2></ion-label>
             <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
-
           </ion-item>
 
           <ion-item lines="none" *ngFor="let itemEntry of option.foodItemEntries; trackBy:trackItems">
             <ion-label>
               <h2>{{ itemEntry?.foodItem?.name }}</h2>
-              <p>{{ itemEntry?.foodItem?.description }}</p>
+              <p>{{itemEntry?.quantity}} {{ itemEntry?.measurement }}</p>
               </ion-label>
             <ion-avatar slot="start">
               <img src="assets/imgs/avocado-toast.jpg"/>
@@ -93,16 +98,18 @@
             </ion-text>
           </ion-item>
 
-          <ion-item [button]="true" class="more-info-item" lines="none">
+          <ion-item *ngIf="option.notes" [button]="true" class="more-info-item" lines="none" (click)="toggleMoreInfoShowing(option.id.toString())">
             <ion-label slot="start">
-              <h2 class="more-info" >More info</h2>
+              <h2 class="more-info">More info</h2>
             </ion-label>
-            <ion-icon name="menu" slot="end"></ion-icon>
+          </ion-item>
+          <ion-item *ngIf="moreInfoShowing[option.id.toString()]" lines="none">
+            <p>{{option.notes}}</p>
           </ion-item>
         </ion-list>
       </div>
-
     </div>
+
     <div *ngIf="!selectedMealPlan">
       <div class="no-meal-plans">
         <ion-icon name="alert-circle-outline"></ion-icon>
