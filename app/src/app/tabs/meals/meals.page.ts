@@ -5,7 +5,7 @@ import { IonicSlides } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { ChangeDetectorRef } from '@angular/core';
-import { addCircle, menu, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
+import { addCircle, menu, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { StorageService } from "../../services/storage.service";
 import { AuthConstants } from "../../config/auth-constants";
@@ -72,7 +72,8 @@ export class MealsPage implements OnInit, OnDestroy {
       chevronForward,
       addCircle,
       calendarOutline,
-      menu
+      menu,
+      alertCircleOutline
     });
     this.selectedOptionIndex = Array(this.mealPlans.length).fill(null);
   }
