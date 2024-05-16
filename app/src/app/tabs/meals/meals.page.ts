@@ -106,14 +106,13 @@ export class MealsPage implements OnInit, OnDestroy {
       }, 100); // Adjust the delay as needed
     }
   }
-  
+
 
   loadData(){
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
       this.mealPlanService.getMealPlans(token, 4).pipe(
         finalize(() => {
           this.loaded = true;
-          this.setSlidesPerView();
         })
       ).subscribe((mealPlans : any) => {
         this.mealPlans = mealPlans;
