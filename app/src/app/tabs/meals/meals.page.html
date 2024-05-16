@@ -87,6 +87,12 @@
             </ion-avatar>
           </ion-item>
 
+          <ion-item lines="none" *ngIf="option.description">
+            <ion-text color="medium" class="break-line">
+              {{ option.description }}
+            </ion-text>
+          </ion-item>
+
           <ion-item [button]="true" class="more-info-item" lines="none">
             <ion-label slot="start">
               <h2 class="more-info" >More info</h2>

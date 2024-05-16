@@ -60,7 +60,6 @@ export class MealsPage implements OnInit, OnDestroy {
   activeNoteIndex: number | null = null; // Initialize to null
   currentInfoIndex: number | null = null; // Initialize to null
   slidesPerView : number | null = null;
-  test = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -80,7 +79,8 @@ export class MealsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentDate = new Date().toISOString();
-    this.loadData();
+    const today = new Date().getDay();
+    this.loadData(today);
   }
 
   ngOnDestroy() {
@@ -108,14 +108,15 @@ export class MealsPage implements OnInit, OnDestroy {
   }
 
 
-  loadData(){
+  loadData(today : number){
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-      this.mealPlanService.getMealPlans(token, 4).pipe(
+      this.mealPlanService.getMealPlans(token, today).pipe(
         finalize(() => {
           this.loaded = true;
         })
       ).subscribe((mealPlans : any) => {
         this.mealPlans = mealPlans;
+        console.log(mealPlans);
         if (mealPlans.length) {
           this.selectedMealPlan = mealPlans[0];
           this.setSlidesPerView();
