@@ -117,7 +117,7 @@ export class MealsPage implements OnInit, OnDestroy {
         })
       ).subscribe((mealPlans : any) => {
         this.mealPlans = mealPlans;
-        console.log(mealPlans);
+
         if (mealPlans.length) {
           this.selectedMealPlan = mealPlans[0];
           this.setSlidesPerView();
@@ -135,7 +135,6 @@ export class MealsPage implements OnInit, OnDestroy {
     const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id === selectedMealPlanId);
     if (mealPlan) {
       this.selectedMealPlan = mealPlan;
-      console.log(this.selectedMealPlan)
       this.setSlidesPerView();
     } else {
       console.log('no meals defined yet')
