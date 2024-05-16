@@ -7,17 +7,15 @@ import { register } from 'swiper/element/bundle';
 import { ChangeDetectorRef } from '@angular/core';
 import { addCircle, menu, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { AuthService } from "../../services/auth.service";
 import { StorageService } from "../../services/storage.service";
 import { AuthConstants } from "../../config/auth-constants";
 import { ActivatedRoute } from '@angular/router';
-import { Observable, delay, finalize, flatMap, forkJoin, map, of, tap } from 'rxjs';
+import { finalize } from 'rxjs';
 import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
-import { FoodItemEntry } from 'src/app/model/food-item-entry';
-import { MealOption } from 'src/app/model/meal-option';
-import { Meal } from 'src/app/model/meal';
-import { IonHeader, ModalController, IonSelect, IonSelectOption, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
+import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkeletonText,
+  IonDatetimeButton, IonModal, IonDatetime, IonList, IonListHeader, IonItem, IonLabel,
+  IonThumbnail, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
 register();
 
 @Component({
@@ -25,7 +23,26 @@ register();
   templateUrl: './meals.page.html',
   styleUrls: ['./meals.page.scss'],
   standalone: true,
-  imports: [IonHeader, IonSelect, IonSelectOption, CommonModule, FormsModule, IonToolbar, IonContent, IonDatetimeButton, IonModal, IonDatetime, IonList, IonItem, IonLabel, IonCheckbox, IonAvatar],
+  imports: [
+    IonHeader,
+    IonSelect,
+    IonSelectOption,
+    CommonModule,
+    FormsModule,
+    IonToolbar,
+    IonContent,
+    IonDatetimeButton,
+    IonModal,
+    IonDatetime,
+    IonSkeletonText,
+    IonList,
+    IonListHeader,
+    IonItem,
+    IonThumbnail,
+    IonLabel,
+    IonCheckbox,
+    IonAvatar
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class MealsPage implements OnInit {
@@ -38,13 +55,10 @@ export class MealsPage implements OnInit {
   customerMealPlanDate = "2024-04-20T00:00:00"; //this will be the date the customer first recieves their mealplan - make it a minimum value in the date calander
   selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   mealPlans : MealPlan[] = [];
-  selectedMealPlan: any; // Default valu
-  selectedMealPlanObject: any;
-  defaultMealPlanObject: any;
+  selectedMealPlan: MealPlan | null = null; // Default value
   infoShowing= false;
   activeNoteIndex: number | null = null; // Initialize to null
   currentInfoIndex: number | null = null; // Initialize to null
-
 
   constructor(
     private route: ActivatedRoute,
@@ -64,28 +78,27 @@ export class MealsPage implements OnInit {
 
   ngOnInit() {
     this.currentDate = new Date().toISOString();
-    this.setDefaultMealPlanObject(); // Call this method to initialize selectedMealPlanObject
     this.loadData();
     // this.mealPlanService.mealPlanData$.subscribe((res:any) => {
     //   this.mealPlans = res;
     // });
   }
 
-
-loadData(){
-  this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-    this.mealPlanService.getMealPlans(token).pipe(
-      finalize(() => {
-        this.loaded = true;
-        // Set the default meal plan object after loading the meal plans
-        this.setDefaultMealPlanObject();
-      })
-    ).subscribe((res : any) => {
-      console.log(res);
-      this.mealPlans = res;
+  loadData(){
+    this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
+      this.mealPlanService.getMealPlans(token).pipe(
+        finalize(() => {
+          this.loaded = true;
+        })
+      ).subscribe((mealPlans : any) => {
+        // this.storageService.store(AuthConstants.MEAL_PLAN_DATA, res);
+        this.mealPlans = mealPlans;
+        if (mealPlans.length) {
+          this.selectedMealPlan = mealPlans[0];
+        }
+      });
     });
-  });
-}
+  }
 
   // handleSelectChange(event: any) {
   //   this.selectedMealPlan = event.detail.value;
@@ -93,44 +106,28 @@ loadData(){
   //   this.updateSwiperAndMealInfo();
   // }
   handleSelectChange(event: any) {
-    this.selectedMealPlan = event.detail.value;
-    console.log(event.detail.value);
-    
-    // Find the selected meal plan object
-    this.selectedMealPlanObject = this.mealPlans.find(plan => plan.title === this.selectedMealPlan);
-    
-    if (this.selectedMealPlanObject) {
-      // Trigger change detection to update the UI
-      this.cdRef.detectChanges();
-    } else {
-      console.log('No matching meal plan found');
-    }
+    const selectedMealPlanId = parseInt(event.detail.value);
+    this.updateSwiperAndMealInfo(selectedMealPlanId);
   }
 
-  setDefaultMealPlanObject() {
-    if (this.mealPlans && this.mealPlans.length > 0) {
-      this.selectedMealPlanObject = this.mealPlans[0]; // Set to the first meal plan initially
-      this.selectedMealPlan = this.selectedMealPlanObject.title; // Set the title as the default selected value
-    }
-  }
+
   kjsToCalories(kjs: any) {
-
       return Math.trunc(kjs/4.18);
-
   }
 
 
   toggleInfo(index: number): void {
     this.activeNoteIndex = this.activeNoteIndex === index ? null : index;
+    this.currentInfoIndex = this.currentInfoIndex === index? null : index;
+    this.infoShowing = !this.infoShowing;
   }
 
-  updateSwiperAndMealInfo() {
+  updateSwiperAndMealInfo(selectedMealPlanId : number) {
     // Find the selected meal plan object
-    this.selectedMealPlanObject = this.mealPlans.find(plan => plan.title === this.selectedMealPlan);
-    if (this.selectedMealPlanObject) {
-      // Update the Swiper slides and meal info based on the selected meal plan
-      // This is a placeholder for your logic to update the Swiper and meal info
-      console.log('Selected Meal Plan:', this.selectedMealPlanObject);
+    const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id === selectedMealPlanId);
+
+    if (mealPlan) {
+      this.selectedMealPlan = mealPlan;
     } else {
       console.log('no meals defined yet')
     }
