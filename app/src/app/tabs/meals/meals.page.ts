@@ -86,7 +86,7 @@ export class MealsPage implements OnInit {
 
   loadData(){
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-      this.mealPlanService.getMealPlans(token).pipe(
+      this.mealPlanService.getMealPlans(token, 4).pipe(
         finalize(() => {
           this.loaded = true;
         })

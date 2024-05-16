@@ -35,13 +35,6 @@
         <p class="meal-page-title">Meal Plan</p>
         <ion-datetime-button datetime="datetime"></ion-datetime-button>
       </div>
-      <ion-list>
-        <ion-item lines="none">
-          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan?.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
-            <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
     </div>
 
     <ion-modal [keepContentsMounted]="true">
@@ -56,18 +49,26 @@
       </ng-template>
     </ion-modal>
 
-    <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
-      <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
-        <p style="text-align: center;">
-          {{ meal.type }}
-          <br>
-          <small>{{ meal.time }}</small>
-        </p>
-      </swiper-slide>
-    </swiper-container>
-  </div>
+    <div *ngIf="selectedMealPlan">
+      <ion-list>
+        <ion-item lines="none">
+          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan?.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+            <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
 
-    <div class="row-container" *ngIf="selectedMealPlan">
+      <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="2.3">
+        <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
+          <p style="text-align: center;">
+            {{ meal.type }}
+            <br>
+            <small>{{ meal.time }}</small>
+          </p>
+        </swiper-slide>
+      </swiper-container>
+
+      <div class="row-container" *ngIf="selectedMealPlan">
         <ion-list *ngFor="let option of selectedMealPlan.meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
 
           <ion-item mode="ios" lines="none" class="list-header">
@@ -93,7 +94,11 @@
             <ion-icon name="menu" slot="end"></ion-icon>
           </ion-item>
         </ion-list>
+      </div>
+
+      <div *ngIf="!selectedMealPlan">
+        <p>No meal plans</p>
+      </div>
     </div>
   </div>
-
 </ion-content>

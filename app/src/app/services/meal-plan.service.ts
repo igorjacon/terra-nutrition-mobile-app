@@ -31,7 +31,7 @@ export class MealPlanService {
     });
   }
 
-  getMealPlans(token : string) {
+  getMealPlans(token : string, day : number) {
     // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
 
     let headers = {}
@@ -41,12 +41,12 @@ export class MealPlanService {
       });
     }
     const options = { headers: headers};
-    const url = environment.api_base_url + '/api/meal_plans';
+    const url = environment.api_base_url + '/api/meal_plans?days=' + day;
 
     return this.http.get<MealPlan[]>(url, options).pipe(catchError(err => {
       if (err.error.code === 401) {
         // If jwt token expired, request new jwt with refresh token
-        this.httpService.refresh('/api/meal_plans');
+        this.httpService.refresh('/api/meal_plans?days=' + day);
       }
       return of(null);
     }));
