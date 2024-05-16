@@ -52,7 +52,7 @@
     <div *ngIf="selectedMealPlan">
       <ion-list>
         <ion-item lines="none">
-          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan?.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
             <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -96,8 +96,16 @@
         </ion-list>
       </div>
 
-      <div *ngIf="!selectedMealPlan">
-        <p>No meal plans</p>
+    </div>
+    <div *ngIf="!selectedMealPlan">
+      <div class="no-meal-plans">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <h2>You do not have any meal plans today!</h2>
+        <div>
+          <p>To see your meal plans assigned to a different date, use the date selector above.</p>
+          <p>If you have any issues, contact your nutritionist. </p>
+        </div>
+        <!-- <p>Otherwise, if you have any issues, contact your nutritionist.</p> -->
       </div>
     </div>
   </div>
