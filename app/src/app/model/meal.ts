@@ -5,6 +5,5 @@ export interface Meal {
     time : string;
     type : string;
     options : MealOption[];
-    createdAt : string;
-    updatedAt : string;
+    notes : string;
 }
