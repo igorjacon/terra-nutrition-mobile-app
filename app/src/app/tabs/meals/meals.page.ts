@@ -84,7 +84,7 @@ export class MealsPage implements OnInit, OnDestroy {
     const today = new Date().getDay();
     this.loadData(today);
     // this.getCaloriesFromKjls(153, 200);
-    this.displayCalories();
+    // this.displayCalories();
   }
 
   ngOnDestroy() {
@@ -145,42 +145,44 @@ export class MealsPage implements OnInit, OnDestroy {
         if (mealPlans.length) {
           this.selectedMealPlan = mealPlans[0];
           this.setSlidesPerView();
-          this.getKjs();
+          // this.getKjs();
           console.log(this.selectedMealPlan)
         }
       });
     });
   }
 
-  displayCalories() {
+  // displayCalories() {
 
-  }
+  // }
 
-  getKjs() {
-    //will need to loop through all the items, save their quantities and serviving sizes, and execute the getCaloriesFromKjs function
-   let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[0].foodItem.foodItemDetails.energyWithFibreKj; //object
+  // getKjs() {
+  //   //will need to loop through all the items, save their quantities and serviving sizes, and execute the getCaloriesFromKjs function
+  //  let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[0].foodItem.foodItemDetails.energyWithFibreKj; //object
 
-   console.log(kjs)
-  //  setTimeout(() => {
-  //   console.log(quantity)
-  //  }, 100)
-  }
+  //  console.log(kjs)
+  // //  setTimeout(() => {
+  // //   console.log(quantity)
+  // //  }, 100)
+  // }
 
-  /* The getCaloriesFromKjls function
-  This method will help us calculate the calories from a food item
-  We have access to the food item
-  Takes in a number in Kjls, multiplies it with
+  // /* The getCaloriesFromKjls function
+  // This method will help us calculate the calories from a food item
+  // We have access to the food item
+  // Takes in a number in Kjls, multiplies it with
 
-  */
-  getCaloriesFromKjls(servingSizeKjls100: number, quantity: number) {
-    //by default, we are provided with the kjs per 100ml/g of food items
-    //by dividing by 100, we get the serving size per 1ml/g of food, which we can use to multiply by the serving size
-    let servingSize = servingSizeKjls100 / 100;
-    console.log(servingSize)
-    let calories = Math.trunc((servingSize * quantity));
-    console.log(calories)
-    return calories;
-  }
+  // */
+  // getCaloriesFromKjls(servingSizeKjls100: number, quantity: number) {
+  //   //by default, we are provided with the kjs per 100ml/g of food items
+  //   //by dividing by 100, we get the serving size per 1ml/g of food, which we can use to multiply by the serving size
+  //   let servingSize = servingSizeKjls100 / 100;
+  //   let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[3].foodItem.foodItemDetails.energyWithFibreKj; //object
+  //   console.log(kjs)
+  //   console.log(servingSize)
+  //   let calories = Math.trunc((servingSize * quantity));
+  //   console.log(calories)
+  //   return calories;
+  // }
 
   //called when a meal plan is selected from the ion-select component
   handleSelectChange(event: any) {

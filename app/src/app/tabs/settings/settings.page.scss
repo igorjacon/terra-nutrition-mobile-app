@@ -1,6 +1,8 @@
 ion-header { 
     ion-toolbar {
-        --background: #45b683;
+        // --background: #45b683;
+        --background: #0fa469;
+
         --padding-top: 10px;
         --padding-bottom: 10px;
         ion-title {
@@ -33,5 +35,35 @@ ion-content {
     --padding-bottom: 10px;
     --padding-start: 30px;
     --padding-end: 30px;
+    .settings-heading {
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    .logout-button {
+        --background: #1eae77;
+        position: fixed;
+        left: 0;
+        bottom: 30px;
+        width: 84%;
+        text-align: center;
+        // margin: 0 auto;
+        margin-left: 30px;
+    }
+ion-list {
+    margin-bottom: 10px;
+    .list-header {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    // padding: 0;
+    // margin: 0;
+    ion-item {
+        --padding-start: 0;
+        font-size: 16px;
+        // padding: 0;
+        // margin: 0;
 
+    }
+}
 }
