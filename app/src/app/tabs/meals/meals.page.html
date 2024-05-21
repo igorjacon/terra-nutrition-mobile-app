@@ -56,13 +56,10 @@
     </div>
 
     <div *ngIf="selectedMealPlan">
-      <ion-list class="select-option">
-        <ion-item lines="none">
-          <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
-            <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+      <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+        <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
+      </ion-select>
+      <br>
 
       <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="slidesPerView" [observer]="true" [observeParents]="true">
         <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
