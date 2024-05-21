@@ -19,7 +19,6 @@ export class SettingsPage implements OnInit {
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit() {
-
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
       console.log(res)

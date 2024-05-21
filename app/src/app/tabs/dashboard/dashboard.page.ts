@@ -24,7 +24,7 @@ export class DashboardPage implements OnInit {
 
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
-      console.log(res)
+      // console.log(res)
     });
   }
 
