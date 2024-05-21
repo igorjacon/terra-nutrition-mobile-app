@@ -26,7 +26,16 @@ export const routes: Routes = [
         },
         {
           path: 'settings',
-          loadComponent: () => import('./settings/settings.page').then( m => m.SettingsPage)
+          loadComponent: () => import('./settings/settings.page').then( m => m.SettingsPage),
+          // children: [{
+          //     path: 'professional',
+          //     loadComponent: () => import('./settings/professional/professional.page').then((m) => m.ProfessionalPage)
+          // }]
+        },
+        {
+          path: 'professional',
+          resolve: { customerData: CustomerResolver },
+          loadComponent: () => import('./settings/professional/professional.page').then((m) => m.ProfessionalPage)
         },
         {
             path: '',

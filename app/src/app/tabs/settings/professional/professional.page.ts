@@ -5,16 +5,15 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
-import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.page.html',
-  styleUrls: ['./settings.page.scss'],
+  selector: 'app-professional',
+  templateUrl: './professional.page.html',
+  styleUrls: ['./professional.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, RouterLink, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class SettingsPage implements OnInit {
+export class ProfessionalPage implements OnInit {
   customer: any;
 
   constructor(private authService: AuthService, private storageService: StorageService) { }

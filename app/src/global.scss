@@ -29,3 +29,35 @@
 * {
     font-family: Inter;
 }
+
+ion-header { 
+    ion-toolbar {
+        // --background: #45b683;
+        --background: #0fa469;
+
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        ion-title {
+
+        }
+        ion-icon {
+            font-size: 40px;
+            color: rgb(255, 255, 255);
+        }
+        .logo {
+            margin: 0 auto;
+            background-color: rgb(219, 243, 219);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 60px;
+
+            img {
+                height: 40px;
+            }
+
+        }
+    }
+}
