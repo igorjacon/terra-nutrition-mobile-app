@@ -20,12 +20,11 @@ export class DashboardPage implements OnInit {
 
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
-  async ngOnInit() {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
+   ngOnInit() {
 
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
+      console.log(res)
     });
   }
 

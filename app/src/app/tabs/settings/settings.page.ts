@@ -14,10 +14,16 @@ import { AuthConstants } from 'src/app/config/auth-constants';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class SettingsPage implements OnInit {
+  customer: any;
 
   constructor(private authService: AuthService, private storageService: StorageService) { }
 
   ngOnInit() {
+
+    this.authService.customerData$.subscribe((res:any) => {
+      this.customer = res;
+      console.log(res)
+    });
   }
 
   logoutAction() {
