@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
+import { arrowBackOutline, chevronBackOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-professional',
@@ -21,7 +23,12 @@ export class ProfessionalPage implements OnInit {
   formattedPhoneNumber: string = '';
   formattedLocationPhoneNumber: string = '';
 
-  constructor(private authService: AuthService, private storageService: StorageService) {}
+  constructor(private authService: AuthService, private storageService: StorageService) {
+    addIcons({
+      arrowBackOutline,
+      chevronBackOutline
+    })
+  }
 
   ngOnInit() {
     this.authService.customerData$.subscribe((res: any) => {
