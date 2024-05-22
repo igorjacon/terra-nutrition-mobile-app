@@ -7,9 +7,53 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h1>Profile page</h1>
-  <p>
-    Name: {{ customer.user.firstName }} {{ customer.user.lastName }}
-  </p>
-
+  <div class="profile-card">
+    <img *ngIf="customer.user?.profilePicture; else defaultImage" [src]="customer.user?.profilePicture" class="profile-image" alt="Profile Picture"> <!-- edit when customer photos are added -->
+    <ng-template #defaultImage>
+      <img src="assets/imgs/default-profile.png" class="profile-image" alt="Default Profile Picture">
+    </ng-template>
+    <div class="profile-details">
+      <h2>{{ customer.user?.firstName }} {{ customer.user?.lastName }}</h2>
+      <p>Email: {{ customer.user?.email }}</p>
+      <p>Phone: {{ getFormattedPhone(customer.user?.phones) }}</p>
+    </div>
+  </div>
+  <div class="info-card">
+    <div class="info-section">
+      <div class="info-label">Height:</div>
+      <div class="info-value">{{ customer.height }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Weight:</div>
+      <div class="info-value">{{ customer.weight }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">DOB:</div>
+      <div class="info-value">{{ customer.dob | date: 'longDate' }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Dietary Preference:</div>
+      <div class="info-value">{{ customer.dietaryPreference }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Occupation:</div>
+      <div class="info-value">{{ customer.occupation }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Goals:</div>
+      <div class="info-value">{{ customer.goals }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Reason for Seeking Professional:</div>
+      <div class="info-value">{{ customer.reasonSeekProfessional }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Medical Information:</div>
+      <div class="info-value">{{ customer.medicalInfo }}</div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Address:</div>
+      <div class="info-value">{{ customer.user?.address?.lineOne }}, {{ customer.user?.address?.city }}, {{ customer.user?.address?.zipCode }}</div>
+    </div>
+  </div>
 </ion-content>

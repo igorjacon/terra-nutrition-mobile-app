@@ -1,13 +1,43 @@
 <ion-header>
-    <ion-toolbar>
-      <div class="logo">
-        <img src="assets/imgs/logo.png">
+  <ion-toolbar>
+    <div class="logo">
+      <img src="assets/imgs/logo.png">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="profile-card">
+    <img *ngIf="customer.professional.user?.profileImg; else defaultImage" [src]="'https://app.terranutri.net/uploads/user/' + customer.professional.user.profileImg" class="profile-image" alt="Profile Picture">
+    <ng-template #defaultImage>
+      <img src="assets/imgs/default-professional-profile.png" class="profile-image" alt="Default Professional Profile Picture">
+    </ng-template>
+    <div class="profile-details">
+      <h2>{{ professional.user?.firstName }} {{ professional.user?.lastName }}</h2>
+      <p>Job Title: {{ professional.jobTitle }}</p>
+      <p>Email: <a href="mailto:{{ professional.user?.email }}">{{ professional.user?.email }}</a></p>
+      <p>Phone: <a [href]="'tel:' + formattedPhoneNumber">{{ formattedPhoneNumber }}</a></p>
+      <p>Website: <a [href]="professional.website" target="_blank">{{ professional.website }}</a></p>
+    </div>
+  </div>
+  <div class="info-card">
+    <div class="info-section">
+      <div class="info-label">Clinic:</div>
+      <div class="info-value">{{ professional.locations[0]?.name }}</div>
+    </div>
+    <div class="info-section" *ngIf="professional.locations && professional.locations.length > 0">
+      <div class="info-label">Address:</div>
+      <div class="info-value">
+        <a [href]="getAppleMapsLink(professional.locations[0]?.address)">
+          {{ professional.locations[0]?.address?.lineOne }}, 
+          {{ professional.locations[0]?.address?.lineTwo }}, 
+          {{ professional.locations[0]?.address?.city }}
+        </a>
       </div>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    {{ customer.professional.user.firstName }}
-  
-  </ion-content>
-  
+    </div>
+    <div class="info-section">
+      <div class="info-label">Location Phone:</div>
+      <div class="info-value"><a [href]="'tel:' + formattedLocationPhoneNumber">{{ formattedLocationPhoneNumber }}</a></div>
+    </div>
+  </div>
+</ion-content>

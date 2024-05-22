@@ -14,21 +14,29 @@ import { AuthConstants } from 'src/app/config/auth-constants';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ProfilePage implements OnInit {
+  customer: any = {};
+  formattedPhoneNumber: string = '';
 
-  customer: any;
-
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService) {}
 
   ngOnInit() {
-    this.authService.customerData$.subscribe((res:any) => {
+    this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
-      console.log(res)
+      console.log('Customer Data:', res);
+
+      if (this.customer.user && this.customer.user.phones) {
+        this.formattedPhoneNumber = this.getFormattedPhone(this.customer.user.phones);
+      }
     });
   }
 
-  logoutAction() {
-    this.storageService.get(AuthConstants.REFRESH_TOKEN).then(res => {
-      this.authService.logout(res);
-    });
+  getFormattedPhone(phones: Array<{ prefix: string, number: string }>): string {
+    if (phones && phones.length > 0) {
+      const phone = phones[0];
+      const formattedNumber = phone.number.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+      console.log('Formatting Phone:', phone);
+      return `${phone.prefix} ${formattedNumber}`;
+    }
+    return 'N/A';
   }
 }
