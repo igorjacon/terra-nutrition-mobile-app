@@ -25,22 +25,18 @@ export const routes: Routes = [
             loadComponent: () => import('./account-details/account-details.page').then((m) => m.AccountDetailsPage)
         },
         {
-          path: 'settings',
-          loadComponent: () => import('./settings/settings.page').then( m => m.SettingsPage),
-          // children: [{
-          //     path: 'professional',
-          //     loadComponent: () => import('./settings/professional/professional.page').then((m) => m.ProfessionalPage)
-          // }]
+            path: 'settings',
+            loadComponent: () => import('./settings/settings.page').then( m => m.SettingsPage),
         },
         {
-          path: 'professional',
-          resolve: { customerData: CustomerResolver },
-          loadComponent: () => import('./settings/professional/professional.page').then((m) => m.ProfessionalPage)
+            path: 'settings/professional',
+            resolve: { customerData: CustomerResolver },
+            loadComponent: () => import('./settings/professional/professional.page').then((m) => m.ProfessionalPage)
         },
         {
-          path: 'profile',
-          resolve: { customerData: CustomerResolver },
-          loadComponent: () => import('./settings/profile/profile.page').then((m) => m.ProfilePage)
+            path: 'settings/profile',
+            resolve: { customerData: CustomerResolver },
+            loadComponent: () => import('./settings/profile/profile.page').then((m) => m.ProfilePage)
         },
         {
             path: '',

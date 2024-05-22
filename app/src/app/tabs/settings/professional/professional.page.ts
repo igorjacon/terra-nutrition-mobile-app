@@ -21,7 +21,6 @@ export class ProfessionalPage implements OnInit {
   ngOnInit() {
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
-      console.log(res)
     });
   }
 
