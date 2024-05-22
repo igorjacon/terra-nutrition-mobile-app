@@ -22,8 +22,9 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
+      console.log('Loading customer profile page');
       console.log('Customer Data:', res);
-
+      
       if (this.customer.user && this.customer.user.phones) {
         this.formattedPhoneNumber = this.getFormattedPhone(this.customer.user.phones);
       }

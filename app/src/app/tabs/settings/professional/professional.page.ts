@@ -27,6 +27,7 @@ export class ProfessionalPage implements OnInit {
     this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
       console.log(res);
+      console.log('Loading Professional profile page');
       if (res && res.professional) {
         this.professional = res.professional;
         console.log('Professional Data:', this.professional);

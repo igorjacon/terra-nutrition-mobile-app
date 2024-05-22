@@ -15,7 +15,7 @@
     <div class="profile-details">
       <h2>{{ customer.user?.firstName }} {{ customer.user?.lastName }}</h2>
       <p>Email: {{ customer.user?.email }}</p>
-      <p>Phone: {{ getFormattedPhone(customer.user?.phones) }}</p>
+      <p>Phone: {{ formattedPhoneNumber }}</p>
     </div>
   </div>
   <div class="info-card">
