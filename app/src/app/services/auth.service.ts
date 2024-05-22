@@ -55,6 +55,7 @@ export class AuthService
   async logout(refreshToken: string|null) {
     await this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
     await this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
+    await this.storageService.removeItem(AuthConstants.CUSTOMER_DATA);
     
     const body = {"refreshToken": refreshToken};
     this.httpService.post('/api/token/invalidate', body).subscribe();
