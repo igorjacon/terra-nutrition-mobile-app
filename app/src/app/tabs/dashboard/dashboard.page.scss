@@ -35,9 +35,54 @@ ion-content {
     --padding-top: 10px;
     --padding-bottom: 10px;
     --padding-start: 30px;
-    --padding-end: 30px;
+    --padding-end: 30px; 
+    .welcome-customer-div {
+        margin-bottom: 50px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        
+    }
+    swiper-container {
+        swiper-slide {
+            
+            padding: 10px;
+            border-radius: 20px;
+            height: 120px;
+            // width: 50px;
+            border: 1px solid green;
+            ion-item::part(native) {
+                --padding-start: 8px;
+                // --padding-end: 0;
+            }
+            ion-item {
+               
+                ion-label {
+                    h2 {
+                        font-size: 18px;
+                    }
+                    p {
+
+                    }
+                }
+                ion-icon {
+
+                }
+            }
+        }
+    }
+
+    .quick-links-grid {
+        margin-top: 20px;
+        height: 200px;
+        // width: 200px;
+        background-color: green;
+    }
 
 }
+
 
 .menu-icon {
     font-size: 2rem;
