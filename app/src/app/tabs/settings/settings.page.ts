@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -17,12 +18,16 @@ import { RouterLink } from '@angular/router';
 export class SettingsPage implements OnInit {
   customer: any;
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService, private router: Router) { }
 
   ngOnInit() {
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
     });
+  }
+
+  navigate(){
+    this.router.navigate(['/professional'])
   }
 
   logoutAction() {

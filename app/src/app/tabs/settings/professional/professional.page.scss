@@ -1,10 +1,19 @@
 ion-header {
     --background: #006400;
     --color: #fff;
-  
+  ion-toolbar {
+    // --background: red;
+    // display: flex;
+    ion-buttons {
+      ion-back-button {
+
+      }
+    }
+  }
     .logo {
-      display: flex;
-      align-items: center;
+      // display: flex;
+      // align-items: center;
+      // justify-content: space-around;
       img {
         height: 40px;
       }
