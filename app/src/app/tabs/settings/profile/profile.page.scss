@@ -1,15 +1,36 @@
 ion-header {
-    --background: #006400;
-    --color: #fff;
-  
-    .logo {
-      display: flex;
-      align-items: center;
-      img {
-        height: 40px;
-      }
+  --background: #006400;
+  --color: #fff;
+ion-toolbar {
+  // --background: red;
+  // display: flex;
+  ion-buttons {
+    ion-back-button {
+      position: absolute;
+      --color: white;
+      --icon-margin-start: 8px;
+
+      --icon-font-size: 40px;
+      // --icon-font-weight: 100px;
+    }
+    //this is a solution to hide back button text from github
+    // https://github.com/ionic-team/ionic-framework/issues/29281
+    ion-back-button::part(text) {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
     }
   }
+}
+  .logo {
+    img {
+      height: 40px;
+    }
+  }
+}
   
   .profile-card {
     display: flex;
