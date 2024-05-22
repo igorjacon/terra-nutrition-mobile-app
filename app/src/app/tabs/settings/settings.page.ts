@@ -27,7 +27,7 @@ export class SettingsPage implements OnInit {
   }
 
   navigate(){
-    this.router.navigate(['/professional'])
+    this.router.navigate(['customer/professional'])
   }
 
   logoutAction() {
