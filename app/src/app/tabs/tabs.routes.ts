@@ -38,6 +38,11 @@ export const routes: Routes = [
           loadComponent: () => import('./settings/professional/professional.page').then((m) => m.ProfessionalPage)
         },
         {
+          path: 'profile',
+          resolve: { customerData: CustomerResolver },
+          loadComponent: () => import('./settings/profile/profile.page').then((m) => m.ProfilePage)
+        },
+        {
             path: '',
             redirectTo: '/customer/dashboard',
             pathMatch: 'full',
