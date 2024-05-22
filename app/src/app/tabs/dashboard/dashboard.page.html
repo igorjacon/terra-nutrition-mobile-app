@@ -19,14 +19,50 @@
   }
 </ion-content> -->
 <ion-content class="ion-padding">
-  <h1>Hello {{ customer?.firstName }}</h1>
-  @if (userHasCompletedIntakeForm) {
-    @if (userHasMealPlans) {
-      <p>Look at these cool af meal plans!</p>
-    } @else {
-      <p>Your intake form has been submitted. <br><br> Camila is currently implementing your meal plan! Once complete, it will appear here.</p>
-    }
-  } @else {
-    <p>pretend this is an intake form</p>
-  }
+  <div class="welcome-customer-div">
+    <h1 style="font-weight: 600;">Hey, {{ customer.user.firstName}}!</h1>
+    <p style="color: rgb(137, 137, 137);">Welcome back to your personalised meal plan!</p>
+  </div>
+
+  <div class="swiper-div">
+    <h2 style="font-size: 20px;">Quick links</h2>
+    <swiper-container #swiper [modules]="swiperModule" [slidesPerView]="1.2" [spaceBetween]="10" [observer]="true" [observeParents]="true">
+      <swiper-slide class="meal-plan-swiper" (click)="test()">
+        <ion-item lines="none">
+          <ion-label slot="start">
+            <h2 style="margin-top: 5px;">Meal Plans</h2>
+            <p style="margin-top: 10px; width: 200px;">
+              See what meals your nutritionist has provided you
+            </p>
+            <ion-icon name="nutrition-outline" slot="end" style="position: absolute; top: 4px; right: 10px; font-size: 26px;"></ion-icon>
+          </ion-label>
+        </ion-item>
+      </swiper-slide>
+
+      <swiper-slide class="meal-plan-swiper">
+        <ion-item lines="none">
+          <ion-label slot="start">
+            <h2 style="margin-top: 5px;">Your Nutritionist</h2>
+            <p style="margin-top: 10px; width: 200px;">
+              Learn more about your nutritionist or get in contact
+            </p>
+            <ion-icon name="happy-outline" slot="end" style="position: absolute; top: 4px; right: 10px; font-size: 26px;"></ion-icon>
+          </ion-label>
+        </ion-item>
+      </swiper-slide>
+
+      <swiper-slide class="meal-plan-swiper">
+        <ion-item lines="none">
+          <ion-label slot="start">
+            <h2 style="margin-top: 5px;">Account details</h2>
+            <p style="margin-top: 10px; width: 200px;">
+              Check the details that are linked to your account
+            </p>
+            <ion-icon name="settings-outline" slot="end" style="position: absolute; top: 4px; right: 10px; font-size: 26px;"></ion-icon>
+          </ion-label>
+        </ion-item>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
 </ion-content>

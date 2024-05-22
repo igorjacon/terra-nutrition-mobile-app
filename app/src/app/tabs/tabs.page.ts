@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {personCircleOutline, menuOutline, settingsOutline, statsChartOutline, nutritionOutline, reorderThreeOutline } from 'ionicons/icons';
+import {personCircleOutline, restaurantOutline, menuOutline, settingsOutline, statsChartOutline, nutritionOutline, reorderThreeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 
@@ -17,7 +17,9 @@ export class TabsPage implements OnInit {
       personCircleOutline,
       statsChartOutline,
       nutritionOutline,
-      settingsOutline
+      settingsOutline,
+      restaurantOutline
+      
     })
   }
 
