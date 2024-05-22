@@ -24,14 +24,11 @@ export class HttpService {
     return this.http.post(url, data);
   }
 
-  async get(serviceName: string) {
-    const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-    const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
-
+  get(serviceName: string, token: string) {
     let headers = {}
-    if (accessToken) {
+    if (token) {
       headers = new HttpHeaders({
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${token}`
       });
     }
     const options = { headers: headers};
@@ -54,11 +51,11 @@ export class HttpService {
         if (res) {
           this.storageService.store(AuthConstants.ACCESS_TOKEN, res.token);
           this.storageService.store(AuthConstants.REFRESH_TOKEN,res.refreshToken);
-          return this.get(serviceName);
+          return this.get(serviceName, res.token);
         } else {
           return of(null);
         }
-      }, 
+      },
       (err) => {
         console.log("Error: Not able to refresh token. Logout!", err);
         this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);

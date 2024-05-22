@@ -12,13 +12,13 @@ import { AuthConstants } from '../config/auth-constants';
 })
 
 export class AuthService
-{ 
+{
   customerData$ = new BehaviorSubject<any>('');
   userData$ = new BehaviorSubject<any>('');
 
   constructor(
-    private httpService: HttpService, 
-    private storageService: StorageService, 
+    private httpService: HttpService,
+    private storageService: StorageService,
     private router: Router
   ) {}
 
@@ -32,12 +32,8 @@ export class AuthService
     });
   }
 
-  fetchCustomerInfo(id:number) {
-    return this.httpService.get('/api/customers/'+id);
-  }
-
-  fetchUserInfo(url:string) {
-    return this.httpService.get(url);
+  fetchCustomerInfo(id:number, token: string) {
+    return this.httpService.get('/api/customers/'+id, token);
   }
 
   getCustomerData() {
@@ -56,7 +52,7 @@ export class AuthService
     await this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
     await this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
     await this.storageService.removeItem(AuthConstants.CUSTOMER_DATA);
-    
+
     const body = {"refreshToken": refreshToken};
     this.httpService.post('/api/token/invalidate', body).subscribe();
     this.router.navigate(['login']);

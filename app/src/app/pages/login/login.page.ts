@@ -72,23 +72,22 @@ export class LoginPage implements OnInit {
         'username': this.loginForm.value.email,
         'password': this.loginForm.value.password
       }
-  
+
       this.authService.authenticate(payload).subscribe(
         async (response) => {
           // Handle successful authentication
           this.isInvalid = false;
           this.errorMsg = "";
           this.loginForm.reset();
-  
+
           // Store token in storage
           let token = response.token;
           let refreshToken = response.refreshToken;
-          await this.storageService.store(AuthConstants.ACCESS_TOKEN,token);
-          await this.storageService.store(AuthConstants.REFRESH_TOKEN,refreshToken);
-  
+          await this.storageService.store(AuthConstants.ACCESS_TOKEN, token);
+          await this.storageService.store(AuthConstants.REFRESH_TOKEN, refreshToken);
+
           // Get user data
-          const customerInfo = await this.authService.fetchCustomerInfo(response.userId);
-          customerInfo.subscribe((res) => {
+          this.authService.fetchCustomerInfo(response.userId, token).subscribe((res) => {
             if (res) {
               this.storageService.store(AuthConstants.CUSTOMER_DATA, res);
               // Redirect user to dashboard

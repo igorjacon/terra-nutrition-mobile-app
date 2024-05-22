@@ -17,12 +17,12 @@ export const routes: Routes = [
         },
         {
             path: 'meals',
-            resolve: { mealPlans: MealPlanResolver },
+            // resolve: { mealPlans: MealPlanResolver },
             loadComponent: () => import('./meals/meals.page').then((m) => m.MealsPage)
         },
         {
-            path: 'account-details',
-            loadComponent: () => import('./account-details/account-details.page').then((m) => m.AccountDetailsPage)
+            path: 'recipes',
+            loadComponent: () => import('./recipes/recipes.page').then((m) => m.RecipesPage)
         },
         {
             path: 'settings',
