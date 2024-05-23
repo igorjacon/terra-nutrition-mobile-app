@@ -1,59 +1,51 @@
 <ion-header>
   <ion-toolbar>
     <div class="logo">
-      <img src="assets/imgs/logo.png">
+      <img src="assets/imgs/logo.png" alt="App Logo">
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="!loaded">
-    <ion-list-header>
-      <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
-    </ion-list-header>
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-      </ion-thumbnail>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <div *ngIf="loaded">
-    <h2>Recipes</h2>
-    <ion-card *ngFor="let recipe of recipes; let i = index; trackBy:trackItems" color="success">
-      <ion-card-header>
-        <ion-card-title>{{ recipe?.name }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list *ngIf="recipe?.foodItemEntries.length" lines="none">
-          <ion-item *ngFor="let item of recipe?.foodItemEntries; let i = index; trackBy:trackItems">
-            <ion-label>{{ item?.foodItem?.name }}</ion-label>
-          </ion-item>
-        </ion-list>
-
-        <ion-list>
-          <ion-item *ngIf="recipe?.instructions" [button]="true" class="more-info-item" lines="none" (click)="toggleInstructions(recipe.id.toString())">
-            <ion-label slot="start">
-              <h2 class="more-info">Instructions</h2>
-            </ion-label>
-          </ion-item>
-          <ion-item *ngIf="instructions[recipe.id.toString()]" lines="none">
-            <div [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
-          </ion-item>
-        </ion-list>
-
-      </ion-card-content>
-    </ion-card>
+  <div *ngIf="!loaded" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
   </div>
+
+  <ion-grid *ngIf="loaded" class="recipes-grid">
+    <ion-row>
+      <ion-card-title>Your Recipes</ion-card-title>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
+        <ion-card class="recipe-card">
+          <img [src]="recipe.image" *ngIf="recipe.image" />
+          <ion-card-header>
+            <ion-card-title>{{ recipe?.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ recipe?.description }}</p>
+            
+            <!-- Display food items if available -->
+            <div *ngIf="recipe.foodItemEntries && recipe.foodItemEntries.length > 0">
+              <h3>Ingredients</h3>
+              <ul>
+                <li *ngFor="let item of recipe.foodItemEntries">
+                  {{ item.foodItem.name }} - {{ item.quantity }} {{ item.measurement }}
+                </li>
+              </ul>
+            </div>
+
+            <ion-button expand="block" color="light" (click)="toggleInstructions(recipe.id.toString())" class="ion-activatable ripple-parent">
+              {{ instructions[recipe.id.toString()] ? 'Hide Instructions' : 'Show Instructions' }}
+            </ion-button>
+            <div *ngIf="instructions[recipe.id.toString()]" class="instructions">
+              <div [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
