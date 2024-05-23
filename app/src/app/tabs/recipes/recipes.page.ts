@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { HttpService } from "../../services/http.service";
-import { StorageService } from "../../services/storage.service";
-import { AuthConstants } from "../../config/auth-constants";
-import { finalize } from "rxjs";
-import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import {HttpService} from "../../services/http.service";
+import {StorageService} from "../../services/storage.service";
+import {AuthConstants} from "../../config/auth-constants";
+import {finalize} from "rxjs";
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -20,11 +21,16 @@ export class RecipesPage implements OnInit {
   loaded: boolean = false;
   sanitizedHTML: SafeHtml = "";
   instructions: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
-
-  constructor(private httpService: HttpService, private storageService: StorageService, private sanitizer: DomSanitizer) {}
+  constructor(private httpService: HttpService, private storageService: StorageService, private sanitizer: DomSanitizer, private router: Router)
+  {}
 
   ngOnInit() {
-    this.loadData();
+    this.loadData()
+  }
+
+  goToDashboard() {
+    console.log('test logo click')
+    this.router.navigateByUrl('customer/dashboard')
   }
 
   loadData() {

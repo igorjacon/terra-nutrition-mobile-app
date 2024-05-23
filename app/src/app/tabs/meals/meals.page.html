@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <div class="logo">
+    <div class="logo" (click)="goToDashboard()">
       <img src="assets/imgs/logo.png">
     </div>
   </ion-toolbar>
@@ -56,7 +56,7 @@
     </div>
 
     <div *ngIf="selectedMealPlan">
-      <ion-select (ionChange)="handleSelectChange($event)" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" placeholder="Meal plan options" >
+      <ion-select (ionChange)="handleSelectChange($event)" label-placement="floating" fill="outline" mode="md" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" label="Meal plan options">
         <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
       </ion-select>
       <br>
