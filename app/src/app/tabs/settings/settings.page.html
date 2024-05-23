@@ -31,14 +31,14 @@
   <ion-list class="your-nutritionist-list">
     <ion-item class="list-header">Your Nutritonist</ion-item>
     <ion-item lines="none" [button]="true" [routerLink]="['professional']">Contact details</ion-item>
-    <ion-item lines="none" [button]="true">Location</ion-item>
+    <!-- <ion-item lines="none" [button]="true">Location</ion-item> -->
     <!-- <ion-item lines="none" [button]="true">Social Media</ion-item> -->
     <!-- <ion-item lines="none" [button]="true" (click)="logoutAction()">Logout</ion-item> -->
   </ion-list>
   <ion-list class="privacy-and-account-list">
     <ion-item class="list-header">Privacy</ion-item>
-    <ion-item lines="none" [button]="true">Terms & conditions</ion-item>
-    <ion-item lines="none" [button]="true">Privacy policy</ion-item>
+    <ion-item lines="none" [button]="true" [routerLink]="['terms-and-conditions']">Terms & conditions</ion-item>
+    <ion-item lines="none" [button]="true" [routerLink]="['privacy-policy']">Privacy policy</ion-item>
     <!-- <ion-item lines="none" [button]="true" (click)="logoutAction()">Logout</ion-item> -->
   </ion-list>
   

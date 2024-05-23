@@ -1,0 +1,50 @@
+ion-header {
+  --background: #006400;
+  --color: #fff;
+  ion-toolbar {
+    ion-buttons {
+      ion-back-button {
+        position: absolute;
+        --color: white;
+        --icon-margin-start: 8px;
+        --icon-font-size: 40px;
+      }
+      // Hide back button text
+      ion-back-button::part(text) {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    }
+  }
+  .logo {
+    img {
+      height: 40px;
+    }
+  }
+}
+
+.terms-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+  padding: 20px;
+}
+
+.terms-content {
+  h2 {
+    margin-top: 20px;
+    color: #006400;
+    font-weight: bold;
+  }
+  
+  p {
+    margin: 10px 0;
+    color: #333;
+    line-height: 1.5;
+  }
+}
