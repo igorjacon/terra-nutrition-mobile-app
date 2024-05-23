@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonImg, IonInput, IonItem, IonLabel, IonRow, IonText, IonTitle, IonToast, IonToolbar } from '@ionic/angular/standalone';
+import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonImg, IonInput, IonItem, IonLabel, IonProgressBar, IonRow, IonText, IonTitle, IonToast, IonToolbar } from '@ionic/angular/standalone';
 import { personOutline, eyeOutline, eyeOffOutline, warningOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router, RouterLink } from '@angular/router';
@@ -17,7 +17,7 @@ import { AuthConstants } from 'src/app/config/auth-constants';
   standalone: true,
   imports: [
     IonContent, IonToast, RouterLink, IonButton, IonInput,
-    IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle,
+    IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonProgressBar,
     IonIcon, IonText, IonItem, ReactiveFormsModule, CommonModule
   ]
 })
@@ -27,6 +27,7 @@ export class LoginPage implements OnInit {
   passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not
   currentIconName: string = "eye-off-outline"; //name of the icon that will be displayed in the password input
   errorMsg: string = "";
+  showLoadingBar = false; //set to true on button click, set to false 
   isInvalid: boolean = false;
   showErrorToast = false; //boolean value on whether or not to show the errorToast
   errorToastText = ""; //the text that will be used in the errorToast
@@ -69,6 +70,7 @@ export class LoginPage implements OnInit {
 
 
   async loginAction(event: Event) {
+
     event.preventDefault();
     if(!this.loginForm.value.email || !this.loginForm.value.password) {
       this.isInvalid = true;
@@ -83,6 +85,7 @@ export class LoginPage implements OnInit {
       this.authService.authenticate(payload).subscribe(
         async (response) => {
           // Handle successful authentication
+          this.showLoadingBar = true;
           this.isInvalid = false;
           this.errorMsg = "";
           this.loginForm.reset();
@@ -99,6 +102,7 @@ export class LoginPage implements OnInit {
               this.storageService.store(AuthConstants.CUSTOMER_DATA, res);
               // Redirect user to dashboard
               this.router.navigate(['/customer/dashboard']);
+              this.showLoadingBar = false;
             }
           });
         },
