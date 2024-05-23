@@ -22,11 +22,16 @@ import { AuthConstants } from 'src/app/config/auth-constants';
   ]
 })
 
+
 export class LoginPage implements OnInit {
   passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not
   currentIconName: string = "eye-off-outline"; //name of the icon that will be displayed in the password input
   errorMsg: string = "";
   isInvalid: boolean = false;
+  showErrorToast = false; //boolean value on whether or not to show the errorToast
+  errorToastText = ""; //the text that will be used in the errorToast
+  // showSuccessToast = false; //boolean value on whether or not to show the successToast
+  // successToastText = ""; //the text that will be used in the successToast
 
   //representation of form controls that make up a form
   loginForm = new FormGroup({
@@ -67,7 +72,8 @@ export class LoginPage implements OnInit {
     event.preventDefault();
     if(!this.loginForm.value.email || !this.loginForm.value.password) {
       this.isInvalid = true;
-      this.errorMsg = "You must provide an email and password before logging in."
+      this.errorToastText = "Provide an email and password to log in"
+      this.showErrorToast = true;
     } else {
       const payload = {
         'username': this.loginForm.value.email,
@@ -100,6 +106,8 @@ export class LoginPage implements OnInit {
           // Handle authentication error
           this.isInvalid = true;
           this.errorMsg = error.error.message;
+          this.errorToastText = "Incorrect email or password"
+          this.showErrorToast = true;
         }
       );
     }
