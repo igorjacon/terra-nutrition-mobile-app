@@ -30,6 +30,11 @@ export class SettingsPage implements OnInit {
     this.router.navigate(['customer/professional'])
   }
 
+  goToDashboard() {
+    console.log('test logo click')
+    this.router.navigateByUrl('customer/dashboard')
+  }
+
   logoutAction() {
     this.storageService.get(AuthConstants.REFRESH_TOKEN).then(res => {
       this.authService.logout(res);

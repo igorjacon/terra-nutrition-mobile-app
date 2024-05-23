@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
 import { arrowBackOutline, chevronBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,11 +20,16 @@ export class ProfilePage implements OnInit {
   customer: any = {};
   formattedPhoneNumber: string = '';
 
-  constructor(private authService: AuthService, private storageService: StorageService) {
+  constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {
     addIcons({
       arrowBackOutline,
       chevronBackOutline
     })
+  }
+
+  goToDashboard() {
+    console.log('test logo click')
+    this.router.navigateByUrl('customer/dashboard')
   }
 
   ngOnInit() {
