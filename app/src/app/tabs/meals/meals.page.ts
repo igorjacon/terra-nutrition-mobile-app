@@ -146,7 +146,6 @@ export class MealsPage implements OnInit, OnDestroy {
           this.selectedMealPlan = mealPlans[0];
           this.setSlidesPerView();
           // this.getKjs();
-          console.log(this.selectedMealPlan)
         }
       });
     });

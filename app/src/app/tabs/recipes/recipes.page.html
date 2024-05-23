@@ -30,18 +30,20 @@
   </ion-list>
 
   <div *ngIf="loaded">
-    <h2>Recipes</h2>
-    <ion-card *ngFor="let recipe of recipes; let i = index; trackBy:trackItems" color="success">
+    <!-- <h2>Recipes</h2> -->
+    <ion-card *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
       <ion-card-header>
         <ion-card-title>{{ recipe?.name }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-list *ngIf="recipe?.foodItemEntries.length" lines="none">
+          <ion-item><b>Ingredients</b></ion-item>
           <ion-item *ngFor="let item of recipe?.foodItemEntries; let i = index; trackBy:trackItems">
             <ion-label>{{ item?.foodItem?.name }}</ion-label>
           </ion-item>
         </ion-list>
 
+        <br>
         <ion-list>
           <ion-item *ngIf="recipe?.instructions" [button]="true" class="more-info-item" lines="none" (click)="toggleInstructions(recipe.id.toString())">
             <ion-label slot="start">
