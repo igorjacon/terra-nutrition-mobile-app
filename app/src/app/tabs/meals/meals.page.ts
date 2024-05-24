@@ -91,6 +91,7 @@ export class MealsPage implements OnInit, OnDestroy {
     this.currentDate = new Date().toISOString();
     const today = new Date().getDay();
     this.loadData(today);
+    this.highlightClosestMealTime();
     // this.getCaloriesFromKjls(153, 200);
     // this.displayCalories();
   }
