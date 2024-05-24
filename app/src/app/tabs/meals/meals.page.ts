@@ -56,6 +56,7 @@ export class MealsPage implements OnInit, OnDestroy {
   selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   mealPlans : MealPlan[] = []; // Array to store the meal plans
   selectedMealPlan: MealPlan | null = null; // Default value for the selected meal plan
+  selectedMealPlanId: string | null = null; // Store selected meal plan ID
   moreInfoShowing: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
   activeNoteIndex: number | null = null; 
   currentInfoIndex: number | null = null;
@@ -140,20 +141,22 @@ export class MealsPage implements OnInit, OnDestroy {
 
 
   //loads the date from the api
-  loadData(today : number){
+  loadData(today: number) {
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
       this.mealPlanService.getMealPlans(token, today).pipe(
         finalize(() => {
           this.loaded = true;
         })
-      ).subscribe((mealPlans : any) => {
+      ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
 
-        if (mealPlans.length) {
-          this.selectedMealPlan = mealPlans[0];
-          this.setSlidesPerView();
-          // this.getKjs();
+        // Retain the selected meal plan if it exists
+        if (this.selectedMealPlanId) {
+          this.selectedMealPlan = this.mealPlans.find(plan => plan.id.toString() === this.selectedMealPlanId) || this.mealPlans[0];
+        } else {
+          this.selectedMealPlan = this.mealPlans[0];
         }
+        this.setSlidesPerView();
       });
     });
   }
@@ -192,14 +195,16 @@ export class MealsPage implements OnInit, OnDestroy {
 
   //called when a meal plan is selected from the ion-select component
   handleSelectChange(event: any) {
-    const selectedMealPlanId = parseInt(event.detail.value);
-    this.updateSwiperAndMealInfo(selectedMealPlanId);
+    this.selectedMealPlanId = event.detail.value;
+    if (this.selectedMealPlanId) {
+      this.updateSwiperAndMealInfo(this.selectedMealPlanId);
+    }
   }
 
   //dynamically set slides per view based on the meal categories provided by api
   //sets selected meal plan
-  updateSwiperAndMealInfo(selectedMealPlanId : number) {
-    const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id === selectedMealPlanId);
+  updateSwiperAndMealInfo(selectedMealPlanId: string) {
+    const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id.toString() === selectedMealPlanId);
     if (mealPlan) {
       this.selectedMealPlan = mealPlan;
       this.setSlidesPerView();
