@@ -38,6 +38,7 @@ ion-content {
   --padding-end: 30px;
 }
 
+
 .selection-box-description {
   color: #464646;
   margin-bottom: 25px;
@@ -170,6 +171,12 @@ swiper-container {
       border-top-right-radius: 20px;
     }
 
+    ion-item.notes {
+      // display: flex;
+      // color: red;
+      // flex-direction: column;
+    }
+
     ion-item.more-info {
       font-size: 14px;
     }
@@ -211,25 +218,7 @@ swiper-container {
       }
 
       ion-label {
-        .macros {
-          margin-top: 5px;
-          color: black;
-          font-size: 10px;
-          display: flex;
-          gap: 8px;
-
-          .protein {
-            color: green;
-          }
-
-          .fats {
-            color: red;
-          }
-
-          .carbs {
-            color: orangered;
-          }
-        }
+        
       }
 
       label {

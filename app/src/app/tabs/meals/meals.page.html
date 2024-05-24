@@ -99,11 +99,10 @@
 
           <ion-item *ngIf="option.notes" [button]="true" class="more-info-item" lines="none" (click)="toggleMoreInfoShowing(option.id.toString())">
             <ion-label slot="start">
-              <h2 class="more-info">More info</h2>
+              <h2 class="more-info">Notes</h2>
             </ion-label>
           </ion-item>
-          <ion-item *ngIf="moreInfoShowing[option.id.toString()]" lines="none">
-            <p>Notes</p>
+          <ion-item class="notes" *ngIf="moreInfoShowing[option.id.toString()]" lines="none">
             <p>{{option.notes}}</p>
           </ion-item>
         </ion-list>
