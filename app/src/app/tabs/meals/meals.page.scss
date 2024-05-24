@@ -1,7 +1,7 @@
 ion-header {
   ion-toolbar {
     --background: #0fa469;
-    --padding-top: 10px;
+    // --padding-top: 10px;
     --padding-bottom: 10px;
 
     ion-title {
@@ -36,6 +36,11 @@ ion-content {
   --padding-bottom: 10px;
   --padding-start: 30px;
   --padding-end: 30px;
+}
+
+.selection-box-description {
+  color: #464646;
+  margin-bottom: 25px;
 }
 
 .ion-select {

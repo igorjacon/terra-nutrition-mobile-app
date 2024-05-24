@@ -9,7 +9,7 @@ import { addCircle, menu, alertCircleOutline, chevronForwardCircleOutline, chevr
 import { addIcons } from 'ionicons';
 import { StorageService } from "../../services/storage.service";
 import { AuthConstants } from "../../config/auth-constants";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
@@ -63,9 +63,10 @@ export class MealsPage implements OnInit, OnDestroy {
 
   //initialise some icons used in app, and inject services that are being used/will be used
   constructor(
-    private route: ActivatedRoute,
+    // private route: ActivatedRoute,
     private mealPlanService: MealPlanService,
     private storageService: StorageService,
+    private router: Router,
     private cdRef: ChangeDetectorRef) {
     addIcons({
       chevronDownCircleOutline,
@@ -77,6 +78,12 @@ export class MealsPage implements OnInit, OnDestroy {
       alertCircleOutline
     });
     this.selectedOptionIndex = Array(this.mealPlans.length).fill(null);
+  }
+
+
+  goToDashboard() {
+    console.log('test logo click')
+    this.router.navigateByUrl('customer/dashboard')
   }
 
   ngOnInit() {

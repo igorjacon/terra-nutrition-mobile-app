@@ -1,5 +1,23 @@
 <ion-content>
+  <ion-progress-bar *ngIf="showLoadingBar" color="success" type="indeterminate"></ion-progress-bar>
   <img class="graphic" src="/assets/imgs/page-graphic.png"/>
+  <ion-toast
+  class="error-toast"
+  isOpen="{{showErrorToast}}"
+  message="{{errorToastText}}"
+  duration="2000"
+  position="top"
+  (ionToastDidDismiss)="showErrorToast = false">
+  </ion-toast>
+  
+  <!-- <ion-toast
+  class="success-toast"
+  isOpen="{{showSuccessToast}}"
+  message="{{successToastText}}"
+  duration="2000"
+  position="top"
+  (ionToastDidDismiss)="showSuccessToast = false">
+  </ion-toast> -->
 
   <ion-row class="login-title">
     <ion-col>
@@ -15,7 +33,7 @@
       <img src="assets/imgs/logo.png">
     </ion-col>
   </ion-row>
-
+<!-- 
   <ion-row *ngIf="isInvalid">
     <ion-col class="danger-warning ion-align-items-center">
       <ion-icon name="warning-outline"></ion-icon>
@@ -23,7 +41,7 @@
         {{ errorMsg }}
       </ion-label>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
   <form [formGroup]="loginForm" (ngSubmit)="loginAction($event)">
     <ion-input

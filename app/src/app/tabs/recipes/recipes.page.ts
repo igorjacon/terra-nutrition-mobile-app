@@ -7,6 +7,7 @@ import {StorageService} from "../../services/storage.service";
 import {AuthConstants} from "../../config/auth-constants";
 import {finalize} from "rxjs";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -16,15 +17,20 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class RecipesPage implements OnInit {
-  recipes : any[] = [];
-  loaded : boolean = false;
+  recipes: any[] = [];
+  loaded: boolean = false;
   sanitizedHTML: SafeHtml = "";
   instructions: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
-  constructor(private httpService: HttpService, private storageService: StorageService, private sanitizer: DomSanitizer)
+  constructor(private httpService: HttpService, private storageService: StorageService, private sanitizer: DomSanitizer, private router: Router)
   {}
 
   ngOnInit() {
     this.loadData()
+  }
+
+  goToDashboard() {
+    console.log('test logo click')
+    this.router.navigateByUrl('customer/dashboard')
   }
 
   loadData() {
@@ -33,17 +39,17 @@ export class RecipesPage implements OnInit {
         finalize(() => {
           this.loaded = true;
         })
-      ).subscribe((recipes : any) => {
-          console.log(recipes);
-          if (recipes.length) {
-            this.recipes = recipes;
-          }
+      ).subscribe((recipes: any) => {
+        console.log(recipes);
+        if (recipes.length) {
+          this.recipes = recipes;
+        }
       });
     });
   }
 
   toggleInstructions(recipeId: string) {
-    this.instructions[recipeId] =!this.instructions[recipeId];
+    this.instructions[recipeId] = !this.instructions[recipeId];
   }
 
   sanitizeHTML(htmlContent: string): SafeHtml {
@@ -52,5 +58,13 @@ export class RecipesPage implements OnInit {
 
   trackItems(index: number, itemObject: any) {
     return itemObject.id;
+  }
+
+  doRefresh(event: any) {
+    this.loaded = false;
+    this.loadData();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 }

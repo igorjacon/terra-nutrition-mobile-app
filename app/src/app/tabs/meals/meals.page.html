@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <div class="logo">
+    <div class="logo" (click)="goToDashboard()">
       <img src="assets/imgs/logo.png">
     </div>
   </ion-toolbar>
@@ -75,7 +75,7 @@
         <ion-list *ngFor="let option of selectedMealPlan.meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
 
           <ion-item mode="ios" lines="none" class="list-header">
-            <ion-label><h2>Option {{ i + 1 }} <span>test</span></h2></ion-label>
+            <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
             <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
           </ion-item>
 
@@ -101,6 +101,7 @@
             </ion-label>
           </ion-item>
           <ion-item *ngIf="moreInfoShowing[option.id.toString()]" lines="none">
+            <p>Notes</p>
             <p>{{option.notes}}</p>
           </ion-item>
         </ion-list>

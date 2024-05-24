@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
 import { arrowBackOutline, chevronBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-professional',
@@ -23,7 +24,7 @@ export class ProfessionalPage implements OnInit {
   formattedPhoneNumber: string = '';
   formattedLocationPhoneNumber: string = '';
 
-  constructor(private authService: AuthService, private storageService: StorageService) {
+  constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {
     addIcons({
       arrowBackOutline,
       chevronBackOutline
@@ -47,6 +48,11 @@ export class ProfessionalPage implements OnInit {
         }
       }
     });
+  }
+
+  goToDashboard() {
+    console.log('test logo click')
+    this.router.navigateByUrl('customer/dashboard')
   }
 
   getFormattedPhone(phones: Array<{ prefix: string, number: string }>): string {

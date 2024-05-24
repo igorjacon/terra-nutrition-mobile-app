@@ -21,11 +21,11 @@
 <ion-content class="ion-padding">
   <div class="welcome-customer-div">
     <h1 style="font-weight: 600;">Hey, {{ customer.user.firstName}}!</h1>
-    <p style="color: rgb(137, 137, 137);">Welcome back to your personalised meal plan!</p>
+    <p style="color: #464646;">Welcome back to your personalised meal plan!</p>
   </div>
 
   <div class="swiper-div">
-    <h2 style="font-size: 20px;">Quick links</h2>
+    <h2 style="font-size: 20px; margin-top: 0;">Quick links</h2>
     <swiper-container #swiper [modules]="swiperModule" [slidesPerView]="1.2" [spaceBetween]="10" [observer]="true" [observeParents]="true">
       <swiper-slide class="meal-plan-swiper" (click)="test()">
         <ion-item lines="none">
@@ -63,6 +63,10 @@
         </ion-item>
       </swiper-slide>
     </swiper-container>
+  </div>
+
+  <div class="recipes-div">
+    <h2 style="font-size: 20px;">Recipes</h2>
   </div>
 
 </ion-content>
