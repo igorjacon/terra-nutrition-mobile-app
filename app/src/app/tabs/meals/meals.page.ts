@@ -102,6 +102,11 @@ export class MealsPage implements OnInit, OnDestroy {
     }
   }
 
+  ionViewWillEnter() {
+    // Highlight the closest meal time when the view is about to enter and become active
+    this.highlightClosestMealTime();
+  }
+
   //called when the notes ion-item-button is clicked to show more info/notes (not complete)
   toggleMoreInfoShowing(optionId: string) {
     this.moreInfoShowing[optionId] =!this.moreInfoShowing[optionId];
@@ -146,6 +151,7 @@ export class MealsPage implements OnInit, OnDestroy {
       this.mealPlanService.getMealPlans(token, today).pipe(
         finalize(() => {
           this.loaded = true;
+          this.highlightClosestMealTime();
         })
       ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
@@ -159,6 +165,36 @@ export class MealsPage implements OnInit, OnDestroy {
         this.setSlidesPerView();
       });
     });
+  }
+
+  // Highlight the meal time closest to the current time
+  highlightClosestMealTime() {
+    if (this.selectedMealPlan) {
+      const currentTime = new Date().getHours() * 60 + new Date().getMinutes(); // Current time in minutes
+      let closestIndex = 0;
+      let closestTimeDiff = Infinity;
+
+      this.selectedMealPlan.meals.forEach((meal, index) => {
+        const [hours, minutes] = meal.time.split(':').map(Number);
+        const mealTime = hours * 60 + minutes; // Meal time in minutes
+        const timeDiff = Math.abs(mealTime - currentTime);
+
+        if (timeDiff < closestTimeDiff) {
+          closestTimeDiff = timeDiff;
+          closestIndex = index;
+        }
+      });
+
+      this.currentSlideIndex = closestIndex; // Set the closest slide as the current slide
+
+      const swiper = this.swiperRef?.nativeElement.swiper;
+      if (swiper) {
+        setTimeout(() => {
+          swiper.slideTo(this.currentSlideIndex); // Scroll to the closest slide
+          swiper.update(); // Update the Swiper to reflect the change
+        }, 500);
+      }
+    }
   }
 
   // displayCalories() {
@@ -207,6 +243,7 @@ export class MealsPage implements OnInit, OnDestroy {
     const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id.toString() === selectedMealPlanId);
     if (mealPlan) {
       this.selectedMealPlan = mealPlan;
+      this.highlightClosestMealTime(); // Highlight the closest meal time when the meal plan changes
       this.setSlidesPerView();
     } else {
       console.log('no meals defined yet')
