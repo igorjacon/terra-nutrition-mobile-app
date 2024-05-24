@@ -27,6 +27,18 @@ ion-header {
 }
 
 ion-content {
+    // --padding-top: 30px;
+    // --padding-bottom: 10px;
+    // --padding-start: 30px;
+    // --padding-end: 30px;
+    .page-title {
+        margin: 0;
+        padding: 0;
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 14px;
+        margin-left: 14px;
+    }
     ion-refresher {
         ion-refresher-content {
             --background: #006400;

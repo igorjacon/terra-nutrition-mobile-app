@@ -15,9 +15,9 @@
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
+  <h1 class="page-title">Recipes</h1>
   <ion-grid *ngIf="loaded" class="recipes-grid">
     <ion-row>
-      <ion-card-title>Your Recipes</ion-card-title>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
         <ion-card class="recipe-card">
           <img [src]="recipe.image" *ngIf="recipe.image" />
