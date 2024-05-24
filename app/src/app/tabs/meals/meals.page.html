@@ -64,7 +64,7 @@
       <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="slidesPerView" [observer]="true" [observeParents]="true">
         <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
           <p style="text-align: center;">
-            {{ meal.type }}
+            {{ meal.type.name }}
             <br>
             <small>{{ meal.time }}</small>
           </p>
@@ -82,7 +82,7 @@
           <ion-item lines="none" *ngFor="let itemEntry of option.foodItemEntries; trackBy:trackItems">
             <ion-label>
               <h2>{{ itemEntry?.foodItem?.name }}</h2>
-              <p>{{itemEntry?.quantity}} {{ itemEntry?.measurement }}</p>
+              <p>{{itemEntry?.quantity}} {{ itemEntry?.measurement?.name }}</p>
               </ion-label>
             <ion-avatar slot="start">
               <img src="assets/imgs/avocado-toast.jpg"/>

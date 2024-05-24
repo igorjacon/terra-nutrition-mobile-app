@@ -60,6 +60,7 @@ export class HttpService {
         console.log("Error: Not able to refresh token. Logout!", err);
         this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
         this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
+        this.storageService.removeItem(AuthConstants.CUSTOMER_DATA);
         this.router.navigate(['login']);
         return of(null);
       });
