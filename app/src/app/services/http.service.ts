@@ -12,16 +12,17 @@ import { Router } from '@angular/router';
 export class HttpService {
   constructor(private http: HttpClient, private storageService: StorageService, private router: Router) {}
 
-  post(serviceName: string, data: any) {
-    // const headers = new HttpHeaders({
-    //   'Authorization': `Bearer ${accessToken}`
-    // });
-    const headers = new HttpHeaders({});
+  post(serviceName: string, data: any, token: any = null) {
+    let headers = {}
+    if (token) {
+      headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+    }
     const options = { headers: headers};
-
     const url = environment.api_base_url + serviceName;
 
-    return this.http.post(url, data);
+    return this.http.post(url, data, options);
   }
 
   get(serviceName: string, token: string) {
@@ -46,6 +47,7 @@ export class HttpService {
   async refresh(serviceName:string) {
     const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
 
+    console.log(refreshToken);
     this.post("/api/token/refresh", {"refreshToken": refreshToken}).subscribe(
       (res:any) => {
         if (res) {

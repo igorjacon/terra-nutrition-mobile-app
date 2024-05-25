@@ -42,7 +42,7 @@
         <ion-datetime
         style=" --background: #e1f9e1;
         --background-rgb: 255, 241, 242;
-      
+
         border-radius: 16px;"
           id="datetime"
           color="success"
@@ -80,7 +80,7 @@
 
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
-            <ion-checkbox (ionChange)="onCheckboxChange($event, option.id)" aria-label="Label" slot="end"></ion-checkbox>
+            <ion-checkbox (ionChange)="onCheckboxChange($event, option.id, selectedMealPlan.meals[currentSlideIndex].id)" aria-label="Label" slot="end"></ion-checkbox>
 
           </ion-item>
 

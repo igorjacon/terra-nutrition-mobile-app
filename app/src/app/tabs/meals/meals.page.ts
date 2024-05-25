@@ -64,7 +64,7 @@ export class MealsPage implements OnInit, OnDestroy {
   slidesPerView : number | null = null;
   selectedDate: string | null = null;
   customer: any;
-
+  private token: string = "";
 
   //initialise some icons used in app, and inject services that are being used/will be used
   constructor(
@@ -101,6 +101,31 @@ export class MealsPage implements OnInit, OnDestroy {
     this.highlightClosestMealTime();
   }
 
+  //loads the date from the api
+  loadData(today: number) {
+    this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
+      this.token = token;
+      this.mealPlanService.getMealPlans(token, today).pipe(
+        finalize(() => {
+          this.loaded = true;
+          this.highlightClosestMealTime();
+        })
+      ).subscribe((mealPlans: any) => {
+        this.mealPlans = mealPlans;
+        //sets a detault mealplan (first mealplan in mealPlans data)
+        this.selectedMealPlanId = mealPlans[0].id.toString();
+
+        // Retain the selected meal plan if it exists
+        if (this.selectedMealPlanId) {
+          this.selectedMealPlan = this.mealPlans.find(plan => plan.id.toString() === this.selectedMealPlanId) || this.mealPlans[0];
+        } else {
+          this.selectedMealPlan = this.mealPlans[0];
+        }
+        this.setSlidesPerView();
+      });
+    });
+  }
+
   ngOnDestroy() {
     const swiper = this.swiperRef?.nativeElement.swiper;
     if (swiper) {
@@ -134,22 +159,21 @@ export class MealsPage implements OnInit, OnDestroy {
   }
 
 
-onCheckboxChange(event: any, optionID: any) {
-  //meal id
-  console.log("Meal Plan ID", this.selectedMealPlanId)
-  //meal option id
-  console.log("Meal option id:", optionID.toString())
-  //customer id
-  console.log("Customer ID:")
-  if(this.selectedDate) {
-      console.log(this.selectedDate)
-  } else {
-    //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
+onCheckboxChange(event: any, optionID: any, meal: any) {
+    let selectedDate = this.selectedDate;
+    if(!selectedDate) {
+      //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
       let lastFiveChars = 5;
       let dateString = new Date(this.currentDate).toISOString();
-      let newDateString = dateString.slice(0, -lastFiveChars);
-      console.log(newDateString)
-  }
+      selectedDate = dateString.slice(0, -lastFiveChars);
+    }
+    this.mealPlanService.registerMealOption(
+      this.token,
+      this.customer.user.id,
+      selectedDate,
+      meal.toString(),
+      optionID.toString()
+    ).subscribe(res => {console.log(res)})
 }
 
   //the amount of swiper slides displayed will be either 1 if only one meal category is available...
@@ -170,32 +194,6 @@ onCheckboxChange(event: any, optionID: any) {
         swiper.init(); // Reinitialize Swiper
       }, 100); // 1 second delay
     }
-  }
-
-
-  //loads the date from the api
-  loadData(today: number) {
-    this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-      this.mealPlanService.getMealPlans(token, today).pipe(
-        finalize(() => {
-          this.loaded = true;
-          this.highlightClosestMealTime();
-        })
-      ).subscribe((mealPlans: any) => {
-        this.mealPlans = mealPlans;
-        console.log(mealPlans)
-        //sets a detault mealplan (first mealplan in mealPlans data)
-        this.selectedMealPlanId = mealPlans[0].id.toString();
-
-        // Retain the selected meal plan if it exists
-        if (this.selectedMealPlanId) {
-          this.selectedMealPlan = this.mealPlans.find(plan => plan.id.toString() === this.selectedMealPlanId) || this.mealPlans[0];
-        } else {
-          this.selectedMealPlan = this.mealPlans[0];
-        }
-        this.setSlidesPerView();
-      });
-    });
   }
 
   // Highlight the meal time closest to the current time
