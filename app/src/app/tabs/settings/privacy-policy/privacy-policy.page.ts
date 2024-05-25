@@ -5,13 +5,16 @@ import { IonicModule } from '@ionic/angular';
 import { arrowBackOutline, chevronBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
+import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonCard,
+IonCardHeader, IonCardTitle, IonCardContent } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-privacy-policy',
   templateUrl: './privacy-policy.page.html',
   styleUrls: ['./privacy-policy.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonCard,
+    IonCardHeader, IonCardTitle, IonCardContent, CommonModule, FormsModule]
 })
 export class PrivacyPolicyPage implements OnInit {
 

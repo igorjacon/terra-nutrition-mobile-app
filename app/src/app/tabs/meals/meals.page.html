@@ -80,7 +80,8 @@
 
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
-            <ion-checkbox aria-label="Label" slot="end"></ion-checkbox>
+            <ion-checkbox (ionChange)="onCheckboxChange($event, option.id)" aria-label="Label" slot="end"></ion-checkbox>
+
           </ion-item>
 
           <ion-item lines="none" *ngFor="let itemEntry of option.foodItemEntries; trackBy:trackItems">
