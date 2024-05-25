@@ -44,6 +44,22 @@ export class DashboardPage implements OnInit {
     });
   }
 
+  navigateToMealsPage() {
+    this.router.navigateByUrl('customer/meals')
+  }
+
+  navigateToProfessionalPage() {
+    this.router.navigateByUrl('customer/settings/professional')
+  }
+
+  navigateToProfilePage() {
+    this.router.navigateByUrl('customer/settings/profile')
+  }
+
+  navigateToRecipesPage() {
+    this.router.navigateByUrl('customer/recipes')
+  }
+
   test() {
     console.log('swiper clicked')
     // this.router.navigateByUrl('tabs/meals')

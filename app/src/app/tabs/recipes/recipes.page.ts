@@ -8,6 +8,8 @@ import {AuthConstants} from "../../config/auth-constants";
 import {finalize} from "rxjs";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import { ActivatedRoute, Router } from '@angular/router';
+import { addCircle, menu, sadOutline, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
 
 @Component({
   selector: 'app-recipes',
@@ -22,7 +24,11 @@ export class RecipesPage implements OnInit {
   sanitizedHTML: SafeHtml = "";
   instructions: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
   constructor(private httpService: HttpService, private storageService: StorageService, private sanitizer: DomSanitizer, private router: Router)
-  {}
+  {
+    addIcons({
+      sadOutline
+    })
+  }
 
   ngOnInit() {
     this.loadData()
@@ -41,9 +47,9 @@ export class RecipesPage implements OnInit {
         })
       ).subscribe((recipes: any) => {
         console.log(recipes);
-        if (recipes.length) {
-          this.recipes = recipes;
-        }
+        // if (recipes.length) {
+        //   this.recipes = recipes;
+        // }
       });
     });
   }

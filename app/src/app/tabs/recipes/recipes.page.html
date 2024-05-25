@@ -15,37 +15,49 @@
     <ion-spinner name="crescent"></ion-spinner>
   </div>
 
-  <h1 class="page-title">Recipes</h1>
-  <ion-grid *ngIf="loaded" class="recipes-grid">
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
-        <ion-card class="recipe-card">
-          <img [src]="recipe.image" *ngIf="recipe.image" />
-          <ion-card-header>
-            <ion-card-title>{{ recipe?.name }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ recipe?.description }}</p>
-            
-            <!-- Display food items if available -->
-            <div *ngIf="recipe.foodItemEntries && recipe.foodItemEntries.length > 0">
-              <h3>Ingredients</h3>
-              <ul>
-                <li *ngFor="let item of recipe.foodItemEntries">
-                  {{ item.foodItem.name }} - {{ item.quantity }} {{ item.measurement }}
-                </li>
-              </ul>
-            </div>
 
-            <ion-button expand="block" color="light" (click)="toggleInstructions(recipe.id.toString())" class="ion-activatable ripple-parent">
-              {{ instructions[recipe.id.toString()] ? 'Hide Instructions' : 'Show Instructions' }}
-            </ion-button>
-            <div *ngIf="instructions[recipe.id.toString()]" class="instructions">
-              <div [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <h1 class="page-title">Recipes</h1>
+    <ion-grid *ngIf="loaded" class="recipes-grid">
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
+          <ion-card class="recipe-card">
+            <img [src]="recipe.image" *ngIf="recipe.image" />
+            <ion-card-header>
+              <ion-card-title>{{ recipe?.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{ recipe?.description }}</p>
+              
+              <!-- Display food items if available -->
+              <div *ngIf="recipe.foodItemEntries && recipe.foodItemEntries.length > 0">
+                <h3>Ingredients</h3>
+                <ul>
+                  <li *ngFor="let item of recipe.foodItemEntries">
+                    {{ item.foodItem.name }} - {{ item.quantity }} {{ item.measurement }}
+                  </li>
+                </ul>
+              </div>
+
+              <ion-button expand="block" color="light" (click)="toggleInstructions(recipe.id.toString())" class="ion-activatable ripple-parent">
+                {{ instructions[recipe.id.toString()] ? 'Hide Instructions' : 'Show Instructions' }}
+              </ion-button>
+              <div *ngIf="instructions[recipe.id.toString()]" class="instructions">
+                <div [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="recipes.length == 0">
+        <div class="no-recipes">
+          <ion-icon name="sad-outline"></ion-icon>
+          <h2>You do not have any recipes assigned to your account!</h2>
+          <div>
+            <p>When your nutritionist creates recipes for you, they will appear here.</p>
+            <p>If you have any issues, contact your nutritionist. </p>
+          </div>
+        </div>
+      </div>
+    </ion-grid>
+
 </ion-content>
