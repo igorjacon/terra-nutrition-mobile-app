@@ -18,42 +18,45 @@
     <p>pretend this is an intake form</p>
   }
 </ion-content> -->
-<ion-content class="ion-padding">
+<ion-content>
   <div class="welcome-customer-div">
     <h1 style="font-weight: 600;">Hey, {{ customer.user.firstName}}!</h1>
-    <p style="color: #464646;">Welcome back! Below are some useful links to pages in the app.</p>
+    <p style="color: #464646;">Welcome back to your personalised meal plan app!</p>
   </div>
 
   <div class="dashboard-grid-container">
     <h2 class="quick-links">Quick links</h2>
     <div class="card meal-plan-card">
-      <div class="card-banner">
+ 
         <h3 class="card-title">Meal Plans</h3>
         <!-- <ion-icon class="card-ion" name="nutrition-outline"></ion-icon> -->
-      </div>
+
       <p class="card-description">See the meal options in your meal plan</p>
     </div>
     <div class="card recipes-card">
-      <div class="card-banner">
+    
         <h3 class="card-title">Recipes</h3>
         <!-- <ion-icon class="card-ion" name="nutrition-outline"></ion-icon> -->
-      </div>
+    
       <p class="card-description">Browse our recipes page for inspiration</p>
     </div>
-    <div class="card">
-      <div class="card-banner">
-        <h3 class="card-title">Account</h3>
-        <!-- <ion-icon class="card-ion" name="nutrition-outline"></ion-icon> -->
-      </div>
-      <p class="card-description">View the details linked to your profile</p>
+    <div class="card account-details-card">
+        <!-- <h3 class="card-title">Account</h3> -->
+        <ion-icon class="card-ion" name="person-circle-outline">></ion-icon>
+        <p>Account</p>
+      <!-- <p class="card-description">View the details linked to your profile</p> -->
     </div>
-    <div class="card">
-      <div class="card-banner">
-        <h3 class="card-title">Nutritionist</h3>
-        <!-- <ion-icon class="card-ion" name="nutrition-outline"></ion-icon> -->
-      </div>
-      <p class="card-description">Learn about your nutritionist or get in contact</p>
+    <!-- <div class="card account-details-card" style="background: white; color: green; border: 1px solid green;"> -->
+    <div class="card account-details-card">
+      
+        <!-- <h3 class="card-title">Account</h3> -->
+        <!-- <ion-icon style="color: green;" class="card-ion" name="happy-outline"></ion-icon> -->
+        <ion-icon class="card-ion" name="happy-outline"></ion-icon>
+       <p>Nutritionist</p> 
+      
+      <!-- <p class="card-description">View the details linked to your profile</p> -->
     </div>
+
   </div>
 
   <!-- <div class="swiper-div">
