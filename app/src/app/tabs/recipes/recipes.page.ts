@@ -10,13 +10,16 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import { ActivatedRoute, Router } from '@angular/router';
 import { addCircle, menu, sadOutline, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { IonHeader, IonToolbar, IonContent, IonRefresher, IonRefresherContent, IonSpinner, 
+  IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonIcon} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.page.html',
   styleUrls: ['./recipes.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [ CommonModule, FormsModule, IonHeader, IonToolbar, IonContent, IonRefresher, IonRefresherContent, IonSpinner, 
+    IonGrid, IonRow, IonCol, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonIcon ]
 })
 export class RecipesPage implements OnInit {
   recipes: any[] = [];

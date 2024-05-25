@@ -10,7 +10,7 @@ import { addIcons } from 'ionicons';
 import { StorageService } from "../../services/storage.service";
 import { AuthConstants } from "../../config/auth-constants";
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { finalize, last } from 'rxjs';
 import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
 import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkeletonText,
@@ -62,17 +62,18 @@ export class MealsPage implements OnInit, OnDestroy {
   activeNoteIndex: number | null = null;
   currentInfoIndex: number | null = null;
   slidesPerView : number | null = null;
+  selectedDate: string | null = null;
   customer: any;
+
 
   //initialise some icons used in app, and inject services that are being used/will be used
   constructor(
     // private route: ActivatedRoute,
     private mealPlanService: MealPlanService,
+    private authService: AuthService,
     private storageService: StorageService,
     private router: Router,
-    private cdRef: ChangeDetectorRef,
-    private authService: AuthService
-  ) {
+    private cdRef: ChangeDetectorRef) {
     addIcons({
       chevronDownCircleOutline,
       chevronForwardCircleOutline,
@@ -121,6 +122,7 @@ export class MealsPage implements OnInit, OnDestroy {
   //turns that date into a date object, which is used as an argument to provide meal plan info for specific dates
   onDateChange(event: any) {
     let date = event.detail.value;
+    this.selectedDate = date;
     let dateObject = new Date(date);
     let dayToday = dateObject.getDay()
     this.loadData(dayToday);
@@ -130,6 +132,25 @@ export class MealsPage implements OnInit, OnDestroy {
     }
 
   }
+
+
+onCheckboxChange(event: any, optionID: any) {
+  //meal id
+  console.log("Meal Plan ID", this.selectedMealPlanId)
+  //meal option id
+  console.log("Meal option id:", optionID.toString())
+  //customer id
+  console.log("Customer ID:")
+  if(this.selectedDate) {
+      console.log(this.selectedDate)
+  } else {
+    //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
+      let lastFiveChars = 5;
+      let dateString = new Date(this.currentDate).toISOString();
+      let newDateString = dateString.slice(0, -lastFiveChars);
+      console.log(newDateString)
+  }
+}
 
   //the amount of swiper slides displayed will be either 1 if only one meal category is available...
   //..or, it will be 1.3 if more than one is available (to show more than one category is available for UX purposes)
@@ -162,6 +183,9 @@ export class MealsPage implements OnInit, OnDestroy {
         })
       ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
+        console.log(mealPlans)
+        //sets a detault mealplan (first mealplan in mealPlans data)
+        this.selectedMealPlanId = mealPlans[0].id.toString();
 
         // Retain the selected meal plan if it exists
         if (this.selectedMealPlanId) {
