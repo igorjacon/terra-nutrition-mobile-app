@@ -18,10 +18,12 @@
     </ng-template>
     <div class="profile-details">
       <h2>{{ professional.user?.firstName }} {{ professional.user?.lastName }}</h2>
-      <p>Job Title: {{ professional.jobTitle }}</p>
-      <p>Email: <a href="mailto:{{ professional.user?.email }}">{{ professional.user?.email }}</a></p>
-      <p>Phone: <a [href]="'tel:' + formattedPhoneNumber">{{ formattedPhoneNumber }}</a></p>
-      <p>Website: <a [href]="professional.website" target="_blank">{{ professional.website }}</a></p>
+      <!-- <p>Job Title: {{ professional.jobTitle }}</p> -->
+      <p>{{ professional.jobTitle }}</p>
+      <!-- <p>Email: <a href="mailto:{{ professional.user?.email }}">{{ professional.user?.email }}</a></p> -->
+      <!-- <p>Phone: <a [href]="'tel:' + formattedPhoneNumber">{{ formattedPhoneNumber }}</a></p> -->
+      <!-- <p>Website: <a [href]="professional.website" target="_blank">{{ professional.website }}</a></p> -->
+      <p><a [href]="professional.website" target="_blank">{{ professional.website }}</a></p>
     </div>
   </div>
   <div class="info-card">
@@ -42,6 +44,10 @@
     <div class="info-section">
       <div class="info-label">Location Phone:</div>
       <div class="info-value"><a [href]="'tel:' + formattedLocationPhoneNumber">{{ formattedLocationPhoneNumber }}</a></div>
+    </div>
+    <div class="info-section">
+      <div class="info-label">Email:</div>
+      <div class="info-value"><a href="mailto:{{ professional.user?.email }}">{{ professional.user?.email }}</a></div>
     </div>
   </div>
 </ion-content>

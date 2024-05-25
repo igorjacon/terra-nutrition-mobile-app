@@ -123,6 +123,11 @@ export class MealsPage implements OnInit, OnDestroy {
     let dayToday = dateObject.getDay()
     // console.log(dayToday)
     this.loadData(dayToday);
+    const modal = document.querySelector('ion-modal');
+    if (modal) {
+      modal.dismiss();
+    }
+      
   }
 
   //the amount of swiper slides displayed will be either 1 if only one meal category is available...

@@ -47,9 +47,9 @@ export class RecipesPage implements OnInit {
         })
       ).subscribe((recipes: any) => {
         console.log(recipes);
-        // if (recipes.length) {
-        //   this.recipes = recipes;
-        // }
+        if (recipes.length) {
+          this.recipes = recipes;
+        }
       });
     });
   }
