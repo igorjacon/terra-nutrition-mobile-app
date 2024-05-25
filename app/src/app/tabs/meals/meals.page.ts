@@ -16,6 +16,7 @@ import { MealPlanService } from 'src/app/services/meal-plan.service';
 import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkeletonText,
   IonDatetimeButton, IonModal, IonDatetime, IonList, IonListHeader, IonItem, IonLabel,
   IonThumbnail, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
+import {AuthService} from "../../services/auth.service";
 register();
 
 @Component({
@@ -58,9 +59,10 @@ export class MealsPage implements OnInit, OnDestroy {
   selectedMealPlan: MealPlan | null = null; // Default value for the selected meal plan
   selectedMealPlanId: string | null = null; // Store selected meal plan ID
   moreInfoShowing: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
-  activeNoteIndex: number | null = null; 
+  activeNoteIndex: number | null = null;
   currentInfoIndex: number | null = null;
-  slidesPerView : number | null = null; 
+  slidesPerView : number | null = null;
+  customer: any;
 
   //initialise some icons used in app, and inject services that are being used/will be used
   constructor(
@@ -68,7 +70,9 @@ export class MealsPage implements OnInit, OnDestroy {
     private mealPlanService: MealPlanService,
     private storageService: StorageService,
     private router: Router,
-    private cdRef: ChangeDetectorRef) {
+    private cdRef: ChangeDetectorRef,
+    private authService: AuthService
+  ) {
     addIcons({
       chevronDownCircleOutline,
       chevronForwardCircleOutline,
@@ -83,17 +87,17 @@ export class MealsPage implements OnInit, OnDestroy {
 
 
   goToDashboard() {
-    console.log('test logo click')
     this.router.navigateByUrl('customer/dashboard')
   }
 
   ngOnInit() {
     this.currentDate = new Date().toISOString();
     const today = new Date().getDay();
+    this.authService.customerData$.subscribe((res:any) => {
+      this.customer = res;
+    });
     this.loadData(today);
     this.highlightClosestMealTime();
-    // this.getCaloriesFromKjls(153, 200);
-    // this.displayCalories();
   }
 
   ngOnDestroy() {
@@ -117,17 +121,14 @@ export class MealsPage implements OnInit, OnDestroy {
   //turns that date into a date object, which is used as an argument to provide meal plan info for specific dates
   onDateChange(event: any) {
     let date = event.detail.value;
-    // console.log(date)
     let dateObject = new Date(date);
-    // console.log(dateObject)
     let dayToday = dateObject.getDay()
-    // console.log(dayToday)
     this.loadData(dayToday);
     const modal = document.querySelector('ion-modal');
     if (modal) {
       modal.dismiss();
     }
-      
+
   }
 
   //the amount of swiper slides displayed will be either 1 if only one meal category is available...
@@ -202,38 +203,6 @@ export class MealsPage implements OnInit, OnDestroy {
       }
     }
   }
-
-  // displayCalories() {
-
-  // }
-
-  // getKjs() {
-  //   //will need to loop through all the items, save their quantities and serviving sizes, and execute the getCaloriesFromKjs function
-  //  let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[0].foodItem.foodItemDetails.energyWithFibreKj; //object
-
-  //  console.log(kjs)
-  // //  setTimeout(() => {
-  // //   console.log(quantity)
-  // //  }, 100)
-  // }
-
-  // /* The getCaloriesFromKjls function
-  // This method will help us calculate the calories from a food item
-  // We have access to the food item
-  // Takes in a number in Kjls, multiplies it with
-
-  // */
-  // getCaloriesFromKjls(servingSizeKjls100: number, quantity: number) {
-  //   //by default, we are provided with the kjs per 100ml/g of food items
-  //   //by dividing by 100, we get the serving size per 1ml/g of food, which we can use to multiply by the serving size
-  //   let servingSize = servingSizeKjls100 / 100;
-  //   let kjs = this.selectedMealPlan?.meals[0].options[0].foodItemEntries[3].foodItem.foodItemDetails.energyWithFibreKj; //object
-  //   console.log(kjs)
-  //   console.log(servingSize)
-  //   let calories = Math.trunc((servingSize * quantity));
-  //   console.log(calories)
-  //   return calories;
-  // }
 
   //called when a meal plan is selected from the ion-select component
   handleSelectChange(event: any) {

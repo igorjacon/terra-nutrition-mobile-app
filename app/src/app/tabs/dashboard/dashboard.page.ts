@@ -37,10 +37,8 @@ export class DashboardPage implements OnInit {
    }
 
    ngOnInit() {
-
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
-      // console.log(res)
     });
   }
 

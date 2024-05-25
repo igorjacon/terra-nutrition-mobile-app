@@ -17,7 +17,7 @@ export const routes: Routes = [
       },
       {
         path: 'meals',
-        // resolve: { mealPlans: MealPlanResolver },
+        resolve: { customerData: CustomerResolver },
         loadComponent: () => import('./meals/meals.page').then((m) => m.MealsPage)
       },
       {
