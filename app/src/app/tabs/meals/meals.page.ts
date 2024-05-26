@@ -49,20 +49,29 @@ register();
 export class MealsPage implements OnInit, OnDestroy {
   @ViewChild('swiper', { static: false }) swiperRef: ElementRef | undefined;
   swiperModule = [IonicSlides];
+  loaded = false; // Flag to indicate if the meal plans have been loaded
+
   currentSlideIndex: number = 0; // Current index of the active slide in the Swiper container
   previousSlideIndex: number = 0; // Previous index of the active slide in the Swiper container
+
   currentDate = ""; // Current date in ISO format
-  loaded = false; // Flag to indicate if the meal plans have been loaded
   customerMealPlanDate = "2024-04-20T00:00:00"; // Default date for the customer's meal plan
-  selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
+  selectedDate: string | null = null;
+
+  // selectedOptionIndex: number[] = []; // Array to store the selected option index for each slide
   mealPlans : MealPlan[] = []; // Array to store the meal plans
   selectedMealPlan: MealPlan | null = null; // Default value for the selected meal plan
   selectedMealPlanId: string | null = null; // Store selected meal plan ID
+
+  selectedMealCategoryID: any; //id of the meal category selected, e.g., breakfast (based on checkbox)
+  selectedMealOptionID: any; //id of the meal selected within a meal category (based on checkbox)
+  selectedMealOptions: any; //meal option objects in an array, based on the category selected - each object needs a 'selected: false or true' - will need to be added to bind to [checked] value
+
   moreInfoShowing: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
   activeNoteIndex: number | null = null;
   currentInfoIndex: number | null = null;
   slidesPerView : number | null = null;
-  selectedDate: string | null = null;
+  
   customer: any;
   private token: string = "";
 
@@ -83,7 +92,7 @@ export class MealsPage implements OnInit, OnDestroy {
       menu,
       alertCircleOutline
     });
-    this.selectedOptionIndex = Array(this.mealPlans.length).fill(null);
+    // this.selectedOptionIndex = Array(this.mealPlans.length).fill(null);
   }
 
 
@@ -99,7 +108,80 @@ export class MealsPage implements OnInit, OnDestroy {
     });
     this.loadData(today);
     this.highlightClosestMealTime();
+   
   }
+
+
+  setMealOptionData(mealOptionID: any, mealCategoryID: any) {
+    this.selectedMealOptionID = mealOptionID;
+    this.selectedMealCategoryID = mealCategoryID;
+    // this.selectedMealPlan = 
+    console.log("setMealOptionData Method ---------------------")
+    // console.log("The ID for the meal option ", this.selectedMealOptionID)
+    console.log("The ID for the meal option ", mealOptionID)
+    console.log("The ID for the meal category: ", mealCategoryID)
+    // console.log("The ID for the meal category: ", this.selectedMealCategoryID)
+    
+    //the goal with this below is to:
+    //- get the current meal plan, e.g., 'Detox' or 'Default', 'test', etc.
+    //- within this meal plan, we need to access all of the meal options, and give them a key value pair of 'selected: false'...
+    //... these values will help to dynamically bind to the template, on the ion check box
+    console.log("1", this.selectedMealOptions)
+    this.selectedMealOptions = this.selectedMealPlan?.meals
+    .filter((plan: any) => {
+      return plan.id == this.selectedMealCategoryID;
+    })
+    .map((option: any) => {
+      return option.options
+        .map((meal: any) => {
+          return {...meal,
+            selected: false
+          }
+      })
+    } )
+    
+    console.log("2", this.selectedMealOptions)
+  }
+
+  //add a checked value to meal option objects
+  //has to take the array of objects known as 'options'
+  //which is within the 'meals' array
+  // checkboxUpdate(currentMealPlan: any, mealOptionID: any, mealCategoryID: any) {
+  //   this.setMealOptionData(mealOptionID, mealCategoryID)
+  //   //check the meal option id, set it to true or false AND set every other option to false
+  //   // this.selectedMealOptions = currentMealPlan.meals.map((option: any) => {
+  //   //   return option
+  //   // })
+  // //  let currentMealOptionsArr = currentMealPlan.meals.map((option: any) => {
+  // //     if()
+  // //     console.log(option.options)
+  // //   })
+  // //   console.log(currentMealOptionsArr)
+  // //   return currentMealOptionsArr
+  // }
+
+  
+onCheckboxChange(event: any, optionID: any, meal: any, mealPlanType: any) {
+  console.log(optionID)
+  console.log(meal)
+  this.setMealOptionData(optionID, mealPlanType)
+  let selectedDate = this.selectedDate;
+  if(!selectedDate) {
+    //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
+    let lastFiveChars = 5;
+    let dateString = new Date(this.currentDate).toISOString();
+    selectedDate = dateString.slice(0, -lastFiveChars);
+  }
+  this.mealPlanService.registerMealOption(
+    this.token,
+    this.customer.user.id,
+    selectedDate,
+    meal.toString(),
+    optionID.toString()
+  ).subscribe(res => {console.log(res)})
+}
+
+
 
   //loads the date from the api
   loadData(today: number) {
@@ -112,9 +194,13 @@ export class MealsPage implements OnInit, OnDestroy {
         })
       ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
-        //sets a detault mealplan (first mealplan in mealPlans data)
+        console.log(this.mealPlans)
+        
+        //the selectedMealPlanId is needed for:
+        //-the ion-select component to have a default meal plan picked on page load
+        //-setting a detault mealplan (first mealplan in mealPlans data)
         this.selectedMealPlanId = mealPlans[0].id.toString();
-
+        // this.checkboxUpdate(this.mealPlans[0].meals[1].options)
         // Retain the selected meal plan if it exists
         if (this.selectedMealPlanId) {
           this.selectedMealPlan = this.mealPlans.find(plan => plan.id.toString() === this.selectedMealPlanId) || this.mealPlans[0];
@@ -122,6 +208,7 @@ export class MealsPage implements OnInit, OnDestroy {
           this.selectedMealPlan = this.mealPlans[0];
         }
         this.setSlidesPerView();
+        // this.selectedOptionIndex;
       });
     });
   }
@@ -158,23 +245,6 @@ export class MealsPage implements OnInit, OnDestroy {
 
   }
 
-
-onCheckboxChange(event: any, optionID: any, meal: any) {
-    let selectedDate = this.selectedDate;
-    if(!selectedDate) {
-      //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
-      let lastFiveChars = 5;
-      let dateString = new Date(this.currentDate).toISOString();
-      selectedDate = dateString.slice(0, -lastFiveChars);
-    }
-    this.mealPlanService.registerMealOption(
-      this.token,
-      this.customer.user.id,
-      selectedDate,
-      meal.toString(),
-      optionID.toString()
-    ).subscribe(res => {console.log(res)})
-}
 
   //the amount of swiper slides displayed will be either 1 if only one meal category is available...
   //..or, it will be 1.3 if more than one is available (to show more than one category is available for UX purposes)
@@ -227,7 +297,10 @@ onCheckboxChange(event: any, optionID: any, meal: any) {
   }
 
   //called when a meal plan is selected from the ion-select component
+  //makes use of the end object that is passed from the ion select component
+  //this event object will contain the ID which is used to set the selectedMealPlanId
   handleSelectChange(event: any) {
+    console.log('Selected Meal Plan ID:', event.detail.value); // Debugging line
     this.selectedMealPlanId = event.detail.value;
     if (this.selectedMealPlanId) {
       this.updateSwiperAndMealInfo(this.selectedMealPlanId);
@@ -236,26 +309,29 @@ onCheckboxChange(event: any, optionID: any, meal: any) {
 
   //dynamically set slides per view based on the meal categories provided by api
   //sets selected meal plan
+
   updateSwiperAndMealInfo(selectedMealPlanId: string) {
     const mealPlan = this.mealPlans.find(mealPlan => mealPlan.id.toString() === selectedMealPlanId);
     if (mealPlan) {
       this.selectedMealPlan = mealPlan;
-      this.highlightClosestMealTime(); // Highlight the closest meal time when the meal plan changes
+      console.log('Updated Selected Meal Plan:', this.selectedMealPlan); // Debugging line
+      this.highlightClosestMealTime();
       this.setSlidesPerView();
     } else {
-      console.log('no meals defined yet')
+      console.log('No matching meal plan found for ID:', selectedMealPlanId);
     }
   }
 
   //called when a checkbox is clicked
-  toggleCheckbox(index: number): void {
-    this.selectedOptionIndex[this.currentSlideIndex] = index;
-  }
+  // toggleCheckbox(index: number): void {
+  //   this.selectedOptionIndex[this.currentSlideIndex] = index;
+  //   console.log(this.selectedOptionIndex);
+  // }
 
   //boolean value to see if a meal option checkbox is checked or not
-  isChecked(slideIndex: number, optionIndex: number): boolean {
-    return this.selectedOptionIndex[slideIndex] === optionIndex;
-  }
+  // isChecked(slideIndex: number, optionIndex: number): boolean {
+  //   return this.selectedOptionIndex[slideIndex] === optionIndex;
+  // }
 
   //called when a swiper slide is clicked,
   slideClick(event: any): void {

@@ -4,5 +4,6 @@ export interface MealOption {
     id : number;
     foodItemEntries : FoodItemEntry[];
     description : string;
-    notes : string;
+    notes : string; 
+    selected: boolean;
 }
