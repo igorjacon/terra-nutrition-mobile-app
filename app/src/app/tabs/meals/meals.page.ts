@@ -19,6 +19,7 @@ import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkele
 import {AuthService} from "../../services/auth.service";
 import {HttpService} from "../../services/http.service";
 import {MealOption} from "../../model/meal-option";
+import { Meal } from 'src/app/model/meal';
 register();
 
 @Component({
@@ -109,21 +110,31 @@ export class MealsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentDate = new Date().toISOString();
-    const today = new Date().getDay();
     this.authService.customerData$.subscribe((res:any) => {
       this.customer = res;
     });
-    this.loadData(today);
+    this.loadData();
     // this.loadMealHistory(this.currentDate);
   }
 
   //loads the date from the api
-  loadData(today: number) {
+  loadData() {
+    let today = new Date().getDay();
+    if (this.selectedDate) {
+      let dateObject = new Date(this.selectedDate);
+      today = dateObject.getDay();
+    }
+    
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
       this.token = token;
       this.mealPlanService.getMealPlans(token, today).pipe(
         finalize(() => {
-          this.loaded = true;
+          // this.loaded = true;
+          if (this.selectedDate) {
+            this.loadMealHistory(this.selectedDate, token)
+          } else {
+            this.loadMealHistory(this.currentDate, token)
+          }
         })
       ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
@@ -139,9 +150,21 @@ export class MealsPage implements OnInit, OnDestroy {
     });
   }
 
-  loadMealHistory(date: string) {
-    this.httpService.get("/api/meal_histories?date=" + date, this.token).subscribe((res: any) => {
+  loadMealHistory(date: string, token: string) {
+    this.httpService.get("/api/meal_histories?date=" + date, token).pipe(
+      finalize(() => {
+        this.loaded = true;
+      })
+    ).subscribe((res: any) => {
       this.mealHistory = res;
+      if (this.selectedMealPlan) {
+        this.selectedMealPlan.meals.forEach((meal: Meal) => {
+          meal.options.forEach((option: MealOption) => {
+            this.checkIfOptionSelected(option, meal.id, this.selectedMealPlan?.id);
+          })
+        });
+      }
+      
     });
   }
 
@@ -176,11 +199,7 @@ export class MealsPage implements OnInit, OnDestroy {
       this.lockOptions = false
     }
     // Get meal plans for the selected date
-    this.loadData(dayToday);
-    // If past date, get meal history
-    if (selectedDate <= currentDate) {
-      this.loadMealHistory(date)
-    }
+    this.loadData();
     const modal = document.querySelector('ion-modal');
     if (modal) {
       modal.dismiss();
@@ -199,7 +218,7 @@ export class MealsPage implements OnInit, OnDestroy {
         });
       }
     }
-    return checked;
+    // return checked;
   }
 
   onCheckboxChange(event: any, option: any, meal: any) {
