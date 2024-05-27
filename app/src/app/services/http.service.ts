@@ -46,9 +46,9 @@ export class HttpService {
 
   async refresh(serviceName:string) {
     const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
+    const url = environment.api_base_url + "/api/token/refresh";
 
-    console.log(refreshToken);
-    this.post("/api/token/refresh", {"refreshToken": refreshToken}).subscribe(
+    return this.http.post(url, {"refreshToken": refreshToken}).subscribe(
       (res:any) => {
         if (res) {
           this.storageService.store(AuthConstants.ACCESS_TOKEN, res.token);
@@ -59,7 +59,6 @@ export class HttpService {
         }
       },
       (err) => {
-        console.log("Error: Not able to refresh token. Logout!", err);
         this.storageService.removeItem(AuthConstants.ACCESS_TOKEN);
         this.storageService.removeItem(AuthConstants.REFRESH_TOKEN);
         this.storageService.removeItem(AuthConstants.CUSTOMER_DATA);

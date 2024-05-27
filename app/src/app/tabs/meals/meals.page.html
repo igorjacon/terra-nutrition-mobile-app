@@ -80,8 +80,13 @@
 
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
-            <ion-checkbox (ionChange)="onCheckboxChange($event, option.id, selectedMealPlan.meals[currentSlideIndex].id)" aria-label="Label" slot="end"></ion-checkbox>
-
+            <ion-checkbox (ionChange)="onCheckboxChange($event, option, selectedMealPlan.meals[currentSlideIndex])"
+                          checked="{{ checkIfOptionSelected(option, selectedMealPlan.meals[currentSlideIndex].id, selectedMealPlan.id) }}"
+                          [disabled]="lockOptions"
+                          [(ngModel)]="option.isChecked"
+                          multiple="false"
+                          aria-label="Label" slot="end">
+            </ion-checkbox>
           </ion-item>
 
           <ion-item lines="none" *ngFor="let itemEntry of option.foodItemEntries; trackBy:trackItems">
@@ -117,7 +122,7 @@
     <div *ngIf="!selectedMealPlan">
       <div class="no-meal-plans">
         <ion-icon name="alert-circle-outline"></ion-icon>
-        <h2>You do not have any meal plans today!</h2>
+        <h2>You do not have any meal plans for the current date!</h2>
         <div>
           <p>To see your meal plans assigned to a different date, use the date selector above.</p>
           <p>If you have any issues, contact your nutritionist. </p>

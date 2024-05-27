@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, formatDate} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicSlides } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -17,6 +17,8 @@ import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkele
   IonDatetimeButton, IonModal, IonDatetime, IonList, IonListHeader, IonItem, IonLabel,
   IonThumbnail, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
 import {AuthService} from "../../services/auth.service";
+import {HttpService} from "../../services/http.service";
+import {MealOption} from "../../model/meal-option";
 register();
 
 @Component({
@@ -64,7 +66,10 @@ export class MealsPage implements OnInit, OnDestroy {
   slidesPerView : number | null = null;
   selectedDate: string | null = null;
   customer: any;
-  private token: string = "";
+  token: string = "";
+  mealHistory: any[] = [];
+  lockOptions: boolean = false;
+
 
   //initialise some icons used in app, and inject services that are being used/will be used
   constructor(
@@ -72,6 +77,7 @@ export class MealsPage implements OnInit, OnDestroy {
     private mealPlanService: MealPlanService,
     private authService: AuthService,
     private storageService: StorageService,
+    private httpService: HttpService,
     private router: Router,
     private cdRef: ChangeDetectorRef) {
     addIcons({
@@ -98,7 +104,7 @@ export class MealsPage implements OnInit, OnDestroy {
       this.customer = res;
     });
     this.loadData(today);
-    this.highlightClosestMealTime();
+    // this.loadMealHistory(this.currentDate);
   }
 
   //loads the date from the api
@@ -108,21 +114,24 @@ export class MealsPage implements OnInit, OnDestroy {
       this.mealPlanService.getMealPlans(token, today).pipe(
         finalize(() => {
           this.loaded = true;
-          this.highlightClosestMealTime();
         })
       ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
-        //sets a detault mealplan (first mealplan in mealPlans data)
-        this.selectedMealPlanId = mealPlans[0].id.toString();
-
         // Retain the selected meal plan if it exists
-        if (this.selectedMealPlanId) {
-          this.selectedMealPlan = this.mealPlans.find(plan => plan.id.toString() === this.selectedMealPlanId) || this.mealPlans[0];
-        } else {
+        if (mealPlans.length) {
           this.selectedMealPlan = this.mealPlans[0];
+          this.selectedMealPlanId = this.selectedMealPlan.id.toString();
+        } else {
+          this.selectedMealPlan = null;
         }
         this.setSlidesPerView();
       });
+    });
+  }
+
+  loadMealHistory(date: string) {
+    this.httpService.get("/api/meal_histories?date=" + date, this.token).subscribe((res: any) => {
+      this.mealHistory = res;
     });
   }
 
@@ -134,47 +143,77 @@ export class MealsPage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter() {
-    // Highlight the closest meal time when the view is about to enter and become active
     this.highlightClosestMealTime();
   }
-
   //called when the notes ion-item-button is clicked to show more info/notes (not complete)
   toggleMoreInfoShowing(optionId: string) {
     this.moreInfoShowing[optionId] =!this.moreInfoShowing[optionId];
   }
 
-  //takes the date from when a user clicks the calander
+  //takes the date from when a user clicks the calendar
   //turns that date into a date object, which is used as an argument to provide meal plan info for specific dates
   onDateChange(event: any) {
     let date = event.detail.value;
     this.selectedDate = date;
     let dateObject = new Date(date);
-    let dayToday = dateObject.getDay()
+    let dayToday = dateObject.getDay();
+    // Lock options if selected date is not today
+    let selectedDate = formatDate(dateObject, 'Y-m-d', 'en');
+    let currentDate = formatDate(new Date(this.currentDate), 'Y-m-d', 'en');
+    if (currentDate < selectedDate || currentDate > selectedDate) {
+      this.lockOptions = true
+    } else {
+      this.lockOptions = false
+    }
+    // Get meal plans for the selected date
     this.loadData(dayToday);
+    // If past date, get meal history
+    if (selectedDate <= currentDate) {
+      this.loadMealHistory(date)
+    }
     const modal = document.querySelector('ion-modal');
     if (modal) {
       modal.dismiss();
     }
-
   }
 
-
-onCheckboxChange(event: any, optionID: any, meal: any) {
-    let selectedDate = this.selectedDate;
-    if(!selectedDate) {
-      //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
-      let lastFiveChars = 5;
-      let dateString = new Date(this.currentDate).toISOString();
-      selectedDate = dateString.slice(0, -lastFiveChars);
+  checkIfOptionSelected(option: any, mealId: any, mealPlanId: any) {
+    let checked = false;
+    if (this.mealHistory) {
+      if (this.mealHistory.length) {
+        this.mealHistory.forEach((record, index) => {
+          if (record.meal.id == mealId && record.mealPlan.id == mealPlanId && record.mealOption.id == option.id) {
+            option.isChecked = true;
+            checked = true;
+          }
+        });
+      }
     }
-    this.mealPlanService.registerMealOption(
-      this.token,
-      this.customer.user.id,
-      selectedDate,
-      meal.toString(),
-      optionID.toString()
-    ).subscribe(res => {console.log(res)})
-}
+    return checked;
+  }
+
+  onCheckboxChange(event: any, option: any, meal: any) {
+      let selectedDate = this.selectedDate;
+      if(!selectedDate) {
+        //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
+        let lastFiveChars = 5;
+        let dateString = new Date(this.currentDate).toISOString();
+        selectedDate = dateString.slice(0, -lastFiveChars);
+      }
+      meal.options.forEach((opt: MealOption) => opt.isChecked = opt.id === option.id);
+      const data = {
+        'customer': this.customer.user.id,
+        'date': selectedDate,
+        'meal': meal.id.toString(),
+        'mealPlan': this.selectedMealPlanId?.toString(),
+        'option': option.id.toString(),
+      }
+      // Register selected meal in database
+      this.httpService.post("/api/meal-history/new", data, this.token).subscribe(res => {
+        console.log(res);
+        console.log('show toast');
+      })
+  }
 
   //the amount of swiper slides displayed will be either 1 if only one meal category is available...
   //..or, it will be 1.3 if more than one is available (to show more than one category is available for UX purposes)

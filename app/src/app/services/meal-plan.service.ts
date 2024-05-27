@@ -31,7 +31,7 @@ export class MealPlanService {
     });
   }
 
-  registerMealOption(token: string, customer: string, date: string, meal: string, option: string) {
+  registerMealOption(token: string, data: any) {
     let headers = {}
     if (token) {
       headers = new HttpHeaders({
@@ -39,21 +39,19 @@ export class MealPlanService {
       });
     }
     const options = { headers: headers};
-    const params = `customer=${customer}&date=${date}&meal=${meal}&option=${option}`
-    const url = environment.api_base_url + "/api/meal-history/new?"+params;
+    const url = environment.api_base_url + "/api/meal-history/new";
 
-    return this.http.post(url, {}, options).pipe(catchError(err => {
+    return this.http.post(url, data, options).pipe(catchError(err => {
       if (err.error.code === 401) {
         // If jwt token expired, request new jwt with refresh token
-        this.httpService.refresh("/api/meal-history/new?"+params);
+        // this.httpService.refresh("/api/meal-history/new");
+        console.log('Could not register meal, token expired.')
       }
       return of(null);
     }));
   }
 
   getMealPlans(token : string, day : number) {
-    // const accessToken = await this.storageService.get(AuthConstants.ACCESS_TOKEN);
-
     let headers = {}
     if (token) {
       headers = new HttpHeaders({

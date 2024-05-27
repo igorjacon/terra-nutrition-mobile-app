@@ -5,4 +5,5 @@ export interface MealOption {
     foodItemEntries : FoodItemEntry[];
     description : string;
     notes : string;
+    isChecked: boolean;
 }

@@ -208,9 +208,9 @@ swiper-container {
         --border-color-checked: white;
       }
 
-      ion-checkbox::part(mark) {
-        display: none;
-      }
+      //ion-checkbox::part(mark) {
+      //  display: none;
+      //}
 
       .add-meal {
         // color: #034226;
@@ -218,7 +218,7 @@ swiper-container {
       }
 
       ion-label {
-        
+
       }
 
       label {
