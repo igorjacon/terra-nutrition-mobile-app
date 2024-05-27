@@ -12,7 +12,7 @@
 
 <ion-content class="ion-padding">
   <div class="profile-card">
-    <img *ngIf="customer.user?.profilePicture; else defaultImage" [src]="customer.user?.profilePicture" class="profile-image" alt="Profile Picture"> <!-- edit when customer photos are added -->
+    <img *ngIf="customer.user?.profileImg; else defaultImage" [src]="'https://app.terranutri.net/uploads/user/' + customer.user?.profileImg" class="profile-image" alt="Profile Picture">
     <ng-template #defaultImage>
       <img src="assets/imgs/default-profile.png" class="profile-image" alt="Default Profile Picture">
     </ng-template>
