@@ -66,6 +66,7 @@ export class MealsPage implements OnInit, OnDestroy {
   selectedMealCategoryID: any; //id of the meal category selected, e.g., breakfast (based on checkbox)
   selectedMealOptionID: any; //id of the meal selected within a meal category (based on checkbox)
   selectedMealOptions: any; //meal option objects in an array, based on the category selected - each object needs a 'selected: false or true' - will need to be added to bind to [checked] value
+  selectedMealOption: any; //the object of the currently selected meal option (need this to bind the true/false of selected property)
 
   moreInfoShowing: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
   activeNoteIndex: number | null = null;
@@ -134,13 +135,26 @@ export class MealsPage implements OnInit, OnDestroy {
     .map((option: any) => {
       return option.options
         .map((meal: any) => {
-          return {...meal,
-            selected: false
-          }
-      })
-    } )
+          if(meal.id === mealOptionID) {
+            this.selectedMealOption = meal;
+            return {
+              ...meal,
+              selected: true
+            }
+          } else {
+            return {
+              ...meal,
+              selected: false
+            }
+          }})
+    })
     
-    console.log("2", this.selectedMealOptions)
+    console.log('selected option: 1', this.selectedMealOption)
+    this.selectedMealOption.selected = !this.selectedMealOption.selected
+    console.log('selected option: 2', this.selectedMealOption)
+
+
+    // console.log("sel", this.selectedMealOptions)
   }
 
   //add a checked value to meal option objects
@@ -160,11 +174,26 @@ export class MealsPage implements OnInit, OnDestroy {
   // //   return currentMealOptionsArr
   // }
 
+//   toggleCheckboxSelected(optionID: any) {
+//     console.log("toggleCheckboxSelected method. The current selected meal option is: ", this.selectedMealOption )
+//     // this.selectedMealOption.selected = !this.selectedMealOption.selected;
+//     // this.selectedMealOptions = arr;
+//     // const selected = this.selectedMealOptions.find(({id: any}) => {
+//     //   id == optionID;
+//     // })
+//     // console.log("test toggle checkbox:", this.selectedMealOptions);
+// }
+
+
+
   
 onCheckboxChange(event: any, optionID: any, meal: any, mealPlanType: any) {
   console.log(optionID)
   console.log(meal)
+  
+  //all meal options get a selected: false value
   this.setMealOptionData(optionID, mealPlanType)
+  //get the selected meal option, set it to opposite what it was before, and all others to false
   let selectedDate = this.selectedDate;
   if(!selectedDate) {
     //used to remove miliseconds and timezone appended on isostring for consistency (.30TZ) for example
@@ -195,11 +224,12 @@ onCheckboxChange(event: any, optionID: any, meal: any, mealPlanType: any) {
       ).subscribe((mealPlans: any) => {
         this.mealPlans = mealPlans;
         console.log(this.mealPlans)
-        
+        // this.setMealOptionData(optionID, mealPlanType)
         //the selectedMealPlanId is needed for:
         //-the ion-select component to have a default meal plan picked on page load
         //-setting a detault mealplan (first mealplan in mealPlans data)
         this.selectedMealPlanId = mealPlans[0].id.toString();
+
         // this.checkboxUpdate(this.mealPlans[0].meals[1].options)
         // Retain the selected meal plan if it exists
         if (this.selectedMealPlanId) {

@@ -78,6 +78,7 @@
       <div class="row-container" *ngIf="selectedMealPlan">
         <ion-list *ngFor="let option of selectedMealPlan.meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
 
+
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
             <ion-checkbox (ionChange)="onCheckboxChange($event, option.id, selectedMealPlan.meals[currentSlideIndex].id, selectedMealPlan.meals[currentSlideIndex].id)" aria-label="Label" slot="end"></ion-checkbox>
