@@ -8,7 +8,7 @@ import {AuthConstants} from "../../config/auth-constants";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { IonicSlides } from '@ionic/angular';
-import { addCircle, menu, settingsOutline, happyOutline, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
+import { addCircle, menu, settingsOutline, waterOutline, happyOutline, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
 register();
@@ -32,7 +32,7 @@ export class DashboardPage implements OnInit {
 
   constructor(private authService: AuthService, private storageService: StorageService, private router: Router) {
     addIcons({
-      addCircle, menu, settingsOutline, happyOutline, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward
+      addCircle, menu, waterOutline, settingsOutline, happyOutline, alertCircleOutline, chevronForwardCircleOutline, chevronDownCircleOutline, calendarOutline, chevronForward
     })
    }
 

@@ -8,7 +8,7 @@ import { NotificationService } from './services/notification.service';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet, CommonModule, IonicStorageModule, NotificationService],
+  imports: [IonApp, IonRouterOutlet, CommonModule, IonicStorageModule],
 })
 export class AppComponent {
   constructor(private notificationService: NotificationService) {}
