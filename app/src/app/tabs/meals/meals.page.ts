@@ -66,10 +66,10 @@ export class MealsPage implements OnInit, OnDestroy {
   selectedMealPlan: MealPlan | null = null; // Default value for the selected meal plan
   selectedMealPlanId: string | null = null; // Store selected meal plan ID
 
-  selectedMealCategoryID: any; //id of the meal category selected, e.g., breakfast (based on checkbox)
-  selectedMealOptionID: any; //id of the meal selected within a meal category (based on checkbox)
-  selectedMealOptions: any; //meal option objects in an array, based on the category selected - each object needs a 'selected: false or true' - will need to be added to bind to [checked] value
-  selectedMealOption: any; //the object of the currently selected meal option (need this to bind the true/false of selected property)
+  // selectedMealCategoryID: any; //id of the meal category selected, e.g., breakfast (based on checkbox)
+  // selectedMealOptionID: any; //id of the meal selected within a meal category (based on checkbox)
+  // selectedMealOptions: any; //meal option objects in an array, based on the category selected - each object needs a 'selected: false or true' - will need to be added to bind to [checked] value
+  // selectedMealOption: any; //the object of the currently selected meal option (need this to bind the true/false of selected property)
 
   moreInfoShowing: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
   activeNoteIndex: number | null = null;
