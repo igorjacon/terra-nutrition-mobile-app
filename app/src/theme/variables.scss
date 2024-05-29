@@ -3,6 +3,10 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  --ion-text-color: #000; // Black text for light mode
+  --ion-background-color: #fff; // White background for light mode
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -84,6 +88,11 @@
    * -------------------------------------------
    */
 
+   :root {
+    --ion-text-color: #fff; // White text for dark mode
+    --ion-background-color: #000; // Black background for dark mode
+  }
+  
   body {
     --ion-color-primary: #428cff;
     --ion-color-primary-rgb: 66,140,255;

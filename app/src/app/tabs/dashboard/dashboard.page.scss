@@ -33,31 +33,14 @@ ion-header {
 ion-content {
     // *welcome customer top box**
     .welcome-customer-div { 
-    //     background: linear-gradient(135deg, #3fa77d, #45b683a2);
-    //     padding: 20px;
-    //     border-radius: 10px;
-    //     color: rgb(0, 0, 0);
-    //     text-align: center;
-    //     margin-bottom: 1px;
-    
-    //     h1 {
-    //       font-size: 24px;
-    //       font-weight: 700;
-    //       margin: 0;
-    //     }
-    
+        h1 {
+            font-weight: 600
+        }
         p {
           font-size: 16px;
           margin: 5px 0 0 0;
         }
-    //   }
-    
-    //   h2.quick-links {
-    //     margin: 0;
-    //     margin-top: 20px;
-    //     font-size: 18px;
-    //     font-weight: 700;
-      }
+    }
 
     div.dashboard-grid-container {
         border-radius: 20px;
@@ -68,26 +51,12 @@ ion-content {
         row-gap: 10px;
         column-gap: 10px;
         .card {
-            // border: 2px solid green;
-        //    padding: 20px;
-        //    border-radius: 20px;
-            // color: green;
-        //    border: 1px solid gray;
-            // background-color: white;
-            // background: rgb(15,164,105);
-            // background: linear-gradient(90deg, rgba(15,164,105,1) 0%, rgba(55,172,126,1) 47%, rgba(15,164,105,1) 100%); 
-            // border-radius: 20px;
-            // padding: 5px 20px;
-            
-            //test
-
+            border: 1px solid var(--ion-text-color);
             padding: 20px;
             border-radius: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
-            // align-items: center;
-            // text-align: center;
         }
         .card:active {
 
@@ -97,7 +66,7 @@ ion-content {
 
             //Grey border click**
             color: rgba(125, 125, 125, 0.445);
-            border: 1px solid rgba(81, 81, 81, 0.443);
+            border: 1px solid var(--ion-text-color);
         }
         .meal-plan-card {
             grid-column: 1/3;

@@ -53,14 +53,18 @@ ion-toolbar {
   .profile-details {
     text-align: center;
   }
+  .profile-details h2,.info-value {
+    color: black;
+  }
   
+
   .profile-details h2 {
     margin: 5px 0;
   }
   
   .profile-details p {
     margin: 5px 0;
-    color: #333;
+    // color: #333;
   }
   
   .info-card {
@@ -80,7 +84,7 @@ ion-toolbar {
   }
   
   .info-value {
-    color: #333;
+    // color: #333;
     margin-bottom: 5px;
   }
   

@@ -33,6 +33,17 @@
   --ion-color-green: #98B66E;
 }
 
+ion-content {
+    color: var(--ion-text-color); // Text color will change based on mode
+    background-color: var(--ion-background-color); // Background color will change based on mode
+}
+p, ion-text, h1, h2, h3, h4, h5, h6 {
+    color: var(--ion-text-color);
+  }
+
+  
+  
+
 ion-header {
     ion-toolbar {
         // --background: #45b683;

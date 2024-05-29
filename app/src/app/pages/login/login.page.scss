@@ -11,8 +11,8 @@ ion-content {
     --padding-bottom: 20px;
     --padding-start: 20px;
     --padding-end: 20px;
-    --background: white;
 }
+    
 
 ion-toast.error-toast {
     --background: rgb(253, 181, 181);
@@ -131,11 +131,11 @@ ion-row.sign-up {
     ion-col {
         text-align: center;
         ion-text {
-            color: #757171;
+            // color: #757171;
             font-size: 0.8rem;
             font-weight: 600;
             span {
-                color: black;
+                // color: black;
             }
         }
     }
@@ -145,7 +145,7 @@ ion-row.login-description {
     margin-left: 2.5vh;
     ion-col {
         ion-label {
-            color: #757171;
+            // color: #757171;
             font-size: 0.9rem;
         }
     }
