@@ -15,6 +15,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.notificationService.requestPermissions();
+    this.notificationService.scheduleNotification();
   }
 
 }
