@@ -7,6 +7,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="!loaded" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
   <ion-list *ngIf="!loaded">
     <ion-list-header>
       <ion-skeleton-text [animated]="true" style="width: 80px"></ion-skeleton-text>
@@ -42,7 +50,6 @@
         <ion-datetime
         style=" --background: #e1f9e1;
         --background-rgb: 255, 241, 242;
-
         border-radius: 16px;"
           id="datetime"
           color="success"
@@ -67,7 +74,7 @@
 
       <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="slidesPerView" [observer]="true" [observeParents]="true">
         <swiper-slide *ngFor="let meal of selectedMealPlan?.meals; let i = index; trackBy:trackItems" [class.active]="i === currentSlideIndex">
-          <p style="text-align: center;">
+          <p>
             {{ meal.type.name }}
             <br>
             <small>{{ meal.time }}</small>
@@ -98,11 +105,13 @@
           </ion-item>
 
           <ion-item lines="none" *ngIf="option.description">
-            <ion-text color="medium" class="break-line">
-              <ion-label style="padding-top: 5px; padding-bottom: 5px; color: black; font-size: 1.0625rem; font-weight: 500;">
-                {{ option.description }}
+
+              <ion-label class="break-line">
+                <h2>
+                  {{ option.description }}
+
+                </h2>
               </ion-label>
-            </ion-text>
           </ion-item>
 
           <ion-item *ngIf="option.notes" [button]="true" class="more-info-item" lines="none" (click)="toggleMoreInfoShowing(option.id.toString())">

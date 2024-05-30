@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -17,6 +17,7 @@
 
 
   <h1 class="page-title">Recipes</h1>
+  <p class="page-description">Browse a collection of recipes for your meal plan.</p>
     <ion-grid *ngIf="loaded" class="recipes-grid">
       <ion-row>
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
@@ -29,7 +30,7 @@
               <p>{{ recipe?.description }}</p>
               
               <!-- Display food items if available -->
-              <div *ngIf="recipe.foodItemEntries && recipe.foodItemEntries.length > 0">
+              <div class="ingredients" *ngIf="recipe.foodItemEntries && recipe.foodItemEntries.length > 0">
                 <h3>Ingredients</h3>
                 <ul>
                   <li *ngFor="let item of recipe.foodItemEntries">
@@ -42,12 +43,13 @@
                 {{ instructions[recipe.id.toString()] ? 'Hide Instructions' : 'Show Instructions' }}
               </ion-button>
               <div *ngIf="instructions[recipe.id.toString()]" class="instructions">
-                <div [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
+                <div class="instructions" [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
               </div>
             </ion-card-content>
           </ion-card>
         </ion-col>
       </ion-row>
+
       <div *ngIf="recipes.length == 0">
         <div class="no-recipes">
           <ion-icon name="alert-circle-outline"></ion-icon>
@@ -58,6 +60,7 @@
           </div>
         </div>
       </div>
+
     </ion-grid>
 
 </ion-content>

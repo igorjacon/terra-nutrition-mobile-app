@@ -15,7 +15,7 @@ import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
 import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkeletonText,
   IonDatetimeButton, IonModal, IonDatetime, IonList, IonListHeader, IonItem, IonLabel,
-  IonThumbnail, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
+  IonThumbnail, IonCheckbox, IonAvatar, IonRefresher, IonRefresherContent, IonSpinner } from '@ionic/angular/standalone';
 import {AuthService} from "../../services/auth.service";
 import {HttpService} from "../../services/http.service";
 import {MealOption} from "../../model/meal-option";
@@ -45,7 +45,8 @@ register();
     IonThumbnail,
     IonLabel,
     IonCheckbox,
-    IonAvatar
+    IonAvatar,
+    IonRefresher, IonRefresherContent, IonSpinner, 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -181,6 +182,13 @@ export class MealsPage implements OnInit, OnDestroy {
   //called when the notes ion-item-button is clicked to show more info/notes (not complete)
   toggleMoreInfoShowing(optionId: string) {
     this.moreInfoShowing[optionId] =!this.moreInfoShowing[optionId];
+  }
+  doRefresh(event: any) {
+    this.loaded = false;
+    this.loadData();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 
   //takes the date from when a user clicks the calendar

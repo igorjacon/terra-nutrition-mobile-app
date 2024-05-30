@@ -7,10 +7,9 @@
 
 
 ion-content {
-    --padding-top: 20px;
-    --padding-bottom: 20px;
-    --padding-start: 20px;
-    --padding-end: 20px;
+.page-content {
+    margin-top: 10vh;
+}
 }
     
 
@@ -33,14 +32,14 @@ ion-row.login-title {
         align-items: center;
         gap: 10px;
         ion-label {
-            font-size: 1.36rem;
+            font-size: 2rem;
             font-weight: 700;
             p {
-                margin-top: 30px;
+                margin-top: 1rem;
             }
         }
         ion-icon {
-            font-size: 1.5rem;
+            font-size: 2rem;
         }
     }
 }
@@ -51,14 +50,14 @@ ion-toast {
 }
 
 ion-row.logo {
-    margin-top: 8vh;
+    margin-top: 3rem;
     ion-col {
         display: flex;
         justify-content: center;
         align-items: center;
         img {
-            height: 150px;
-            margin-bottom: 20px;
+            height: 13rem;
+            margin-bottom: 3rem;
             
         }
     }
@@ -76,9 +75,11 @@ ion-col.danger-warning {
 }
 
 form {
+        //email field
         ion-input:first-child {
-            margin-bottom: 10px;
-            --padding-start: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            --padding-start: 2rem;
             --border-radius: 10px;
             ion-button {
                 ion-icon {
@@ -86,12 +87,15 @@ form {
                 }
             }
         }
-
+        //password field
         ion-input {
+            margin-bottom: 3rem;
+            font-size: 1.5rem;
             --padding-start: 20px;
             --border-radius: 10px;
             ion-button {
                 ion-icon {
+                font-size: 2.7em;
                 color:  #44aa79;
                 }
             }
@@ -106,7 +110,7 @@ form {
                 margin: 0;
                 p {
                     font-weight: 600;
-                    font-size: 0.8rem;
+                    font-size: 1.2rem;
                     display: inline-block;
                 }
             }
@@ -118,7 +122,7 @@ form {
         // font-weight: 600;
         --border-radius: 10px;
         letter-spacing: 0;
-        font-size: 1.3rem;
+        font-size: 1.7rem;
         --background: #44aa79;
         // --background-hov
         --background-activated: #60b48b;
@@ -132,7 +136,7 @@ ion-row.sign-up {
         text-align: center;
         ion-text {
             // color: #757171;
-            font-size: 0.8rem;
+            font-size: 1.2rem;
             font-weight: 600;
             span {
                 // color: black;
