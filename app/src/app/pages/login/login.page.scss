@@ -96,7 +96,7 @@ form {
             ion-button {
                 ion-icon {
                 font-size: 2.7em;
-                color:  #44aa79;
+                color: var(--ion-color-green);
                 }
             }
         }
@@ -123,7 +123,7 @@ form {
         --border-radius: 10px;
         letter-spacing: 0;
         font-size: 1.7rem;
-        --background: #44aa79;
+        --background: var(--ion-color-green);
         // --background-hov
         --background-activated: #60b48b;
         text-transform: none;

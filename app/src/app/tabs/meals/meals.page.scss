@@ -44,8 +44,8 @@ ion-refresher {
   }
 
   ion-datetime-button::part(native) {
-    background-color: #40b53e;
-    color: white;
+    background-color: #F9D876;
+    color: rgb(0, 0, 0);
     font-size: 1.4rem;
   }
 
@@ -102,7 +102,7 @@ swiper-container {
     .list-header {
       // font-size: 4rem;
       // --background: #44aa79;
-      --background: #1eae77;
+      --background: #C5E5A5;
       color: white;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
@@ -141,7 +141,7 @@ swiper-container {
       }
       ion-checkbox {
         --checkmark-color: rgb(37, 87, 29);
-        --checkbox-background-checked: #69d567;
+        --checkbox-background-checked: #98B66E;
         --border-color: white;
         --border-color-checked: white;
         --size: 2.3rem;

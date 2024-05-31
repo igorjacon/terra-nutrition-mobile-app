@@ -7,7 +7,7 @@ ion-content {
         margin-bottom: 2rem;
     }
     .logout-button {
-        --background: #44aa79;
+        --background: var(--ion-color-green);
         --background-activated: #60b48b;
         position: fixed;
         left: 0;
