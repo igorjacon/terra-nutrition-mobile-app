@@ -315,17 +315,6 @@ export class MealsPage implements OnInit, OnDestroy {
     }
   }
 
-  //called when a checkbox is clicked
-  // toggleCheckbox(index: number): void {
-  //   this.selectedOptionIndex[this.currentSlideIndex] = index;
-  //   console.log(this.selectedOptionIndex);
-  // }
-
-  //boolean value to see if a meal option checkbox is checked or not
-  // isChecked(slideIndex: number, optionIndex: number): boolean {
-  //   return this.selectedOptionIndex[slideIndex] === optionIndex;
-  // }
-
   //called when a swiper slide is clicked,
   slideClick(event: any): void {
     const swiper = this.swiperRef?.nativeElement.swiper;

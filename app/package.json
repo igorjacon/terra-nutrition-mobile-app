@@ -29,6 +29,8 @@
     "@capacitor/status-bar": "5.0.7",
     "@ionic/angular": "^7.5.0",
     "@ionic/storage-angular": "^4.0.0",
+    "@maskito/angular": "^2.3.2",
+    "@maskito/core": "^2.3.2",
     "ionicons": "^7.4.0",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.1",

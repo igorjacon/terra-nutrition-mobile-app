@@ -44,47 +44,234 @@
   </ion-row>
 
   
-  <form [formGroup]="signupForm" (ngSubmit)="signUp()" novalidate> 
-
-
+  <form [formGroup]="signupForm" (ngSubmit)="signUp($event)" novalidate>
     <ion-input
-    formControlName="email"
-    id="email"
-    mode="md"
-    fill="outline"
-    placeholder="Email address"
-    type="email">
-    </ion-input>
-  
+      formControlName="firstName"
+      id="firstName"
+      mode="md"
+      label="First Name"
+      label-placement="floating"
+      name="firstName"
+      fill="outline"
+      type="text"
+    ></ion-input>
     <ion-input
-    formControlName="password"
-    id="password"
-    mode="md"
-    fill="outline"
-    placeholder="Password"
-    type="password"
-    [type]="passIsVisible ? 'text' : 'password'"
-    
+      formControlName="lastName"
+      id="lastName"
+      mode="md"
+      name="lastName"
+      label="Last Name"
+      label-placement="floating"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="phoneNumber"
+      id="phoneNumber"
+      mode="md"
+      name="phoneNumber"
+      label="Phone Number"
+      label-placement="floating"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="email"
+      id="email"
+      mode="md"
+      name="email"
+      label="Email"
+      label-placement="floating"
+      fill="outline"
+      placeholder="Email address"
+      type="email"
+    ></ion-input>
+    <ion-input
+      formControlName="addressLineOne"
+      id="addressLineOne"
+      mode="md"
+      label="Address Line One"
+      label-placement="floating"
+      name="addressLineOne"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="addressLineTwo"
+      id="addressLineTwo"
+      mode="md"
+      label="Address Line Two"
+      label-placement="floating"
+      name="addressLineTwo"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="addressCity"
+      id="addressCity"
+      mode="md"
+      label="City"
+      label-placement="floating"
+      name="addressCity"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="addressZipCode"
+      id="addressZipCode"
+      mode="md"
+      label="Zip Code"
+      label-placement="floating"
+      name="addressZipCode"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="addressState"
+      id="addressState"
+      mode="md"
+      label="State"
+      label-placement="floating"
+      name="addressState"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="addressCountry"
+      id="addressCountry"
+      mode="md"
+      label="Country"
+      label-placement="floating"
+      name="addressCountry"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-input
+      formControlName="height"
+      id="height"
+      mode="md"
+      label="Height"
+      name="height"
+      fill="outline"
+      type="text"
+      placeholder="1,75"
     >
-    <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
-      <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
-    </ion-button>
+      <ion-label slot="end">m</ion-label>
     </ion-input>
-
-      
     <ion-input
-    formControlName="confirmPassword"
-    id="confirmPassword"
-    mode="md"
-    fill="outline"
-    placeholder="Confirm Password"
-    type="password">
+      formControlName="weight"
+      id="weight"
+      mode="md"
+      label="Weight"
+      name="weight"
+      fill="outline"
+      type="text"
+      placeholder="66,5"
+    >
+      <ion-label slot="end">kg</ion-label>
     </ion-input>
+    <ion-input
+      formControlName="goalWeight"
+      id="goalWeight"
+      mode="md"
+      label="Goal Weight"
+      name="goalWeight"
+      fill="outline"
+      type="text"
+      placeholder="64"
+    >
+      <ion-label slot="end">kg</ion-label>
+    </ion-input>
+    <ion-input
+      formControlName="occupation"
+      id="occupation"
+      mode="md"
+      label="Occupation"
+      label-placement="floating"
+      name="occupation"
+      fill="outline"
+      type="text"
+    ></ion-input>
+    <ion-item lines="none">
+      <ion-label>Date of Birth</ion-label>
+      <ion-datetime-button datetime="dob"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+          id="dob"
+          presentation="date"
+          (ionChange)="onDateChange($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
+    <br>
+    <ion-textarea
+      formControlName="dietaryPreference"
+      id="dietaryPreference"
+      mode="md"
+      name="dietaryPreference"
+      label="What's your dietary preference?"
+      label-placement="floating"
+    ></ion-textarea>
+    <ion-textarea
+      formControlName="goals"
+      id="goals"
+      mode="md"
+      name="goals"
+      label="Goals"
+      label-placement="floating"
+    ></ion-textarea>
+    <ion-textarea
+      formControlName="reasonSeekProfessional"
+      id="reasonSeekProfessional"
+      mode="md"
+      name="reasonSeekProfessional"
+      label="What is your reason for seeking a professional?"
+      label-placement="floating"
+    ></ion-textarea>
+    <ion-textarea
+      formControlName="currExerciseRoutine"
+      id="currExerciseRoutine"
+      mode="md"
+      name="currExerciseRoutine"
+      label="What is your current exercise routine?"
+      label-placement="floating"
+    ></ion-textarea>
+    <ion-textarea
+      formControlName="medicalInfo"
+      id="medicalInfo"
+      mode="md"
+      name="medicalInfo"
+      label="Medical Info"
+      label-placement="floating"
+    ></ion-textarea>
+  
+    <!-- PASSWORD -->
+    <ion-input
+      formControlName="password"
+      id="password"
+      mode="md"
+      fill="outline"
+      placeholder="Password"
+      type="password"
+      [type]="passIsVisible ? 'text' : 'password'"
+    >
+      <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
+        <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
+      </ion-button>
+    </ion-input>
+    <ion-input
+      formControlName="confirmPassword"
+      id="confirmPassword"
+      mode="md"
+      fill="outline"
+      placeholder="Confirm Password"
+      type="password"
+    ></ion-input>
+    <!-- END PASSWORD -->
 
     <ion-button type="submit" class="sign-up" size="large" expand="block">Sign Up</ion-button>
   </form>
- 
-
    
   <ion-row class="log-in">
     <ion-col>
