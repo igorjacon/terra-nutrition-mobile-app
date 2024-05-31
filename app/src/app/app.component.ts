@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { IonicStorageModule } from '@ionic/storage-angular';
-
+import { NotificationService } from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +11,11 @@ import { IonicStorageModule } from '@ionic/storage-angular';
   imports: [IonApp, IonRouterOutlet, CommonModule, IonicStorageModule],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private notificationService: NotificationService) {}
+
+  ngOnInit() {
+    this.notificationService.requestPermissions();
+    this.notificationService.scheduleNotification();
+  }
+
 }

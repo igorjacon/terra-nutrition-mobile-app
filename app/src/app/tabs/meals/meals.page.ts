@@ -15,7 +15,7 @@ import { MealPlan } from 'src/app/model/meal-plan';
 import { MealPlanService } from 'src/app/services/meal-plan.service';
 import { IonHeader, IonSelect, IonSelectOption, IonToolbar, IonContent, IonSkeletonText,
   IonDatetimeButton, IonModal, IonDatetime, IonList, IonListHeader, IonItem, IonLabel,
-  IonThumbnail, IonCheckbox, IonAvatar } from '@ionic/angular/standalone';
+  IonThumbnail, IonCheckbox, IonAvatar, IonRefresher, IonRefresherContent, IonSpinner } from '@ionic/angular/standalone';
 import {AuthService} from "../../services/auth.service";
 import {HttpService} from "../../services/http.service";
 import {MealOption} from "../../model/meal-option";
@@ -45,7 +45,8 @@ register();
     IonThumbnail,
     IonLabel,
     IonCheckbox,
-    IonAvatar
+    IonAvatar,
+    IonRefresher, IonRefresherContent, IonSpinner, 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -66,10 +67,10 @@ export class MealsPage implements OnInit, OnDestroy {
   selectedMealPlan: MealPlan | null = null; // Default value for the selected meal plan
   selectedMealPlanId: string | null = null; // Store selected meal plan ID
 
-  selectedMealCategoryID: any; //id of the meal category selected, e.g., breakfast (based on checkbox)
-  selectedMealOptionID: any; //id of the meal selected within a meal category (based on checkbox)
-  selectedMealOptions: any; //meal option objects in an array, based on the category selected - each object needs a 'selected: false or true' - will need to be added to bind to [checked] value
-  selectedMealOption: any; //the object of the currently selected meal option (need this to bind the true/false of selected property)
+  // selectedMealCategoryID: any; //id of the meal category selected, e.g., breakfast (based on checkbox)
+  // selectedMealOptionID: any; //id of the meal selected within a meal category (based on checkbox)
+  // selectedMealOptions: any; //meal option objects in an array, based on the category selected - each object needs a 'selected: false or true' - will need to be added to bind to [checked] value
+  // selectedMealOption: any; //the object of the currently selected meal option (need this to bind the true/false of selected property)
 
   moreInfoShowing: Record<string, boolean> = {}; // Object to track the visibility state of notes for each meal option
   activeNoteIndex: number | null = null;
@@ -181,6 +182,13 @@ export class MealsPage implements OnInit, OnDestroy {
   //called when the notes ion-item-button is clicked to show more info/notes (not complete)
   toggleMoreInfoShowing(optionId: string) {
     this.moreInfoShowing[optionId] =!this.moreInfoShowing[optionId];
+  }
+  doRefresh(event: any) {
+    this.loaded = false;
+    this.loadData();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
   }
 
   //takes the date from when a user clicks the calendar

@@ -1,9 +1,5 @@
 ion-header {
-    --background: #006400;
-    --color: #fff;
   ion-toolbar {
-    // --background: red;
-    // display: flex;
     ion-buttons {
       ion-back-button {
         position: absolute;
@@ -24,11 +20,6 @@ ion-header {
       }
     }
   }
-    .logo {
-      img {
-        height: 40px;
-      }
-    }
 }
   
   .profile-card {
@@ -55,11 +46,15 @@ ion-header {
   
   .profile-details h2 {
     margin: 5px 0;
+    color: black;
+    font-size: 2rem;
   }
   
   .profile-details p {
     margin: 5px 0;
+    font-size: 1.4rem;
     color: #333;
+
   }
   
   .profile-details a {
@@ -79,14 +74,24 @@ ion-header {
   }
   
   .info-label {
-    color: #333;
+    color: black;
     font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
   }
   
   .info-value {
-    color: #333;
-    margin-bottom: 5px;
+    // color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
   }
+  
+  .address {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    color: black;
+  }
+  
   
   a {
     color: #006400;

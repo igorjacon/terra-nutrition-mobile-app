@@ -1,6 +1,4 @@
 <ion-content>
-  <ion-progress-bar *ngIf="showLoadingBar" color="success" type="indeterminate"></ion-progress-bar>
-  <img class="graphic" src="/assets/imgs/page-graphic.png"/>
   <ion-toast
   class="error-toast"
   isOpen="{{showErrorToast}}"
@@ -8,25 +6,19 @@
   duration="2000"
   position="top"
   (ionToastDidDismiss)="showErrorToast = false">
-  </ion-toast>
-  
-  <!-- <ion-toast
-  class="success-toast"
-  isOpen="{{showSuccessToast}}"
-  message="{{successToastText}}"
-  duration="2000"
-  position="top"
-  (ionToastDidDismiss)="showSuccessToast = false">
-  </ion-toast> -->
+</ion-toast>
 
-  <ion-row class="login-title">
-    <ion-col>
-      <ion-label>
-        Account Login
-      </ion-label>
-      <ion-icon name="person-outline"></ion-icon>
-    </ion-col>
-  </ion-row>
+<ion-row class="login-title">
+  <ion-col>
+    <ion-label>
+      Account Login
+    </ion-label>
+    <ion-icon name="person-outline"></ion-icon>
+  </ion-col>
+</ion-row>
+<div class="page-content">
+  <img class="graphic" src="/assets/imgs/page-graphic.png"/>
+
 
   <ion-row class="logo">
     <ion-col>
@@ -44,6 +36,7 @@
   </ion-row> -->
 
   <form [formGroup]="loginForm" (ngSubmit)="loginAction($event)">
+
     <ion-input
     formControlName="email"
     id="email"
@@ -63,26 +56,30 @@
     fill="outline"
     placeholder="Password"
     [type]="passIsVisible ? 'text' : 'password'">
+
     <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
       <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
      </ion-button>
+     
     </ion-input>
-
+<!-- 
     <ion-row>
       <ion-col class="ion-text-end">
         <p [routerLink]="['/forgot-password']">Forgot Password?</p>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-button type="submit" class="login" size="large" expand="block">Login</ion-button>
   </form>
 
 
-
+<!-- 
   <ion-row class="sign-up">
     <ion-col>
       <ion-text>Don't have an account? <span [routerLink]="['/sign-up']">Sign Up</span></ion-text>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
+
+</div>
 </ion-content>

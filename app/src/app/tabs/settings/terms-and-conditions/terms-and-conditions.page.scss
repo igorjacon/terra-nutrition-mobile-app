@@ -1,6 +1,4 @@
 ion-header {
-  --background: #006400;
-  --color: #fff;
   ion-toolbar {
     ion-buttons {
       ion-back-button {
@@ -20,11 +18,6 @@ ion-header {
       }
     }
   }
-  .logo {
-    img {
-      height: 40px;
-    }
-  }
 }
 
 .terms-card {
@@ -35,16 +28,30 @@ ion-header {
   padding: 20px;
 }
 
+ion-card-title {
+  color: black;
+}
+
 .terms-content {
   h2 {
-    margin-top: 20px;
+    margin-top: 1.8rem;
     color: #006400;
     font-weight: bold;
+    font-size: 1.5rem;
   }
   
-  p {
+  p, ul {
     margin: 10px 0;
     color: #333;
     line-height: 1.5;
+    font-size: 1.3rem;
+  }
+  
+  ul {
+    padding-left: 20px;
+    
+    li {
+      margin-bottom: 10px;
+    }
   }
 }

@@ -1,33 +1,22 @@
 ion-header {
-  --background: #006400;
-  --color: #fff;
-ion-toolbar {
-  // --background: red;
-  // display: flex;
-  ion-buttons {
-    ion-back-button {
-      position: absolute;
-      --color: white;
-      --icon-margin-start: 8px;
-
-      --icon-font-size: 40px;
-      // --icon-font-weight: 100px;
-    }
-    //this is a solution to hide back button text from github
-    // https://github.com/ionic-team/ionic-framework/issues/29281
-    ion-back-button::part(text) {
-      position: absolute;
-      left: -9999px;
-      top: auto;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-  }
-}
-  .logo {
-    img {
-      height: 40px;
+  ion-toolbar {
+    ion-buttons {
+      ion-back-button {
+        position: absolute;
+        --color: white;
+        --icon-margin-start: 8px;
+        --icon-font-size: 40px;
+      }
+      //this is a solution to hide back button text from github
+      // https://github.com/ionic-team/ionic-framework/issues/29281
+      ion-back-button::part(text) {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
     }
   }
 }
@@ -43,6 +32,10 @@ ion-toolbar {
     padding: 20px;
   }
   
+  .customer-email {
+    font-size: 1rem;
+  }
+
   .profile-image {
     width: 100px;
     height: 100px;
@@ -52,22 +45,35 @@ ion-toolbar {
   
   .profile-details {
     text-align: center;
+    .customer-email {
+      font-size: 1.4rem;
+    }
+    .customer-name {
+      font-size: 2rem;
+    }
+    .customer-number {
+      font-size: 1.4rem;
+    }
+  }
+  .profile-details h2,.info-value {
+    color: black;
   }
   
+
   .profile-details h2 {
     margin: 5px 0;
   }
   
   .profile-details p {
     margin: 5px 0;
-    color: #333;
+    // color: #333;
   }
   
   .info-card {
     background: #f0f0f0;
     border-radius: 10px;
     padding: 20px;
-    margin-top: 20px;
+    // margin-top: 2rem;
   }
   
   .info-section {
@@ -77,10 +83,13 @@ ion-toolbar {
   .info-label {
     color: #006400;
     font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
   }
   
   .info-value {
-    color: #333;
-    margin-bottom: 5px;
+    // color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
   }
   

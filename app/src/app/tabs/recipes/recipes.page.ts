@@ -29,7 +29,8 @@ export class RecipesPage implements OnInit {
   constructor(private httpService: HttpService, private storageService: StorageService, private sanitizer: DomSanitizer, private router: Router)
   {
     addIcons({
-      sadOutline
+      sadOutline,
+      alertCircleOutline
     })
   }
 

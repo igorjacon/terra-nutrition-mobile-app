@@ -30,8 +30,74 @@
     font-family: Inter;
 }
 :root {
-  --ion-color-green: #98B66E;
+//   --ion-color-green: #98B66E;
+--ion-color-green: #98B66E;
 }
+
+/* For responsiveness across screens
+used from this source: 
+https://dev.to/nwamugo/make-your-ionic-apps-100-responsive-p40
+by setting this up, we can use rem,em,%,vh units in app to change dynamically
+
+*/
+html {
+    font-size: 100%;
+    @media (max-width: 289px) {
+        font-size: 45%;
+    }
+    @media (min-width: 290px) {
+        font-size: 50%;
+    }
+    @media (min-width: 300px) {
+        font-size: 52.5%;
+    }
+    @media (min-width: 320px) {
+        font-size: 55.5%;
+    }
+    @media (min-width: 325px) {
+        font-size: 56.5%;
+    }
+    @media (min-width: 326px) {
+        font-size: 57%;
+    }
+    @media (min-width: 330px) {
+        font-size: 59%;
+    }
+    @media (min-width: 360px) {
+        font-size: 62.5%;
+    }
+    @media (min-width: 411px) {
+        font-size: 70%;
+    }
+    @media (min-width: 500px) {
+        font-size: 85%;
+    }
+    @media (min-width: 720px) {
+        font-size: 100%;
+    }
+    @media (min-width: 1000px) {
+        font-size: 110%;
+    }
+  }
+  html.ios {
+    @media (max-width: 359px) and (min-width: 320px) {
+        font-size: 59%;
+    }
+  }
+ion-content {
+    color: var(--ion-text-color); // Text color will change based on mode
+    background-color: var(--ion-background-color); // Background color will change based on mode
+    --padding-top: 3rem;
+    --padding-bottom: 1rem;
+    --padding-start: 3rem;
+    --padding-end: 3rem;
+}
+p, ion-text, h1, h2, h3, h4, h5, h6 {
+    color: var(--ion-text-color);
+  }
+
+  
+  
 
 ion-header {
     ion-toolbar {
