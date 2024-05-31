@@ -50,7 +50,8 @@
         <ion-datetime
         style=" --background: #e1f9e1;
         --background-rgb: 255, 241, 242;
-        border-radius: 16px;"
+        border-radius: 16px;
+        font-size: 3rem;"
           id="datetime"
           color="success"
           presentation="date"
@@ -99,9 +100,6 @@
               <h2>{{ itemEntry?.foodItem?.name }}</h2>
               <p>{{itemEntry?.quantity}} {{ itemEntry?.measurement?.name }}</p>
               </ion-label>
-            <!-- <ion-avatar slot="start">
-              <img src="assets/imgs/avocado-toast.jpg"/>
-            </ion-avatar> -->
           </ion-item>
 
           <ion-item lines="none" *ngIf="option.description">
