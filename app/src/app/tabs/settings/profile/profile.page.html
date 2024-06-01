@@ -16,6 +16,7 @@
     <ng-template #defaultImage>
       <img src="assets/imgs/default-profile.png" class="profile-image" alt="Default Profile Picture">
     </ng-template>
+    <ion-button color="success" (click)="getPicture()">Change Photo</ion-button>
     <div class="profile-details">
       <h2 class="customer-name">{{ customer.user?.firstName }} {{ customer.user?.lastName }}</h2>
       <p class="customer-email" style="color: #006400;">{{ customer.user?.email }}</p>
