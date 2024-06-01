@@ -17,10 +17,7 @@ ion-toast.success-toast {
 
 
 ion-content {
-    --padding-top: 20px;
-    --padding-bottom: 20px;
-    --padding-start: 20px;
-    --padding-end: 20px;
+
 }
 
 
@@ -31,31 +28,93 @@ ion-row.login-title {
         align-items: center;
         gap: 10px;
         ion-label {
-            font-size: 1.36rem;
+            font-size: 2rem;
             font-weight: 700;
             p {
-                margin-top: 30px;
+                margin-top: 1rem;
             }
         }
         ion-icon {
-            font-size: 1.5rem;
+            font-size: 2rem;
         }
     }
 }
 
 ion-row.logo {
-    margin-top: 8vh;
+    margin-top: 3rem;
     ion-col {
         display: flex;
         justify-content: center;
         align-items: center;
         img {
-            height: 150px;
-            margin-bottom: 20px;
+            height: 13rem;
+            margin-bottom: 3rem;
             
         }
     }
     
+}
+
+h1 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+ion-select::part(placeholder), ion-select::part(text) {
+    font-size: 1.3rem;
+}
+
+.form-section {
+    margin-bottom: 4rem;
+}
+
+ion-input {
+    font-size: 1.5rem;
+    // color: #757171;
+}
+
+ion-textarea {
+    font-size: 1.3rem;
+    // border-radius: 80px;
+    // --border-top-left-radius: 40px;
+
+}
+
+.dob {
+    margin-bottom: 1rem;
+    // border: 1px solid rgb(148, 147, 147);
+    // border-radius: 10px;
+}
+
+ion-list.diet {
+    margin-bottom: 1rem;
+}
+
+.diet-select {
+    // border: 1px solid lightgray;
+}
+
+.diet-item {
+    border: 1px solid rgb(143, 143, 143);
+    border-radius: 10px;
+    padding: 4px;
+}
+
+ion-list.goals {
+    margin-bottom: 1rem;
+
+}
+
+.goals-item {
+    border: 1px solid rgb(143, 143, 143);
+    border-radius: 10px;
+    padding: 4px;
+
+
+}
+
+ion-textarea {
+    margin-bottom: 1rem;
 }
 
 form {
@@ -89,27 +148,34 @@ form {
 }
 
 ion-row.log-in {
-    margin-top: 20px;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
     ion-col {
         text-align: center;
         ion-text {
             color: #757171;
-            font-size: 0.8rem;
+            font-size: 1.2rem;
             font-weight: 600;
             span {
+                margin-left: 0.1rem;
                 color: black;
             }
         }
     }
 }
 
-ion-row.login-description {
-    margin-left: 2.5vh;
-    ion-col {
-        ion-label {
-            color: #757171;
-            font-size: 0.9rem;
-        }
-    }
-}
+// ion-row.login-description {
+//     margin-top: 2rem;
+//     ion-col {
+//         text-align: center;
+//         ion-text {
+//             color: #757171;
+//             font-size: 1.2rem;
+//             font-weight: 600;
+//             span {
+//                 color: black;
+//             }
+//         }
+//     }
+// }
 

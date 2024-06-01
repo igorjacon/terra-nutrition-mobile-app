@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonRow, IonText,
-  IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea } from '@ionic/angular/standalone';
+  IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline, personAddOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router, RouterLink } from '@angular/router';
@@ -10,13 +10,16 @@ import { HttpService } from 'src/app/services/http.service';
 import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
   styleUrls: ['./sign-up.page.scss'],
   standalone: true,
   imports: [IonContent, IonToast, RouterLink, ReactiveFormsModule, IonButton, IonInput, MaskitoModule, IonModal, IonTextarea,
-    IonDatetimeButton, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem, IonDatetime]
+    IonDatetimeButton, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem, IonDatetime,
+    IonSelect, IonSelectOption, IonList,   
+  ]
 })
 export class SignUpPage implements OnInit {
   passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not

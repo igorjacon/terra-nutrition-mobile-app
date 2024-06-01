@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
   <div class="profile-card">
     <img *ngIf="customer.professional.user?.profileImg; else defaultImage" [src]="'https://app.terranutri.net/uploads/user/' + customer.professional.user.profileImg" class="profile-image" alt="Profile Picture">
     <ng-template #defaultImage>
