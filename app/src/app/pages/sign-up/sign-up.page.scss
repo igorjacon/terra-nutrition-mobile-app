@@ -55,8 +55,23 @@ ion-row.logo {
     
 }
 
+h1 {
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.form-section {
+    margin-bottom: 4rem;
+}
+
 ion-input {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    // color: #757171;
+}
+
+ion-textarea {
+    font-size: 1.3rem;
+
 }
 
 .dob {
