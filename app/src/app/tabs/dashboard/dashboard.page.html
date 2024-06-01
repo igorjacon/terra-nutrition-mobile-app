@@ -14,18 +14,25 @@
 
   <div class="dashboard-grid-container">
     <div class="card water-intake-card">
-      <h3 class="card-title">Water Intake</h3>
-      <ion-icon class="card-ion" name="water-outline"></ion-icon>
+      <h3 class="card-title">
+        Water Intake
+        <ion-icon name="settings-outline" class="settings-icon" (click)="openWaterGoalModal()"></ion-icon>
+      </h3>
       <div class="water-tracker">
-        <p>Goal: <ion-input [(ngModel)]="waterGoal" type="number" placeholder="Enter goal in glasses"></ion-input></p>
-        <p>Drank: {{ waterIntake }} glasses</p>
+        <p>Drank: {{ waterIntake }} {{ unitLabel }}</p>
         <div class="progress-bar">
           <div class="progress" [style.width.%]="(waterIntake / waterGoal) * 100"></div>
         </div>
-        <ion-button (click)="incrementWaterIntake()">Add a glass</ion-button>
-        <ion-button color="danger" (click)="resetWaterIntake()">Reset</ion-button>
+        <div class="hydration-tips" *ngIf="hydrationTips.enabled">
+          <p>{{ currentTip }}</p>
+        </div>
+        <div class="icon-buttons">
+          <ion-icon name="add-circle-outline" (click)="incrementWaterIntake()"></ion-icon>
+          <ion-icon name="remove-circle-outline" (click)="minusWaterIntake()"></ion-icon>
+          <ion-icon name="refresh-circle-outline" color="danger" (click)="resetWaterIntake()"></ion-icon>
+        </div>
       </div>
-    </div>
+    </div>    
 
     <div class="card meal-plan-card" (click)="navigateToMealsPage()">
         <h3 class="card-title">Meal Plans</h3>
