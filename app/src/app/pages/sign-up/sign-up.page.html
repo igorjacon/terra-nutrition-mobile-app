@@ -45,6 +45,8 @@
 
   
   <form [formGroup]="signupForm" (ngSubmit)="signUp($event)" novalidate>
+
+    <h1>Personal Details</h1>
     <ion-input
       formControlName="firstName"
       id="firstName"
@@ -65,6 +67,18 @@
       fill="outline"
       type="text"
     ></ion-input>
+    <ion-item class="dob" lines="none">
+      <ion-label>Date of Birth</ion-label>
+      <ion-datetime-button datetime="dob"></ion-datetime-button>
+      <ion-modal [keepContentsMounted]="true">
+        <ng-template>
+          <ion-datetime
+          id="dob"
+          presentation="date"
+          (ionChange)="onDateChange($event)"></ion-datetime>
+        </ng-template>
+      </ion-modal>
+    </ion-item>
     <ion-input
       formControlName="phoneNumber"
       id="phoneNumber"
@@ -86,6 +100,18 @@
       placeholder="Email address"
       type="email"
     ></ion-input>
+    <ion-input
+      formControlName="occupation"
+      id="occupation"
+      mode="md"
+      label="Occupation"
+      label-placement="floating"
+      name="occupation"
+      fill="outline"
+      type="text"
+    ></ion-input>
+
+    <h1>Address</h1>
     <ion-input
       formControlName="addressLineOne"
       id="addressLineOne"
@@ -146,107 +172,113 @@
       fill="outline"
       type="text"
     ></ion-input>
+    <h1>Weight and Height</h1>
     <ion-input
       formControlName="height"
+      label-placement="floating"
       id="height"
       mode="md"
       label="Height"
       name="height"
       fill="outline"
-      type="text"
-      placeholder="1,75"
     >
-      <ion-label slot="end">m</ion-label>
+      <ion-label slot="end">cm</ion-label>
     </ion-input>
     <ion-input
       formControlName="weight"
+      label-placement="floating"
       id="weight"
       mode="md"
       label="Weight"
       name="weight"
       fill="outline"
       type="text"
-      placeholder="66,5"
     >
       <ion-label slot="end">kg</ion-label>
     </ion-input>
     <ion-input
       formControlName="goalWeight"
+      label-placement="floating"
       id="goalWeight"
       mode="md"
       label="Goal Weight"
       name="goalWeight"
       fill="outline"
       type="text"
-      placeholder="64"
     >
       <ion-label slot="end">kg</ion-label>
     </ion-input>
-    <ion-input
-      formControlName="occupation"
-      id="occupation"
-      mode="md"
-      label="Occupation"
-      label-placement="floating"
-      name="occupation"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-item lines="none">
-      <ion-label>Date of Birth</ion-label>
-      <ion-datetime-button datetime="dob"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
-        <ng-template>
-          <ion-datetime
-          id="dob"
-          presentation="date"
-          (ionChange)="onDateChange($event)"></ion-datetime>
-        </ng-template>
-      </ion-modal>
-    </ion-item>
-    <br>
+    <h1>Goals and Preferences</h1>
+    <ion-list class="diet">
+      <ion-item lines="none" class="diet-item">
+        <ion-select class="diet-select" aria-label="diet" placeholder="Dietary preference">
+          <ion-select-option value="omnivore">Omnivore</ion-select-option>
+          <ion-select-option value="pescatarian">Pescatarian</ion-select-option>
+          <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+          <ion-select-option value="vegan">Vegan</ion-select-option>
+          <ion-select-option value="other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-list class="goals">
+      <ion-item lines="none" class="goals-item">
+        <ion-select aria-label="goals" placeholder="Goals">
+          <ion-select-option value="lose-weight">Lose weight</ion-select-option>
+          <ion-select-option value="gain-weight">Gain weight</ion-select-option>
+          <ion-select-option value="energy-and-vitality">Energy and vitality</ion-select-option>
+          <ion-select-option value="eat-healthier">Eat healthier</ion-select-option>
+          <ion-select-option value="pregnancy">Pregnancy</ion-select-option>
+          <ion-select-option value="other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <h1>Additional information</h1>
     <ion-textarea
-      formControlName="dietaryPreference"
-      id="dietaryPreference"
-      mode="md"
-      name="dietaryPreference"
-      label="What's your dietary preference?"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
-      formControlName="goals"
-      id="goals"
-      mode="md"
-      name="goals"
-      label="Goals"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
-      formControlName="reasonSeekProfessional"
-      id="reasonSeekProfessional"
-      mode="md"
-      name="reasonSeekProfessional"
-      label="What is your reason for seeking a professional?"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
+    class="reason-for-seeking-professional"
+    formControlName="reasonSeekProfessional"
+    id="reasonSeekProfessional"
+    mode="md"
+    name="reasonSeekProfessional"
+    label="Reason for seeking a professional" 
+    labelPlacement="floating" 
+    fill="outline">
+  </ion-textarea>
+    <!-- <ion-textarea
       formControlName="currExerciseRoutine"
       id="currExerciseRoutine"
       mode="md"
       name="currExerciseRoutine"
       label="What is your current exercise routine?"
       label-placement="floating"
-    ></ion-textarea>
+    ></ion-textarea> -->
     <ion-textarea
+    formControlName="currExerciseRoutine"
+    id="currExerciseRoutine"
+    mode="md"
+    name="currExerciseRoutine"    
+    label="What is your current exercise routine?" 
+    labelPlacement="floating" 
+    fill="outline">
+    </ion-textarea>
+    <!-- <ion-textarea
       formControlName="medicalInfo"
       id="medicalInfo"
       mode="md"
       name="medicalInfo"
       label="Medical Info"
       label-placement="floating"
-    ></ion-textarea>
-  
+    ></ion-textarea> -->
+    <ion-textarea
+    formControlName="medicalInfo"
+    id="medicalInfo"
+    mode="md"
+    name="medicalInfo"
+    label="Medical Info"
+    label-placement="floating"
+    fill="outline">
+    </ion-textarea>
     <!-- PASSWORD -->
+    <h1>Create password</h1>
     <ion-input
       formControlName="password"
       id="password"
