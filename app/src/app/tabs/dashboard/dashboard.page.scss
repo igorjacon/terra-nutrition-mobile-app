@@ -38,15 +38,132 @@ ion-content {
             // border: 1px solid var(--ion-text-color);
         }
         .meal-plan-card {
+            background: linear-gradient(135deg, #D8EAAB, #95d387);
             grid-column: 1/3;
             // background: linear-gradient(135deg, rgba(15,164,105,1), #b8fcd7);
         }
+
+        .water-intake-card {
+            background: linear-gradient(135deg, #AECBEB, #83B0E1);
+            grid-column: 1/3;
+            position: relative; // Make sure the card has a relative position for absolute positioning of the icon
+          
+            .card-title {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding-right: 10px; // Add some padding to the right for spacing
+          
+              .settings-icon {
+                pointer-events: auto; // Ensure the settings icon is clickable
+                font-size: 24px;
+                cursor: pointer; // Change cursor to pointer on hover
+              }
+            }
+          
+            .water-tracker {
+              pointer-events: auto;
+              margin-top: 5px;
+          
+              p {
+                font-size: 15px;
+                color: #333;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+          
+                ion-input {
+                  width: 50%;
+                  margin: 5px 0;
+                  --padding-end: 10px;
+                }
+              }
+            }
+          }
+          
+          .progress-bar {
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 15px;
+            margin-top: 5px;
+          
+            .progress {
+              background: #71A5DE;
+              height: 100%;
+              width: 0;
+              transition: width 0.3s;
+            }
+          
+            .icon-buttons {
+              display: flex;
+              justify-content: space-around;
+              margin-top: 10px;
+          
+              ion-icon {
+                font-size: 40px;
+          
+                &[color="danger"] {
+                  color: #e74d3c69;
+                }
+              }
+            }
+                    
+    
+          }
+          
+          .progress-bar {
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 15px;
+            margin-top: 5px;
+    
+            .progress {
+              background: #71A5DE;
+              height: 100%;
+              width: 0;
+              transition: width 0.3s;
+            }
+
+            .icon-buttons {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 10px;
+        
+                ion-icon {
+                  font-size: 40px;
+        
+                  &[color="danger"] {
+                    color: #e74d3c69;
+                  }
+                }
+            }
+          }
+
+          .icon-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+    
+            ion-icon {
+              font-size: 40px;
+              cursor: pointer;
+    
+              &[color="danger"] {
+                color: #e74d3c69;
+              }
+            }
+        }
+
         .recipes-card {
+            background: linear-gradient(135deg, #D8EAAB, #95d387);
             grid-column: 1/3;
             // background: linear-gradient(135deg, #b8fcd7, rgba(15,164,105,1));
 
         }
         .nutritionist-details-card {
+            background: linear-gradient(135deg, #D8EAAB, #95d387);
             // background: linear-gradient(135deg, #b8fcd7, rgba(15,164,105,1));
             // background: linear-gradient(135deg, rgba(15,164,105,1), #b8fcd7);
             p {
@@ -64,7 +181,7 @@ ion-content {
 
         }
         .account-details-card {
-            // background: linear-gradient(135deg, rgba(15,164,105,1), #b8fcd7);
+             background: linear-gradient(135deg, #D8EAAB, #95d387);
             p {
                 margin: 0;
             }
@@ -93,49 +210,4 @@ ion-content {
            
         }
     }
-
-
-    //Water intake SCSS**
-    .water-intake-card {
-        pointer-events: none;
-        background: linear-gradient(135deg, #1bd8f1, #b8f4fc);
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        grid-column: 1/3;
-
-        .water-tracker {
-            pointer-events: auto;
-            margin-top: 5px;
-      
-            p {
-              font-size: 12px;
-              color: #333;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-      
-              ion-input {
-                width: 50%;
-                margin: 5px 0;
-                --padding-end: 10px;
-              }
-            }
-        }
-
-      }
-      
-      .progress-bar {
-        background: #e0e0e0;
-        border-radius: 5px;
-        overflow: hidden;
-        height: 15px;
-        margin-top: 5px;
-
-        .progress {
-          background: #0f63a4;
-          height: 100%;
-          width: 0;
-          transition: width 0.3s;
-        }
-      }
-    }
+}
