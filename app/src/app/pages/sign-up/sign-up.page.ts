@@ -10,6 +10,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
 
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
