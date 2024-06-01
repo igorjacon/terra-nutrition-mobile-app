@@ -1,0 +1,57 @@
+.graphic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+ion-content {
+.page-content {
+    margin-top: 4vh;
+}
+}
+
+ion-row.login-title {
+    margin-top: 4vh;
+    ion-col {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        ion-label {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        ion-icon {
+            font-size: 2rem;
+        }
+    }
+}
+
+ion-row.logo {
+    ion-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            height: 10rem;
+            margin-bottom: 3rem;
+        }
+    }   
+}
+
+ion-col.registration-message {
+    text-align: center;
+    ion-icon {
+        font-size: 10rem;
+    }
+    p {
+        color: #505050;
+    }
+    small {
+        margin-top: 2rem;
+        color: #8a8a8a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

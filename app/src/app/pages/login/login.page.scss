@@ -131,26 +131,18 @@ form {
 }
 
 ion-row.sign-up {
-    margin-top: 20px;
+    margin-top: 2rem;
     ion-col {
         text-align: center;
         ion-text {
-            // color: #757171;
+            color: #757171;
             font-size: 1.2rem;
             font-weight: 600;
             span {
-                // color: black;
+                margin-left: 0.1rem;
+                color: black;
             }
         }
     }
 }
 
-ion-row.login-description {
-    margin-left: 2.5vh;
-    ion-col {
-        ion-label {
-            // color: #757171;
-            font-size: 0.9rem;
-        }
-    }
-}

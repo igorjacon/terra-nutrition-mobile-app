@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonRow, IonText, 
-  IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea } from '@ionic/angular/standalone';
+import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonRow, IonText,
+  IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline, personAddOutline} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import { FormValidationService } from 'src/app/services/form-validation.service';
 import { HttpService } from 'src/app/services/http.service';
 import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,9 @@ import { MaskitoModule } from '@maskito/angular';
   styleUrls: ['./sign-up.page.scss'],
   standalone: true,
   imports: [IonContent, IonToast, RouterLink, ReactiveFormsModule, IonButton, IonInput, MaskitoModule, IonModal, IonTextarea,
-    IonDatetimeButton, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem, IonDatetime]
+    IonDatetimeButton, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem, IonDatetime,
+    IonSelect, IonSelectOption, IonList,   
+  ]
 })
 export class SignUpPage implements OnInit {
   passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not
@@ -35,15 +38,16 @@ export class SignUpPage implements OnInit {
   myPhoneNumber = maskitoTransform('4 2222-3344', this.phoneMask);
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private formValidator: FormValidationService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private router: Router
   ) {
     addIcons({
       personOutline,
       personCircleOutline,
       eyeOutline,
-      eyeOffOutline, 
+      eyeOffOutline,
       personAddOutline
     });
   }
@@ -69,19 +73,19 @@ export class SignUpPage implements OnInit {
     height: new FormControl('', Validators.required),
     weight: new FormControl('', Validators.required),
     goalWeight: new FormControl('', Validators.required),
-    dob: new FormControl('', Validators.required),
+    dob: new FormControl(''),
     occupation: new FormControl('', Validators.required),
     dietaryPreference: new FormControl('', Validators.required),
     goals: new FormControl('', Validators.required),
     reasonSeekProfessional: new FormControl('', Validators.required),
     currExerciseRoutine: new FormControl(''),
     medicalInfo: new FormControl(''),
-    password: new FormControl(null, [Validators.required]),
-    confirmPassword: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, Validators.required),
+    confirmPassword: new FormControl(null, Validators.required),
   },
   {
     validators: [
-      this.formValidator.emailValidator, 
+      this.formValidator.emailValidator,
       this.formValidator.passwordMatchValidator,
     ]
   });
@@ -104,7 +108,8 @@ export class SignUpPage implements OnInit {
       } else if (errors?.['invalidemailerror']) {
         this.errorToastText = "Invalid email format.";
         this.showErrorToast = true;
-      } 
+      }
+      console.log(errors);
       // else if (errors?.['passwordstrengtherror']) {
       //   this.passwordToastText = "Your password requires a minimum length of 8 characters and needs an uppercase and lowercase character.";
       //   this.showPasswordToast = true;
@@ -114,6 +119,7 @@ export class SignUpPage implements OnInit {
         'user': {
           'firstName': this.signupForm.value.firstName,
           'lastName': this.signupForm.value.lastName,
+          'password': this.signupForm.value.password,
           'phones': [
             {
               'prefix': "+61",
@@ -130,9 +136,9 @@ export class SignUpPage implements OnInit {
             'country': this.signupForm.value.addressCountry,
           },
         },
-        'height': this.signupForm.value.height + "m",
-        'weight': this.signupForm.value.weight + "kg",
-        'goalWeight': this.signupForm.value.goalWeight + "kg",
+        'height': this.signupForm.value.height + " m",
+        'weight': this.signupForm.value.weight + " kg",
+        'goalWeight': this.signupForm.value.goalWeight + " kg",
         'dob': this.dob,
         'occupation': this.signupForm.value.occupation,
         'dietaryPreference': this.signupForm.value.dietaryPreference,
@@ -141,11 +147,13 @@ export class SignUpPage implements OnInit {
         'currExerciseRoutine': this.signupForm.value.currExerciseRoutine,
         'medicalInfo': this.signupForm.value.medicalInfo
       }
-      
+
       console.log(payload);
       this.httpService.post("/api/customers", payload).subscribe(
         (response) => {
           console.log(response);
+          // Redirect user to registration complete page
+          this.router.navigate(['/registration-complete']);
         },
         (error) => {
           // Handle authentication error

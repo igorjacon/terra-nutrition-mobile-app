@@ -45,208 +45,253 @@
 
   
   <form [formGroup]="signupForm" (ngSubmit)="signUp($event)" novalidate>
-    <ion-input
-      formControlName="firstName"
-      id="firstName"
-      mode="md"
-      label="First Name"
-      label-placement="floating"
-      name="firstName"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="lastName"
-      id="lastName"
-      mode="md"
-      name="lastName"
-      label="Last Name"
-      label-placement="floating"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="phoneNumber"
-      id="phoneNumber"
-      mode="md"
-      name="phoneNumber"
-      label="Phone Number"
-      label-placement="floating"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="email"
-      id="email"
-      mode="md"
-      name="email"
-      label="Email"
-      label-placement="floating"
-      fill="outline"
-      placeholder="Email address"
-      type="email"
-    ></ion-input>
-    <ion-input
-      formControlName="addressLineOne"
-      id="addressLineOne"
-      mode="md"
-      label="Address Line One"
-      label-placement="floating"
-      name="addressLineOne"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="addressLineTwo"
-      id="addressLineTwo"
-      mode="md"
-      label="Address Line Two"
-      label-placement="floating"
-      name="addressLineTwo"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="addressCity"
-      id="addressCity"
-      mode="md"
-      label="City"
-      label-placement="floating"
-      name="addressCity"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="addressZipCode"
-      id="addressZipCode"
-      mode="md"
-      label="Zip Code"
-      label-placement="floating"
-      name="addressZipCode"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="addressState"
-      id="addressState"
-      mode="md"
-      label="State"
-      label-placement="floating"
-      name="addressState"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="addressCountry"
-      id="addressCountry"
-      mode="md"
-      label="Country"
-      label-placement="floating"
-      name="addressCountry"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-input
-      formControlName="height"
-      id="height"
-      mode="md"
-      label="Height"
-      name="height"
-      fill="outline"
-      type="text"
-      placeholder="1,75"
-    >
-      <ion-label slot="end">m</ion-label>
-    </ion-input>
-    <ion-input
-      formControlName="weight"
-      id="weight"
-      mode="md"
-      label="Weight"
-      name="weight"
-      fill="outline"
-      type="text"
-      placeholder="66,5"
-    >
-      <ion-label slot="end">kg</ion-label>
-    </ion-input>
-    <ion-input
-      formControlName="goalWeight"
-      id="goalWeight"
-      mode="md"
-      label="Goal Weight"
-      name="goalWeight"
-      fill="outline"
-      type="text"
-      placeholder="64"
-    >
-      <ion-label slot="end">kg</ion-label>
-    </ion-input>
-    <ion-input
-      formControlName="occupation"
-      id="occupation"
-      mode="md"
-      label="Occupation"
-      label-placement="floating"
-      name="occupation"
-      fill="outline"
-      type="text"
-    ></ion-input>
-    <ion-item lines="none">
-      <ion-label>Date of Birth</ion-label>
-      <ion-datetime-button datetime="dob"></ion-datetime-button>
-      <ion-modal [keepContentsMounted]="true">
-        <ng-template>
-          <ion-datetime
-          id="dob"
-          presentation="date"
-          (ionChange)="onDateChange($event)"></ion-datetime>
-        </ng-template>
-      </ion-modal>
-    </ion-item>
-    <br>
-    <ion-textarea
-      formControlName="dietaryPreference"
-      id="dietaryPreference"
-      mode="md"
-      name="dietaryPreference"
-      label="What's your dietary preference?"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
-      formControlName="goals"
-      id="goals"
-      mode="md"
-      name="goals"
-      label="Goals"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
+
+    <div class="personal-details form-section">
+      <h1>Personal Details</h1>
+      <ion-input
+        formControlName="firstName"
+        id="firstName"
+        mode="md"
+        label="First Name"
+        label-placement="floating"
+        name="firstName"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="lastName"
+        id="lastName"
+        mode="md"
+        name="lastName"
+        label="Last Name"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-item class="dob" lines="none">
+        <ion-label>Date of Birth</ion-label>
+        <ion-datetime-button datetime="dob"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+            id="dob"
+            presentation="date"
+            (ionChange)="onDateChange($event)"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+      <ion-input
+        formControlName="phoneNumber"
+        id="phoneNumber"
+        mode="md"
+        name="phoneNumber"
+        label="Phone Number"
+        label-placement="floating"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="email"
+        id="email"
+        mode="md"
+        name="email"
+        label="Email"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Email address"
+        type="email"
+      ></ion-input>
+      <ion-input
+        formControlName="occupation"
+        id="occupation"
+        mode="md"
+        label="Occupation"
+        label-placement="floating"
+        name="occupation"
+        fill="outline"
+        type="text"
+      ></ion-input>
+    </div>
+
+    <div class="address form-section">
+      <h1>Address</h1>
+      <ion-input
+        formControlName="addressLineOne"
+        id="addressLineOne"
+        mode="md"
+        label="Address Line One"
+        label-placement="floating"
+        name="addressLineOne"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="addressLineTwo"
+        id="addressLineTwo"
+        mode="md"
+        label="Address Line Two"
+        label-placement="floating"
+        name="addressLineTwo"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="addressCity"
+        id="addressCity"
+        mode="md"
+        label="City"
+        label-placement="floating"
+        name="addressCity"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="addressZipCode"
+        id="addressZipCode"
+        mode="md"
+        label="Zip Code"
+        label-placement="floating"
+        name="addressZipCode"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="addressState"
+        id="addressState"
+        mode="md"
+        label="State"
+        label-placement="floating"
+        name="addressState"
+        fill="outline"
+        type="text"
+      ></ion-input>
+      <ion-input
+        formControlName="addressCountry"
+        id="addressCountry"
+        mode="md"
+        label="Country"
+        label-placement="floating"
+        name="addressCountry"
+        fill="outline"
+        type="text"
+      ></ion-input>
+    </div>
+
+    <div class="weight-and-height form-section">
+      <h1>Weight and Height</h1>
+      <ion-input
+        formControlName="height"
+        label-placement="floating"
+        id="height"
+        mode="md"
+        label="Height"
+        name="height"
+        fill="outline"
+      >
+        <ion-label slot="end">cm</ion-label>
+      </ion-input>
+      <ion-input
+        formControlName="weight"
+        label-placement="floating"
+        id="weight"
+        mode="md"
+        label="Weight"
+        name="weight"
+        fill="outline"
+        type="text"
+      >
+        <ion-label slot="end">kg</ion-label>
+      </ion-input>
+      <ion-input
+        formControlName="goalWeight"
+        label-placement="floating"
+        id="goalWeight"
+        mode="md"
+        label="Goal Weight"
+        name="goalWeight"
+        fill="outline"
+        type="text"
+      >
+        <ion-label slot="end">kg</ion-label>
+      </ion-input>
+    </div>
+    <div class="goals-and-preferences form-section">
+      <h1>Goals and Preferences</h1>
+      <ion-list class="diet">
+        <ion-item lines="none" class="diet-item">
+          <ion-select label="Dietary Preference" class="diet-select" aria-label="diet" placeholder="Preference">
+            <ion-select-option value="omnivore">Omnivore</ion-select-option>
+            <ion-select-option value="pescatarian">Pescatarian</ion-select-option>
+            <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+            <ion-select-option value="vegan">Vegan</ion-select-option>
+            <ion-select-option value="other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      <ion-list class="goals">
+        <ion-item lines="none" class="goals-item">
+          <ion-select label="Dietary Goals" aria-label="goals" placeholder="Goals">
+            <ion-select-option value="lose-weight">Lose weight</ion-select-option>
+            <ion-select-option value="gain-weight">Gain weight</ion-select-option>
+            <ion-select-option value="energy-and-vitality">Energy and vitality</ion-select-option>
+            <ion-select-option value="eat-healthier">Eat healthier</ion-select-option>
+            <ion-select-option value="pregnancy">Pregnancy</ion-select-option>
+            <ion-select-option value="other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="additionl-information form-section">
+      <h1>Additional information</h1>
+      <ion-textarea
+      class="reason-for-seeking-professional"
       formControlName="reasonSeekProfessional"
       id="reasonSeekProfessional"
       mode="md"
       name="reasonSeekProfessional"
-      label="What is your reason for seeking a professional?"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
+      label="Reason for seeking a professional" 
+      labelPlacement="floating" 
+      fill="outline">
+    </ion-textarea>
+      <!-- <ion-textarea
+        formControlName="currExerciseRoutine"
+        id="currExerciseRoutine"
+        mode="md"
+        name="currExerciseRoutine"
+        label="What is your current exercise routine?"
+        label-placement="floating"
+      ></ion-textarea> -->
+      <ion-textarea
       formControlName="currExerciseRoutine"
       id="currExerciseRoutine"
       mode="md"
-      name="currExerciseRoutine"
-      label="What is your current exercise routine?"
-      label-placement="floating"
-    ></ion-textarea>
-    <ion-textarea
+      name="currExerciseRoutine"    
+      label="What is your current exercise routine?" 
+      labelPlacement="floating" 
+      fill="outline">
+      </ion-textarea>
+      <!-- <ion-textarea
+        formControlName="medicalInfo"
+        id="medicalInfo"
+        mode="md"
+        name="medicalInfo"
+        label="Medical Info"
+        label-placement="floating"
+      ></ion-textarea> -->
+      <ion-textarea
       formControlName="medicalInfo"
       id="medicalInfo"
       mode="md"
       name="medicalInfo"
       label="Medical Info"
       label-placement="floating"
-    ></ion-textarea>
-  
+      fill="outline">
+      </ion-textarea>
+    </div>
+
     <!-- PASSWORD -->
+    <h1>Create password</h1>
     <ion-input
       formControlName="password"
       id="password"
