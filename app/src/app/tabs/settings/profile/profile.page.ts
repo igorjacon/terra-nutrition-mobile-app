@@ -12,6 +12,7 @@ import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera
 import { HttpService } from 'src/app/services/http.service';
 import { Directory, Filesystem } from '@capacitor/filesystem';
 import { Platform } from '@ionic/angular'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,8 @@ import { Platform } from '@ionic/angular'
 export class ProfilePage implements OnInit {
   customer: any = {};
   formattedPhoneNumber: string = '';
+  userImgDir = environment.api_base_url + "/uploads/user/";
+  profileImgPath: string = "";
 
   constructor(
     private authService: AuthService, 
@@ -38,13 +41,13 @@ export class ProfilePage implements OnInit {
   }
 
   goToDashboard() {
-    console.log('test logo click')
     this.router.navigateByUrl('customer/dashboard')
   }
 
   ngOnInit() {
     this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
+      this.profileImgPath = res.user?.profileImg ?? 'assets/imgs/default-profile.png';
       
       if (this.customer.user && this.customer.user.phones) {
         this.formattedPhoneNumber = this.getFormattedPhone(this.customer.user.phones);
@@ -70,6 +73,7 @@ export class ProfilePage implements OnInit {
   
     if (image) {
       this.uploadImage(image.base64String)
+      this.profileImgPath = image.webPath ?? this.profileImgPath;
     }
   };
 
@@ -98,8 +102,9 @@ export class ProfilePage implements OnInit {
     formData.append('profileFile', blob, fileName);
 
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-      this.httpService.post('/api/users/profile-image/'+this.customer.user.id, formData, token).subscribe(response => {
-        console.log(response);
+      this.httpService.post('/api/users/profile-image/'+this.customer.user.id, formData, token).subscribe((response:any) => {
+        console.log(response.profileImg);
+        this.profileImgPath = response.profileImg;
       }, error => {
         console.error(error);
       });
