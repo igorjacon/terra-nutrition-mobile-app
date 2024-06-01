@@ -60,6 +60,10 @@ h1 {
     margin-bottom: 2rem;
 }
 
+ion-select::part(placeholder), ion-select::part(text) {
+    font-size: 1.3rem;
+}
+
 .form-section {
     margin-bottom: 4rem;
 }
@@ -71,6 +75,8 @@ ion-input {
 
 ion-textarea {
     font-size: 1.3rem;
+    // border-radius: 80px;
+    // --border-top-left-radius: 40px;
 
 }
 
