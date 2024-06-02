@@ -52,7 +52,7 @@ ion-content {
               display: flex;
               justify-content: space-between;
               align-items: center;
-              padding-right: 10px; // Add some padding to the right for spacing
+              padding-right: 0 10px 0 0; // Add some padding to the right for spacing
           
               .settings-icon {
                 pointer-events: auto; // Ensure the settings icon is clickable
@@ -60,24 +60,33 @@ ion-content {
                 cursor: pointer; // Change cursor to pointer on hover
               }
             }
+        
+            .water-consumed {
+            
+              
+                font-size: 1.1em;
+                color: #333;
+                margin: 0;
+                margin-bottom: 1rem;
+                margin-left: 0.5rem;
+                font-weight: 700;
+                // display: flex;
+                // justify-content: space-between;
+                // align-items: center;
+            
           
+            }
+
             .water-tracker {
               pointer-events: auto;
               margin-top: 5px;
-          
-              p {
-                font-size: 15px;
-                color: #333;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
           
                 ion-input {
                   width: 50%;
                   margin: 5px 0;
                   --padding-end: 10px;
                 }
-              }
+              
             }
           }
           

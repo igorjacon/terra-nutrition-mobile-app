@@ -13,12 +13,30 @@ ion-content {
 
 ion-select {
   font-size: 1.5rem;
-  margin-bottom: 0.8rem;
+  // margin-bottom: 0.8rem;
 }
-ion-select-option {
-  font-size: 1.5rem;
 
-}
+// ion-select-option::part(text) {
+//   font-size: 16px; /* Set your desired font size */
+//   color: blue; /* Change the text color */
+// }
+
+// ion-select::part(text) {
+//   font-size: 16px; /* Set your desired font size */
+//   color: blue; /* Change the text color */
+// }
+
+// ion-alert.select-alert {
+//   --width: auto; /* Adjust width as needed */
+//   --max-width: 100%; /* Set maximum width */
+// }
+
+// ion-alert.select-alert .alert-radio-label, 
+// ion-alert.select-alert .alert-tappable {
+//   font-size: 16px; /* Adjust font size */
+//   color: blue; /* Adjust text color */
+// }
+
 
 ion-refresher {
   ion-refresher-content {
@@ -54,6 +72,7 @@ ion-item:part(month-year-button) {
     color: rgb(0, 0, 0);
     font-size: 1.4rem;
   }
+
 
 
 
@@ -98,7 +117,7 @@ swiper-container {
   }
 
   swiper-slide.active {
-    color: red;
+    color: green;
     border: 1px solid green;
   }
 }
