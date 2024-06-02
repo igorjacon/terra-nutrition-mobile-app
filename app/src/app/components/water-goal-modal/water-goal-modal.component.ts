@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IonicModule, ModalController, AlertController, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ import { LocalNotifications, PermissionStatus } from '@capacitor/local-notificat
 })
 export class WaterGoalModalComponent {
   @Input() currentGoal!: number;
+  @Output() settingsChanged = new EventEmitter<any>();
   goal: number = 0; // Initialized with a default value
 
   reminders = {
@@ -102,6 +103,7 @@ export class WaterGoalModalComponent {
     this.storageService.set('unitPreference', this.unitPreference);
     this.storageService.set('hydrationTips', this.hydrationTips);
     this.storageService.set('weeklyReport', this.weeklyReport).then(() => {
+      this.settingsChanged.emit();
       this.modalController.dismiss(this.goal);
     });
   }

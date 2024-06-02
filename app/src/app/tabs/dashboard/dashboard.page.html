@@ -8,7 +8,7 @@
 
 <ion-content>
   <div class="welcome-customer-div">
-    <h1>Hey, {{ customer.user.firstName}}!</h1>
+    <h1>Hey, {{ customer?.user?.firstName }}!</h1>
     <p>Welcome back to your personalised meal plan app!</p>
   </div>
 
@@ -28,32 +28,31 @@
         </div>
         <div class="icon-buttons">
           <ion-icon name="add-circle-outline" (click)="incrementWaterIntake()"></ion-icon>
-          <ion-icon name="remove-circle-outline" (click)="minusWaterIntake()"></ion-icon>
+          <ion-icon name="remove-circle-outline" (click)="decrementWaterIntake()"></ion-icon>
           <ion-icon name="refresh-circle-outline" color="danger" (click)="resetWaterIntake()"></ion-icon>
         </div>
       </div>
     </div>    
 
     <div class="card meal-plan-card" (click)="navigateToMealsPage()">
-        <h3 class="card-title">Meal Plans</h3>
+      <h3 class="card-title">Meal Plans</h3>
       <p class="card-description">Select and save the meals you eat while following your meal plan</p>
     </div>
 
     <div class="card recipes-card" (click)="navigateToRecipesPage()">
-        <h3 class="card-title">Recipes</h3>
+      <h3 class="card-title">Recipes</h3>
       <p class="card-description">Browse recipes for the meals in your meal plan</p>
     </div>
 
     <div class="card account-details-card" (click)="navigateToProfilePage()">
-        <ion-icon class="card-ion" name="person-circle-outline">></ion-icon>
-        <p class="card-description">Account</p>
+      <ion-icon class="card-ion" name="person-circle-outline"></ion-icon>
+      <p class="card-description">Account</p>
     </div>
 
     <div class="card nutritionist-details-card" (click)="navigateToProfessionalPage()">
-        <ion-icon class="card-ion" name="happy-outline"></ion-icon>
-       <p class="card-description">Nutritionist</p> 
+      <ion-icon class="card-ion" name="happy-outline"></ion-icon>
+      <p class="card-description">Nutritionist</p> 
     </div>
-    
   </div>
 
   <!-- <div class="swiper-div">

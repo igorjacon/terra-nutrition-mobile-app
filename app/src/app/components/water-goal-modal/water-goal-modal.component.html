@@ -16,14 +16,13 @@
   <ion-list class="water-settings-list">
     <ion-item class="list-header">Water Intake Goal</ion-item>
     <ion-item lines="none">
-      <ion-label position="stacked">Set Daily Water Goal ({{ unitLabel }})</ion-label>
-      <ion-input [(ngModel)]="goal" type="number"></ion-input>
+      <ion-input [(ngModel)]="goal" type="number" label="{{ unitLabel }}"></ion-input>
     </ion-item>
 
     <ion-item class="list-header">Reminders</ion-item>
     <ion-item lines="none">
+      <ion-toggle [(ngModel)]="reminders.enabled" aria-label="Enable Reminders"></ion-toggle>
       <ion-label>Enable Reminders</ion-label>
-      <ion-toggle [(ngModel)]="reminders.enabled"></ion-toggle>
     </ion-item>
     <ion-item lines="none" *ngIf="reminders.enabled">
       <ion-label>
@@ -38,8 +37,7 @@
 
     <ion-item class="list-header">Units</ion-item>
     <ion-item lines="none">
-      <ion-label position="stacked">Preferred Unit</ion-label>
-      <ion-select [(ngModel)]="unitPreference" (ionChange)="updateUnitLabel()">
+      <ion-select [(ngModel)]="unitPreference" (ionChange)="updateUnitLabel()" aria-label="Preferred Unit">
         <ion-select-option value="ml">Milliliters (ml)</ion-select-option>
         <ion-select-option value="L">Liters (L)</ion-select-option>
         <ion-select-option value="glasses">Glasses</ion-select-option>
@@ -48,12 +46,11 @@
 
     <ion-item class="list-header">Hydration Tips</ion-item>
     <ion-item lines="none">
-      <ion-label>Enable Hydration Tips</ion-label>
-      <ion-toggle [(ngModel)]="hydrationTips.enabled"></ion-toggle>
+      <ion-toggle [(ngModel)]="hydrationTips.enabled" aria-label="Enable Hydration Tips"></ion-toggle>
+      <ion-label>Enable Tips</ion-label>
     </ion-item>
     <ion-item lines="none" *ngIf="hydrationTips.enabled">
-      <ion-label position="stacked">Tips Frequency (times/day)</ion-label>
-      <ion-input [(ngModel)]="hydrationTips.frequency" type="number"></ion-input>
+      <ion-input [(ngModel)]="hydrationTips.frequency" type="number" label="Tips Frequency (times/day)"></ion-input>
     </ion-item>
 
     <!-- <ion-item class="list-header">Weekly Report</ion-item>
