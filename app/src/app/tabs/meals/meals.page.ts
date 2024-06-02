@@ -82,6 +82,11 @@ export class MealsPage implements OnInit, OnDestroy {
   mealHistory: any[] = [];
   lockOptions: boolean = false;
 
+  customSelectOptions: any = {
+    cssClass: 'custom-select-options' // This should match the CSS class in your global styles
+  };
+
+
 
   //initialise some icons used in app, and inject services that are being used/will be used
   constructor(
@@ -208,10 +213,10 @@ export class MealsPage implements OnInit, OnDestroy {
     }
     // Get meal plans for the selected date
     this.loadData();
-    const modal = document.querySelector('ion-modal');
-    if (modal) {
-      modal.dismiss();
-    }
+    // const modal = document.querySelector('ion-modal');
+    // if (modal) {
+    //   modal.dismiss();
+    // }
   }
 
   checkIfOptionSelected(option: any, mealId: any, mealPlanId: any) {

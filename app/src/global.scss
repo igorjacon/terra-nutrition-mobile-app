@@ -85,16 +85,33 @@ html {
     }
   }
 ion-content {
-    color: var(--ion-text-color); // Text color will change based on mode
-    background-color: var(--ion-background-color); // Background color will change based on mode
+    // color: var(--ion-text-color); // Text color will change based on mode
+    // background-color: var(--ion-background-color); // Background color will change based on mode
     --padding-top: 3rem;
     --padding-bottom: 1rem;
     --padding-start: 3rem;
     --padding-end: 3rem;
 }
-p, ion-text, h1, h2, h3, h4, h5, h6 {
-    color: var(--ion-text-color);
-  }
+// p, ion-text, h1, h2, h3, h4, h5, h6 {
+//     // color: var(--ion-text-color);
+//   }
+
+.custom-select-options .select-interface-option .alert-radio-label {
+    // color: red; // Example: changing the text color to red
+    font-size: 16px; // Example: setting font size
+}
+
+/* Customizing Alert buttons and title */
+.custom-select-options .alert-button {
+    font-size: 16px; /* Change the font size of the buttons */
+    height: 45px; /* Change the height of the buttons */
+}
+.custom-select-options .alert-title {
+    font-size: 16px; /* Change the font size of the title */
+    font-weight: 600;
+}
+
+
 
   
   

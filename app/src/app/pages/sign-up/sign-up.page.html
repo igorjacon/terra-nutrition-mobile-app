@@ -1,5 +1,15 @@
 <ion-content>
-
+  <img class="graphic" src="/assets/imgs/page-graphic.png"/>
+  <ion-row class="login-title">
+    <ion-col>
+      <ion-label>
+        Sign Up
+      </ion-label>
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+  
+<div class="page-content">
   <ion-toast
   class="error-toast"
   isOpen="{{showErrorToast}}"
@@ -27,19 +37,10 @@
   (ionToastDidDismiss)="showPasswordToast = false">
   </ion-toast>
   
-  <img class="graphic" src="/assets/imgs/page-graphic.png"/>
-  <ion-row class="login-title">
-    <ion-col>
-      <ion-label>
-        Sign Up
-      </ion-label>
-      <ion-icon name="person-add-outline"></ion-icon>
-    </ion-col>
-  </ion-row>
-  
+
   <ion-row class="logo">
     <ion-col>
-      <img src="assets/imgs/logo.png">
+      <img src="assets/imgs/logo.png" (click)="navigateToLoginPage()">
     </ion-col>
   </ion-row>
 
@@ -68,18 +69,27 @@
         fill="outline"
         type="text"
       ></ion-input>
+
+      <!-- Date  -->
       <ion-item class="dob" lines="none">
         <ion-label>Date of Birth</ion-label>
         <ion-datetime-button datetime="dob"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
+        <ion-modal
+        style="--background: transparent;"
+        [keepContentsMounted]="true">
           <ng-template>
             <ion-datetime
+            style=" --background: #e1f9e1;
+            --background-rgb: 255, 241, 242;
+            border-radius: 16px;"
             id="dob"
+            color="success"
             presentation="date"
             (ionChange)="onDateChange($event)"></ion-datetime>
           </ng-template>
         </ion-modal>
       </ion-item>
+
       <ion-input
         formControlName="phoneNumber"
         id="phoneNumber"
@@ -89,17 +99,6 @@
         label-placement="floating"
         fill="outline"
         type="text"
-      ></ion-input>
-      <ion-input
-        formControlName="email"
-        id="email"
-        mode="md"
-        name="email"
-        label="Email"
-        label-placement="floating"
-        fill="outline"
-        placeholder="Email address"
-        type="email"
       ></ion-input>
       <ion-input
         formControlName="occupation"
@@ -215,6 +214,7 @@
         <ion-label slot="end">kg</ion-label>
       </ion-input>
     </div>
+
     <div class="goals-and-preferences form-section">
       <h1>Goals and Preferences</h1>
       <ion-list class="diet">
@@ -228,6 +228,7 @@
           </ion-select>
         </ion-item>
       </ion-list>
+
       <ion-list class="goals">
         <ion-item lines="none" class="goals-item">
           <ion-select label="Dietary Goals" aria-label="goals" placeholder="Goals">
@@ -291,7 +292,18 @@
     </div>
 
     <!-- PASSWORD -->
-    <h1>Create password</h1>
+    <h1>Create Account</h1>
+    <ion-input
+    formControlName="email"
+    id="email"
+    mode="md"
+    name="email"
+
+
+    fill="outline"
+    placeholder="Email"
+    type="email"
+  ></ion-input>
     <ion-input
       formControlName="password"
       id="password"
@@ -323,5 +335,7 @@
       <ion-text>Already have an account? <span [routerLink]="['/login']">Log in</span></ion-text>
     </ion-col>
   </ion-row>
+</div>
+ 
 
 </ion-content>

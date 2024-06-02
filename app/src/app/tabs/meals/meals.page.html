@@ -67,9 +67,10 @@
     </div>
 
     <div *ngIf="selectedMealPlan">
-      <ion-select (ionChange)="handleSelectChange($event)" label-placement="floating" fill="outline" mode="md" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" label="Meal plan options">
+      <ion-select [interfaceOptions]="customSelectOptions" (ionChange)="handleSelectChange($event)" label-placement="floating" fill="outline" mode="md" value="{{ selectedMealPlan.id }}" aria-label="Meal Plan Options" label="Meal plan options">
         <ion-select-option *ngFor="let mealPlan of mealPlans" value="{{ mealPlan.id }}">{{mealPlan.title}}</ion-select-option>
       </ion-select>
+      
       <br>
 
       <swiper-container *ngIf="selectedMealPlan" #swiper (click)="slideClick($event)" [modules]="swiperModule" [spaceBetween]="10" [slidesPerView]="slidesPerView" [observer]="true" [observeParents]="true">
@@ -88,6 +89,7 @@
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
             <ion-checkbox (ionChange)="onCheckboxChange($event, option, selectedMealPlan.meals[currentSlideIndex])"
+                          [disabled]="lockOptions"
                           [(ngModel)]="option.isChecked"
                           multiple="false"
                           aria-label="Label" slot="end">

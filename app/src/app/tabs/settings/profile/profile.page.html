@@ -12,10 +12,8 @@
 
 <ion-content>
   <div class="profile-card">
-    <img *ngIf="customer.user?.profileImg; else defaultImage" [src]="'https://app.terranutri.net/uploads/user/' + customer.user?.profileImg" class="profile-image" alt="Profile Picture">
-    <ng-template #defaultImage>
-      <img src="assets/imgs/default-profile.png" class="profile-image" alt="Default Profile Picture">
-    </ng-template>
+    <img [src]="userImgDir + profileImgPath" class="profile-image" alt="Profile Picture">
+    <ion-button color="success" (click)="getPicture()">Change Photo</ion-button>
     <div class="profile-details">
       <h2 class="customer-name">{{ customer.user?.firstName }} {{ customer.user?.lastName }}</h2>
       <p class="customer-email" style="color: #006400;">{{ customer.user?.email }}</p>

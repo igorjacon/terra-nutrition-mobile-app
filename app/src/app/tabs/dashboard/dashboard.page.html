@@ -18,8 +18,8 @@
         Water Intake
         <ion-icon name="settings-outline" class="settings-icon" (click)="openWaterGoalModal()"></ion-icon>
       </h3>
+      <p class="water-consumed">You've had {{ waterIntake }} {{unitLabel }} today</p>
       <div class="water-tracker">
-        <p>Drank: {{ waterIntake }} {{ unitLabel }}</p>
         <div class="progress-bar">
           <div class="progress" [style.width.%]="(waterIntake / waterGoal) * 100"></div>
         </div>
@@ -30,6 +30,7 @@
           <ion-icon name="add-circle-outline" (click)="incrementWaterIntake()"></ion-icon>
           <ion-icon name="remove-circle-outline" (click)="decrementWaterIntake()"></ion-icon>
           <ion-icon name="refresh-circle-outline" color="danger" (click)="resetWaterIntake()"></ion-icon>
+          <ion-icon name="add-circle-outline" (click)="incrementWaterIntake()"></ion-icon>
         </div>
       </div>
     </div>    
