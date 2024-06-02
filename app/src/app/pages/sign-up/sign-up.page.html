@@ -1,5 +1,15 @@
 <ion-content>
-
+  <img class="graphic" src="/assets/imgs/page-graphic.png"/>
+  <ion-row class="login-title">
+    <ion-col>
+      <ion-label>
+        Sign Up
+      </ion-label>
+      <ion-icon name="person-add-outline"></ion-icon>
+    </ion-col>
+  </ion-row>
+  
+<div class="page-content">
   <ion-toast
   class="error-toast"
   isOpen="{{showErrorToast}}"
@@ -27,16 +37,7 @@
   (ionToastDidDismiss)="showPasswordToast = false">
   </ion-toast>
   
-  <img class="graphic" src="/assets/imgs/page-graphic.png"/>
-  <ion-row class="login-title">
-    <ion-col>
-      <ion-label>
-        Sign Up
-      </ion-label>
-      <ion-icon name="person-add-outline"></ion-icon>
-    </ion-col>
-  </ion-row>
-  
+
   <ion-row class="logo">
     <ion-col>
       <img src="assets/imgs/logo.png" (click)="navigateToLoginPage()">
@@ -329,5 +330,7 @@
       <ion-text>Already have an account? <span [routerLink]="['/login']">Log in</span></ion-text>
     </ion-col>
   </ion-row>
+</div>
+ 
 
 </ion-content>

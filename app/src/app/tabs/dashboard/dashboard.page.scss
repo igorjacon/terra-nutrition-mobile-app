@@ -30,11 +30,11 @@ ion-content {
         }
         .card:active {
             //Green border click
-            color: green;
-            border: 1px solid green;
+            // color: green;
+            // border: 1px solid green;
 
             //Grey border click**
-            color: rgba(125, 125, 125, 0.445);
+            // color: rgba(125, 125, 125, 0.445);
             // border: 1px solid var(--ion-text-color);
         }
         .meal-plan-card {
@@ -64,7 +64,7 @@ ion-content {
             .water-consumed {
             
               
-                font-size: 1.1em;
+                font-size: 1.4em;
                 color: #333;
                 margin: 0;
                 margin-bottom: 1rem;

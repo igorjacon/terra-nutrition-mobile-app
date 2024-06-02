@@ -18,7 +18,7 @@
         Water Intake
         <ion-icon name="settings-outline" class="settings-icon" (click)="openWaterGoalModal()"></ion-icon>
       </h3>
-      <p class="water-consumed">Drank: {{ waterIntake }} {{ unitLabel }}</p>
+      <p class="water-consumed">You've had {{ waterIntake }} {{unitLabel }} today</p>
       <div class="water-tracker">
         <div class="progress-bar">
           <div class="progress" [style.width.%]="(waterIntake / waterGoal) * 100"></div>
