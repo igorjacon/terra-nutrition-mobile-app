@@ -55,6 +55,10 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
+  navigateToLoginPage() {
+    this.router.navigateByUrl('/login')
+  }
+
   onDateChange(event: any) {
     this.dob = event.detail.value;
   }

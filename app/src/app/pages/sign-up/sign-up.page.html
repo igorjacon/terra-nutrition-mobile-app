@@ -39,7 +39,7 @@
   
   <ion-row class="logo">
     <ion-col>
-      <img src="assets/imgs/logo.png">
+      <img src="assets/imgs/logo.png" (click)="navigateToLoginPage()">
     </ion-col>
   </ion-row>
 
@@ -68,10 +68,13 @@
         fill="outline"
         type="text"
       ></ion-input>
+
+      <!-- Date  -->
       <ion-item class="dob" lines="none">
         <ion-label>Date of Birth</ion-label>
         <ion-datetime-button datetime="dob"></ion-datetime-button>
-        <ion-modal [keepContentsMounted]="true">
+        <ion-modal
+        [keepContentsMounted]="true">
           <ng-template>
             <ion-datetime
             id="dob"
@@ -80,6 +83,7 @@
           </ng-template>
         </ion-modal>
       </ion-item>
+
       <ion-input
         formControlName="phoneNumber"
         id="phoneNumber"
@@ -89,17 +93,6 @@
         label-placement="floating"
         fill="outline"
         type="text"
-      ></ion-input>
-      <ion-input
-        formControlName="email"
-        id="email"
-        mode="md"
-        name="email"
-        label="Email"
-        label-placement="floating"
-        fill="outline"
-        placeholder="Email address"
-        type="email"
       ></ion-input>
       <ion-input
         formControlName="occupation"
@@ -291,7 +284,18 @@
     </div>
 
     <!-- PASSWORD -->
-    <h1>Create password</h1>
+    <h1>Create Account</h1>
+    <ion-input
+    formControlName="email"
+    id="email"
+    mode="md"
+    name="email"
+
+
+    fill="outline"
+    placeholder="Email"
+    type="email"
+  ></ion-input>
     <ion-input
       formControlName="password"
       id="password"
