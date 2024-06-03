@@ -290,8 +290,8 @@ ion-content {
     .profile-image {
       padding: 0;
       margin: 0;
+      height: 100px;
        width: 100px;
-       height: 100px;
        border-radius: 100px;
      }
  
@@ -334,12 +334,12 @@ ion-content {
        // border: 1px solid var(--ion-text-color);
      }
  
-    .meal-plan-card,.water-intake-card,.recipes-card,.nutritionist-details-card,.account-details-card {
+    .meal-plan-card,.recipes-card,.nutritionist-details-card,.account-details-card {
        background: linear-gradient(135deg, #D8EAAB, #95D387);
        display: flex;
        flex-direction: column;
        gap: 10px;
-       text-align: center;
+      //  text-align: center;
        font-size: 1.7rem;
  
        p {
@@ -353,6 +353,10 @@ ion-content {
      }
  
     .water-intake-card {
+      padding: 2rem 2rem 1rem 2rem;     
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
        margin: 2rem 0;
        background: linear-gradient(135deg, #AECBEB, #83B0E1);
        grid-column: 1/3;
@@ -362,23 +366,32 @@ ion-content {
          display: flex;
          justify-content: space-between;
          align-items: center;
-         padding-right: 0 10px 0 0;
+        //  padding-right: 0 10px 0 0;
+        font-weight: 600;
  
         .settings-icon {
+          padding: 0;
+          margin: 0;
            pointer-events: auto;
-           font-size: 24px;
+           font-size: 2.6rem;
            cursor: pointer;
          }
-       }
- 
-      .water-consumed {
-         font-size: 1.4em;
+        }
+        .water-consumed {
+          margin: 0;
+          margin-bottom: 2rem;
+          margin-left: 1rem;
+         font-size: 1.2rem;
          color: #333;
-         margin: 0;
-         margin-bottom: 1rem;
-         margin-left: 0.5rem;
+        //  margin-left: 3rem;
+         padding: 0;
+        //  margin: 0;
+        //  margin-bottom: 0rem 0 5rem 0;
+        //  margin-left: 0.5rem;
          font-weight: 700;
        }
+ 
+  
  
       .water-tracker {
          pointer-events: auto;
@@ -395,7 +408,7 @@ ion-content {
          background: #e0e0e0;
          border-radius: 5px;
          overflow: hidden;
-         height: 15px;
+         height: 2rem;
          margin-top: 5px;
  
         .progress {
@@ -404,18 +417,20 @@ ion-content {
            width: 0;
            transition: width 0.3s;
          }
- 
-        .icon-buttons {
-           display: flex;
-           justify-content: space-around;
-           margin-top: 10px;
- 
-           ion-icon {
-             font-size: 40px;
- 
-             &[color="danger"] {
-               color: #e74d3c69;
-             }
+         margin-bottom: 2rem;
+       }
+
+
+       .icon-buttons {
+         display: flex;
+         justify-content: space-between;
+         margin-top: 10px;
+
+         ion-icon {
+           font-size: 3.5rem;
+
+           &[color="danger"] {
+             color: #e74d3c69;
            }
          }
        }
