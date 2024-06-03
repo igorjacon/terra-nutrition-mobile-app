@@ -17,7 +17,7 @@
 
 
   <h1 class="page-title">Recipes</h1>
-  <p class="page-description">Browse a collection of recipes for your meal plan.</p>
+  <p class="page-description">Browse a collection of recipes that your nutritionist has shared with you.</p>
     <ion-grid *ngIf="loaded" class="recipes-grid">
       <ion-row>
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let recipe of recipes; let i = index; trackBy:trackItems">
@@ -56,7 +56,7 @@
           <h2>You do not have any recipes assigned to your account!</h2>
           <div>
             <p>When your nutritionist creates recipes for you, they will appear here.</p>
-            <p>If you have any issues, contact your nutritionist. </p>
+            <p>If you have any issues, contact your <a class="navigate-to-professional" (click)="navigateToProfessionalPage()">nutritionist.</a> </p>
           </div>
         </div>
       </div>
