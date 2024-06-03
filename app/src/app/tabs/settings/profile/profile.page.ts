@@ -47,7 +47,11 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
-      this.profileImgPath = res.user?.profileImg ?? 'assets/imgs/default-profile.png';
+      if (res.user?.profileImg) {
+        this.profileImgPath = res.user.profileImg;
+      } else {
+        this.userImgDir = 'assets/imgs/default-profile.png';
+      }
       
       if (this.customer.user && this.customer.user.phones) {
         this.formattedPhoneNumber = this.getFormattedPhone(this.customer.user.phones);
