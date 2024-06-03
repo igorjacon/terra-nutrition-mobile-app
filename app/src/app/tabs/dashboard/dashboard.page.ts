@@ -75,7 +75,31 @@ export class DashboardPage implements OnInit {
     'Keep a water bottle with you all day.',
     'Set reminders to drink water.',
     'Drink water before meals.',
-    'Infuse your water with fruits for added flavor.'
+    'Infuse your water with fruits for added flavor.',
+    'Take sips of water between bites during meals.',
+    'Replace sugary drinks with water.',
+    'Drink a glass of water before, during, and after exercise.',
+    'Carry a reusable water bottle with you.',
+    'Drink water at regular intervals, even if you are not thirsty.',
+    'Eat water-rich foods like fruits and vegetables.',
+    'Add a splash of lemon or lime to your water for flavor.',
+    'Track your water intake with this app.',
+    'Keep a water bottle at your desk or workspace.',
+    'Drink a glass of water before going to bed.',
+    'Make drinking water a part of your daily routine.',
+    'Add ice cubes to your water to make it refreshing.',
+    'Experiment with different temperatures of water to find what you like best.',
+    'Use a marked water bottle to track your intake throughout the day.',
+    'Drink a glass of water when you feel hungry; sometimes thirst is mistaken for hunger.',
+    'Keep water easily accessible in places you spend the most time.',
+    'Choose sparkling water as a healthy alternative to soda.',
+    'Drink water when you wake up to kickstart your metabolism.',
+    'Flavor your water with mint leaves or cucumber slices.',
+    'Drink water consistently throughout the day, not just when you feel thirsty.',
+    'Set a daily water intake goal and monitor your progress.',
+    'Drink water during breaks at work or while watching TV.',
+    'Keep a pitcher of water in the refrigerator so its always cold and ready to drink.',
+    'Add a pinch of sea salt to your water to help with hydration during workouts.'
   ];
 
   constructor(private authService: AuthService, private storageService: StorageService, private router: Router, private modalController: ModalController) {
@@ -98,11 +122,12 @@ export class DashboardPage implements OnInit {
         this.waterIntake = intake;
       }
     });
-    this.loadSettings();
-    this.updateUnitLabel();
-    if (this.hydrationTips.enabled) {
-      this.setupHydrationTips();
-    }
+    this.loadSettings().then(() => {
+      this.updateUnitLabel();
+      if (this.hydrationTips.enabled) {
+        this.setupHydrationTips();
+      }
+    });
   }
 
   setupHydrationTips() {
@@ -119,24 +144,40 @@ export class DashboardPage implements OnInit {
 
     const now = new Date();
     const currentTipIndex = tipTimes.findIndex(tipTime => now < tipTime);
-    this.currentTip = this.tips[currentTipIndex < 0 ? this.tips.length - 1 : currentTipIndex];
-  }
 
-  loadSettings() {
-    this.storageService.get('unitPreference').then(unit => {
+    console.log('Hydration Tips Enabled:', this.hydrationTips.enabled);
+    console.log('Hydration Tips Frequency:', this.hydrationTips.frequency);
+    console.log('Current Time:', now);
+    console.log('Calculated Tip Times:', tipTimes);
+    console.log('Current Tip Index:', currentTipIndex);
+
+    this.currentTip = this.tips[currentTipIndex < 0 ? this.tips.length - 1 : currentTipIndex];
+    console.log('Current Tip:', this.currentTip);
+  }
+  
+
+  async loadSettings() {
+    await this.storageService.get('unitPreference').then(unit => {
       if (unit) {
         this.unitPreference = unit;
         this.updateUnitLabel();
       }
     });
-    this.storageService.get('waterGoal').then(goal => {
+    await this.storageService.get('waterGoal').then(goal => {
       if (goal) {
         this.waterGoal = goal;
       }
     });
-    this.storageService.get('waterIntake').then(intake => {
+    await this.storageService.get('waterIntake').then(intake => {
       if (intake) {
         this.waterIntake = intake;
+      }
+    });
+    await this.storageService.get('hydrationTips').then(tips => {
+      if (tips) {
+        this.hydrationTips = tips;
+        console.log('Loaded Hydration Tips Settings:', this.hydrationTips);
+        this.setupHydrationTips();
       }
     });
   }
@@ -158,7 +199,7 @@ export class DashboardPage implements OnInit {
   }
 
   // Method to decrement water intake
-  minusWaterIntake() {
+  decrementWaterIntake() {
     if (this.waterIntake > 0) {
       this.waterIntake--;
       this.storageService.set('waterIntake', this.waterIntake);
@@ -210,6 +251,7 @@ export class DashboardPage implements OnInit {
       if (data.data) {
         this.waterGoal = data.data;
         this.saveWaterGoal();
+        this.loadSettings();
       }
     });
 

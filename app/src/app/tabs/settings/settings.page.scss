@@ -13,11 +13,19 @@ ion-content {
         left: 0;
         bottom: 30px;
         width: 84%;
-        height: 8%;
+        // height: 8%;
         text-align: center;
         // margin: 0 auto;
         margin-left: 30px;
         font-size: 1.6rem;
+        //
+        --border-radius: 10px;
+        letter-spacing: 0;
+        font-size: 1.7rem;
+        // --background: var(--ion-color-green);
+        // --background-hov
+        // --background-activated: #60b48b;
+        text-transform: none;
     }
 ion-list {
     margin-bottom: 1.4rem;

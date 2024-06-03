@@ -213,10 +213,10 @@ export class MealsPage implements OnInit, OnDestroy {
     }
     // Get meal plans for the selected date
     this.loadData();
-    const modal = document.querySelector('ion-modal');
-    if (modal) {
-      modal.dismiss();
-    }
+    // const modal = document.querySelector('ion-modal');
+    // if (modal) {
+    //   modal.dismiss();
+    // }
   }
 
   checkIfOptionSelected(option: any, mealId: any, mealPlanId: any) {
