@@ -30,8 +30,11 @@
     font-family: Inter;
 }
 :root {
-//   --ion-color-green: #98B66E;
---ion-color-green: #98B66E;
+--ion-color-color1: #98B66E; //changes the color for header, tabs, login button, logout button, meal plan selected (check button), password hide
+--ion-color-color2: #C5E5A5; //changes the color for option heading, recipe heading
+--ion-color-color3: #F9D876; //changes the color for date-time (on meal plan page)
+--ion-color-color4: #006400; //changes the text color on profile, contact details(aka professional), privacy policy, terms & conds.
+// --ion-color-green: #98B66E;
 }
 
 /* For responsiveness across screens
@@ -119,7 +122,7 @@ ion-content {
 ion-header {
     ion-toolbar {
         // --background: #45b683;
-        --background: var(--ion-color-green);
+        --background: var(--ion-color-color1);
         //--background: #98B66E;
 
         --padding-top: 10px;
