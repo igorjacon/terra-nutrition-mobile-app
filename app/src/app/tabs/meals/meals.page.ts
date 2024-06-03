@@ -83,9 +83,13 @@ export class MealsPage implements OnInit, OnDestroy {
   lockOptions: boolean = false;
 
   customSelectOptions: any = {
-    cssClass: 'custom-select-options' // This should match the CSS class in your global styles
+    cssClass: 'custom-select-options' 
   };
 
+
+  //toast
+  showSuccessToast: boolean = false;
+  successToastText: string = "Meal Saved";
 
 
   //initialise some icons used in app, and inject services that are being used/will be used
@@ -258,6 +262,7 @@ export class MealsPage implements OnInit, OnDestroy {
       this.httpService.post("/api/meal-history/new", data, this.token).subscribe(res => {
         console.log(res);
         console.log('show toast');
+        this.showSuccessToast = true;
       })
   }
 

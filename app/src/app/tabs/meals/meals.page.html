@@ -7,6 +7,16 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-toast
+  class="success-toast"
+  isOpen="{{showSuccessToast}}"
+  message="{{successToastText}}"
+  duration="1000"
+  position="top"
+  (ionToastDidDismiss)="showSuccessToast = false">
+  </ion-toast>
+
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

@@ -8,10 +8,10 @@ export class NotificationService {
 
   constructor() { }
 
-  async requestPermissions(): Promise<void> {
-    const permissions = await LocalNotifications.requestPermissions();
-    console.log('Permissions granted:', permissions.display);
-  }
+  // async requestPermissions(): Promise<void> {
+  //   const permissions = await LocalNotifications.requestPermissions();
+  //   console.log('Permissions granted:', permissions.display);
+  // }
 
 
   // async scheduleNotification() {

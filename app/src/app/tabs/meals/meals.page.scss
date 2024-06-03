@@ -55,6 +55,13 @@ ion-refresher {
   }
 }
 
+
+ion-toast.success-toast {
+  --background: rgb(127, 216, 127);
+  color:  rgb(18, 80, 18);
+}
+
+
 ion-item:part(month-year-button) {
   font-size: 2rem;
 }
