@@ -9,6 +9,7 @@ import { FormValidationService } from 'src/app/services/form-validation.service'
 import { HttpService } from 'src/app/services/http.service';
 import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -31,17 +32,20 @@ export class SignUpPage implements OnInit {
   showPasswordToast = false;
   passwordToastText = "";
   dob = "";
-  readonly phoneMask: MaskitoOptions = {
-    mask: ['+', '61', ' ', '(', /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
-  };
-  readonly maskPredicate: MaskitoElementPredicate = (el) => (el as HTMLIonInputElement).getInputElement();
-  myPhoneNumber = maskitoTransform('4 2222-3344', this.phoneMask);
+  loading: HTMLIonLoadingElement | null = null;
+  
+  // readonly phoneMask: MaskitoOptions = {
+  //   mask: ['+', '61', ' ', '(', /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
+  // };
+  // readonly maskPredicate: MaskitoElementPredicate = (el) => (el as HTMLIonInputElement).getInputElement();
+  // myPhoneNumber = maskitoTransform('4 2222-3344', this.phoneMask);
 
   constructor(
     private formBuilder: FormBuilder,
     private formValidator: FormValidationService,
     private httpService: HttpService,
-    private router: Router
+    private router: Router,
+    private loadingCtrl: LoadingController
   ) {
     addIcons({
       personOutline,
@@ -53,6 +57,14 @@ export class SignUpPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Loading...'
+    });
+
+    this.loading.present();
   }
 
   navigateToLoginPage() {
@@ -100,6 +112,7 @@ export class SignUpPage implements OnInit {
   }
 
   signUp(event: Event) {
+    this.showLoading();
     event.preventDefault();
     const errors = this.signupForm.errors;
     if (!this.signupForm.valid && errors !== null) {
@@ -113,11 +126,11 @@ export class SignUpPage implements OnInit {
         this.errorToastText = "Invalid email format.";
         this.showErrorToast = true;
       }
-      console.log(errors);
       // else if (errors?.['passwordstrengtherror']) {
       //   this.passwordToastText = "Your password requires a minimum length of 8 characters and needs an uppercase and lowercase character.";
       //   this.showPasswordToast = true;
       // }
+      this.loading?.dismiss();
     } else {
       const payload = {
         'user': {
@@ -152,14 +165,14 @@ export class SignUpPage implements OnInit {
         'medicalInfo': this.signupForm.value.medicalInfo
       }
 
-      console.log(payload);
       this.httpService.post("/api/customers", payload).subscribe(
         (response) => {
-          console.log(response);
           // Redirect user to registration complete page
           this.router.navigate(['/registration-complete']);
+          this.loading?.dismiss();
         },
         (error) => {
+          this.loading?.dismiss();
           // Handle authentication error
           this.errorToastText = "An error occurred. Please try again later."
           this.showErrorToast = true;

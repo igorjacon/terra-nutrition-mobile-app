@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
-
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -27,13 +27,12 @@ export class LoginPage implements OnInit {
   passIsVisible: boolean = false; //determines if password in the input is being shown on screen or not
   currentIconName: string = "eye-off-outline"; //name of the icon that will be displayed in the password input
   errorMsg: string = "";
-  showLoadingBar = false; //set to true on button click, set to false 
   isInvalid: boolean = false;
   showErrorToast = false; //boolean value on whether or not to show the errorToast
   errorToastText = ""; //the text that will be used in the errorToast
   // showSuccessToast = false; //boolean value on whether or not to show the successToast
   // successToastText = ""; //the text that will be used in the successToast
-
+  loading: HTMLIonLoadingElement | null = null;
   //representation of form controls that make up a form
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -45,7 +44,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private storageService: StorageService,
-    private router: Router
+    private router: Router,
+    private loadingCtrl: LoadingController
     ) {
       addIcons({
         personOutline,
@@ -56,6 +56,14 @@ export class LoginPage implements OnInit {
     }
 
   ngOnInit() {}
+
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Loading...'
+    });
+
+    this.loading.present();
+  }
 
   /* The changeEyeIcon method
   This method is called when a user presses on the eye icon in the password input so they can toggle the visibility of their password
@@ -70,7 +78,7 @@ export class LoginPage implements OnInit {
 
 
   async loginAction(event: Event) {
-
+    this.showLoading();
     event.preventDefault();
     if(!this.loginForm.value.email || !this.loginForm.value.password) {
       this.isInvalid = true;
@@ -85,7 +93,6 @@ export class LoginPage implements OnInit {
       this.authService.authenticate(payload).subscribe(
         async (response) => {
           // Handle successful authentication
-          this.showLoadingBar = true;
           this.isInvalid = false;
           this.errorMsg = "";
           this.loginForm.reset();
@@ -102,11 +109,14 @@ export class LoginPage implements OnInit {
               this.storageService.store(AuthConstants.CUSTOMER_DATA, res);
               // Redirect user to dashboard
               this.router.navigate(['/customer/dashboard']);
-              this.showLoadingBar = false;
+              this.loading?.dismiss();
+            } else {
+              this.loading?.dismiss();
             }
           });
         },
         (error) => {
+          this.loading?.dismiss();
           // Handle authentication error
           this.isInvalid = true;
           this.errorMsg = error.error.message;

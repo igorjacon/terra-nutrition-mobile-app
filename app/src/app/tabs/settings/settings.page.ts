@@ -31,7 +31,6 @@ export class SettingsPage implements OnInit {
   }
 
   goToDashboard() {
-    console.log('test logo click')
     this.router.navigateByUrl('customer/dashboard')
   }
 

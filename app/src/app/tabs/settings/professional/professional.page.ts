@@ -34,12 +34,8 @@ export class ProfessionalPage implements OnInit {
   ngOnInit() {
     this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
-      console.log(res);
-      console.log('Loading Professional profile page');
       if (res && res.professional) {
         this.professional = res.professional;
-        console.log('Professional Data:', this.professional);
-          console.log('Profile Image:', this.customer.professional.user.profileImg);
         if (this.professional.user && this.professional.user.phones) {
           this.formattedPhoneNumber = this.getFormattedPhone(this.professional.user.phones);
         }
@@ -59,7 +55,6 @@ export class ProfessionalPage implements OnInit {
     if (phones && phones.length > 0) {
       const phone = phones[0];
       const formattedNumber = phone.number.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
-      console.log('Formatting Phone:', phone);
       return `${phone.prefix} ${formattedNumber}`;
     }
     return 'N/A';

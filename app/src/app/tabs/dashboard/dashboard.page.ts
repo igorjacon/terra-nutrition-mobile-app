@@ -233,11 +233,6 @@ export class DashboardPage implements OnInit {
     this.router.navigateByUrl('customer/recipes')
   }
 
-  test() {
-    console.log('swiper clicked')
-    // this.router.navigateByUrl('tabs/meals')
-  }
-
   // Method to open the modal for changing water goal
   async openWaterGoalModal() {
     const modal = await this.modalController.create({
