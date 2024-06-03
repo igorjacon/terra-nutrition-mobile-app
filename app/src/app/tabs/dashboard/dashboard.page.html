@@ -11,10 +11,11 @@
     <img [src]="userImgDir + profileImgPath" class="profile-image" alt="Profile Picture">
     <div class="name-and-message">
       <h1>Hey, {{ customer?.user?.firstName }}!</h1>
-      <p>Welcome back to your personalised meal plan!</p>
+      <p>Welcome back to the your personal meal planner!</p>
     </div>
   </div>
 
+  <h2 class="water-outter-title">Track your daily water consumption</h2>
   <div class="dashboard-grid-container">
     <div class="water-intake-card">
       <h3 class="card-title">
@@ -25,7 +26,7 @@
       <div class="water-tracker">
         <div class="progress-bar">
           <div class="progress" [style.width.%]="(waterIntake / waterGoal) * 100"></div>
-        </div>
+        </div> 
         <div class="hydration-tips" *ngIf="hydrationTips.enabled">
           <p>{{ currentTip }}</p>
         </div>
@@ -37,12 +38,15 @@
       </div>
     </div>    
 
+    <h2 class="quick-links">
+      Quick links
+    </h2>
     <div class="card meal-plan-card" (click)="navigateToMealsPage()">
       <div class="card-header">
         <h1 class="card-title">Meal Plans</h1>
         <ion-icon name="nutrition-outline"></ion-icon>
       </div>
-      <p class="card-description">Select and save the meals you eat while following your meal plan</p>
+      <p class="card-description">Select and save the meals you eat to track your progress</p>
     </div>
 
     <div class="card recipes-card" (click)="navigateToRecipesPage()">
@@ -50,7 +54,8 @@
         <h1 class="card-title">Recipes</h1>
         <ion-icon name="list-outline"></ion-icon>
       </div>
-      <p class="card-description">Browse recipes for the meals in your meal plan</p>
+      <p class="card-description">Browse recipes added to your meal plan
+      </p>
     </div>
 
     <div class="card small-card account-details-card" (click)="navigateToProfilePage()">

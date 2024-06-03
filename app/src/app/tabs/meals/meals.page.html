@@ -114,7 +114,7 @@
 
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label>
-              <h2>Option {{ i + 1 }}</h2>
+              <h2 class="option-heading">Option {{ i + 1 }}</h2>
             </ion-label>
             <ion-checkbox (ionChange)="onCheckboxChange($event, option, selectedMealPlan.meals[currentSlideIndex])"
                           [disabled]="lockOptions"

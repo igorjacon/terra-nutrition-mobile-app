@@ -24,7 +24,7 @@
           <ion-card class="recipe-card">
             <img [src]="recipe.image" *ngIf="recipe.image" />
             <ion-card-header>
-              <ion-card-title style="color: white; font-weight: 600;">{{ recipe?.name }}</ion-card-title>
+              <ion-card-title>{{ recipe?.name }}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <p>{{ recipe?.description }}</p>
