@@ -55,24 +55,24 @@
 
     <!-- <ion-item class="list-header">Weekly Report</ion-item>
     <ion-item lines="none">
+      <ion-toggle [(ngModel)]="weeklyReport.enabled" aria-label="Enable Weekly Report"></ion-toggle>
       <ion-label>Enable Weekly Report</ion-label>
-      <ion-toggle [(ngModel)]="weeklyReport.enabled"></ion-toggle>
-    </ion-item> -->
-    <!-- <ion-item lines="none" *ngIf="weeklyReport.enabled">
-      <ion-label position="stacked">Report Day</ion-label>
+    </ion-item>
+    <ion-item lines="none" *ngIf="weeklyReport.enabled">
+      <ion-label>Report Day</ion-label>
       <ion-select [(ngModel)]="weeklyReport.day">
-        <ion-select-option value="sunday">Sunday</ion-select-option>
         <ion-select-option value="monday">Monday</ion-select-option>
         <ion-select-option value="tuesday">Tuesday</ion-select-option>
         <ion-select-option value="wednesday">Wednesday</ion-select-option>
         <ion-select-option value="thursday">Thursday</ion-select-option>
         <ion-select-option value="friday">Friday</ion-select-option>
         <ion-select-option value="saturday">Saturday</ion-select-option>
+        <ion-select-option value="sunday">Sunday</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item lines="none" *ngIf="weeklyReport.enabled">
-      <ion-label position="stacked">Report Time</ion-label>
-      <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="weeklyReport.time"></ion-datetime>
+      <ion-label>Report Time</ion-label>
+      <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="weeklyReport.time"></ion-datetime>
     </ion-item> -->
   </ion-list>
   
