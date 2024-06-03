@@ -61,6 +61,10 @@ ion-toast.success-toast {
   color:  rgb(18, 80, 18);
 }
 
+ion-toast.meal-unselected-toast {
+  --background: rgb(245, 253, 181);
+color: rgb(60, 60, 60);
+}
 
 ion-item:part(month-year-button) {
   font-size: 2rem;

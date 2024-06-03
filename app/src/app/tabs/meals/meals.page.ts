@@ -88,8 +88,9 @@ export class MealsPage implements OnInit, OnDestroy {
 
 
   //toast
-  showSuccessToast: boolean = false;
-  successToastText: string = "Meal Saved";
+  // isChecked: boolean = false;
+  showMealSavedToast: boolean = false;
+  showMealUnselectedToast: boolean = false;
 
 
   //initialise some icons used in app, and inject services that are being used/will be used
@@ -259,10 +260,18 @@ export class MealsPage implements OnInit, OnDestroy {
         'option': option.id.toString(),
       }
       // Register selected meal in database
+      const isChecked = event.detail.checked;
+      console.log(isChecked)
+      
       this.httpService.post("/api/meal-history/new", data, this.token).subscribe(res => {
         console.log(res);
-        console.log('show toast');
-        this.showSuccessToast = true;
+        const isChecked = event.detail.checked;
+        // console.log('show toast');
+        if (isChecked) {
+          this.showMealSavedToast = true;
+        } else {
+          this.showMealUnselectedToast = true;
+        }
       })
   }
 

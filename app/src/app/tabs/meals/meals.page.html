@@ -10,12 +10,28 @@
 
   <ion-toast
   class="success-toast"
-  isOpen="{{showSuccessToast}}"
-  message="{{successToastText}}"
+  isOpen="{{showMealSavedToast}}"
+  message="Meal saved."
   duration="1000"
   position="top"
-  (ionToastDidDismiss)="showSuccessToast = false">
+  (ionToastDidDismiss)="showMealSavedToast = false">
   </ion-toast>
+
+  <ion-toast
+  class="meal-unselected-toast"
+  isOpen="{{showMealUnselectedToast}}"
+  message="Meal unselected."
+  duration="1000"
+  position="top"
+  (ionToastDidDismiss)="showMealUnselectedToast = false">
+  </ion-toast>
+
+    <!-- Toast for saving meal -->
+    <!-- <ion-toast *ngIf="showMealSavxedToast" message="Meal Saved" duration="2000" (ionToastDidDismiss)="showMealSavedToast = false"></ion-toast> -->
+
+    <!-- Toast for unselecting meal -->
+    <!-- <ion-toast *ngIf="showMealUnselectedToast" message="Meal Unselected" duration="2000" (ionToastDidDismiss)="showMealUnselectedToast = false"></ion-toast> -->
+  
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
