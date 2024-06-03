@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonLabel, IonRow } from '@ionic/angular/standalone';
 import { checkmarkCircleOutline, personOutline, heart } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-complete',
@@ -12,7 +13,7 @@ import { addIcons } from 'ionicons';
 })
 export class RegistrationCompleteComponent  implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     addIcons({
       checkmarkCircleOutline,
       personOutline,
@@ -21,5 +22,9 @@ export class RegistrationCompleteComponent  implements OnInit {
   }
 
   ngOnInit() {}
+
+  navigateToLoginPage() {
+    this.router.navigateByUrl('/login')
+  }
 
 }
