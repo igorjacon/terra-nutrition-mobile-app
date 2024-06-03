@@ -93,6 +93,12 @@ export class WaterGoalModalComponent {
     this.storageService.get('weeklyReport').then(report => {
       if (report) {
         this.weeklyReport = report;
+      } else {
+        this.weeklyReport = {
+          enabled: false,
+          day: 'monday',
+          time: '09:00'
+        };
       }
     });
   }
