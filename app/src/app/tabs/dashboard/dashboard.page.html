@@ -8,8 +8,11 @@
 
 <ion-content>
   <div class="welcome-customer-div">
-    <h1>Hey, {{ customer?.user?.firstName }}!</h1>
-    <p>Welcome back to your personalised meal plan app!</p>
+    <img [src]="userImgDir + profileImgPath" class="profile-image" alt="Profile Picture">
+    <div class="name-and-message">
+      <h1>Hey, {{ customer?.user?.firstName }}!</h1>
+      <p>Welcome back to your personalised meal plan app!</p>
+    </div>
   </div>
 
   <div class="dashboard-grid-container">
@@ -35,13 +38,15 @@
     </div>    
 
     <div class="card meal-plan-card" (click)="navigateToMealsPage()">
-      <h3 class="card-title">Meal Plans</h3>
-      <p class="card-description">Select and save the meals you eat while following your meal plan</p>
+      <ion-icon name="nutrition-outline"></ion-icon>
+      <p class="card-description">Meal Plans</p>
+      <!-- <p class="card-description">Select and save the meals you eat while following your meal plan</p> -->
     </div>
 
     <div class="card recipes-card" (click)="navigateToRecipesPage()">
-      <h3 class="card-title">Recipes</h3>
-      <p class="card-description">Browse recipes for the meals in your meal plan</p>
+      <ion-icon name="list-outline"></ion-icon>
+      <p class="card-description">Recipes</p>
+      <!-- <p class="card-description">Browse recipes for the meals in your meal plan</p> -->
     </div>
 
     <div class="card account-details-card" (click)="navigateToProfilePage()">

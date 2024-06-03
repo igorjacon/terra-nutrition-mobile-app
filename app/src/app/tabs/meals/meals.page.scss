@@ -68,7 +68,7 @@ ion-item:part(month-year-button) {
   }
 
   ion-datetime-button::part(native) {
-    background-color: #F9D876;
+    background-color: var(--ion-color-color3);
     color: rgb(0, 0, 0);
     font-size: 1.4rem;
   }
@@ -129,7 +129,7 @@ swiper-container {
     .list-header {
       // font-size: 4rem;
       // --background: #44aa79;
-      --background: #C5E5A5;
+      --background: var(--ion-color-color2);
       color: white;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
@@ -168,7 +168,7 @@ swiper-container {
       }
       ion-checkbox {
         --checkmark-color: rgb(37, 87, 29);
-        --checkbox-background-checked: #98B66E;
+        --checkbox-background-checked: var(--ion-color-color1);
         --border-color: white;
         --border-color-checked: white;
         --size: 2.3rem;
