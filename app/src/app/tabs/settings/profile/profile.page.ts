@@ -11,8 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { HttpService } from 'src/app/services/http.service';
 import { Directory, Filesystem } from '@capacitor/filesystem';
-import { Platform } from '@ionic/angular'
+import { Platform, LoadingController} from '@ionic/angular';
 import { environment } from 'src/environments/environment';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -26,13 +27,15 @@ export class ProfilePage implements OnInit {
   formattedPhoneNumber: string = '';
   userImgDir = environment.api_base_url + "/uploads/user/";
   profileImgPath: string = "";
+  loading: HTMLIonLoadingElement | null = null;
 
   constructor(
     private authService: AuthService, 
     private storageService: StorageService, 
     private router: Router,
     private httpService: HttpService,
-    private platform: Platform
+    private platform: Platform,
+    private loadingCtrl: LoadingController
   ) {
     addIcons({
       arrowBackOutline,
@@ -42,6 +45,14 @@ export class ProfilePage implements OnInit {
 
   goToDashboard() {
     this.router.navigateByUrl('customer/dashboard')
+  }
+
+  async showLoading() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Loading...'
+    });
+
+    this.loading.present();
   }
 
   ngOnInit() {
@@ -72,12 +83,13 @@ export class ProfilePage implements OnInit {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: true,
+      width: 300,
+      height: 300,
       resultType: CameraResultType.Base64
     });
   
     if (image) {
       this.uploadImage(image.base64String)
-      this.profileImgPath = image.webPath ?? this.profileImgPath;
     }
   };
 
@@ -99,6 +111,7 @@ export class ProfilePage implements OnInit {
   }
 
   async uploadImage(data: any) {
+    this.showLoading();
     const fileName = this.customer.user.firstName + '.jpeg';
     const blob = await this.base64ToBlob(data);
 
@@ -106,8 +119,17 @@ export class ProfilePage implements OnInit {
     formData.append('profileFile', blob, fileName);
 
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
-      this.httpService.post('/api/users/profile-image/'+this.customer.user.id, formData, token).subscribe((response:any) => {
-        console.log(response.profileImg);
+      this.httpService.post('/api/users/profile-image/'+this.customer.user.id, formData, token).pipe(
+        finalize(() => {
+          // Refresh customer data cache
+          this.authService.fetchCustomerInfo(this.customer.user.id, token).subscribe((res) => {
+            if (res) {
+              this.storageService.store(AuthConstants.CUSTOMER_DATA, res);
+            }
+          });
+          this.loading?.dismiss();
+        })
+      ).subscribe((response:any) => {
         this.profileImgPath = response.profileImg;
       }, error => {
         console.error(error);

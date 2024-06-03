@@ -50,7 +50,6 @@ export class RecipesPage implements OnInit {
           this.loaded = true;
         })
       ).subscribe((recipes: any) => {
-        console.log(recipes);
         if (recipes.length) {
           this.recipes = recipes;
         }
@@ -73,7 +72,6 @@ export class RecipesPage implements OnInit {
   navigateToProfessionalPage() {
     this.router.navigateByUrl('customer/settings/professional')
   }
-
 
   doRefresh(event: any) {
     this.loaded = false;
