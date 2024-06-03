@@ -6,13 +6,14 @@ import { StorageService } from '../../services/storage.service';
 import { arrowBackOutline, chevronBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { LocalNotifications, PermissionStatus } from '@capacitor/local-notifications';
+import { IonToggle } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-water-goal-modal',
   templateUrl: './water-goal-modal.component.html',
   styleUrls: ['./water-goal-modal.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, IonToggle]
 })
 export class WaterGoalModalComponent {
   @Input() currentGoal!: number;

@@ -9,6 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { IonicSlides } from '@ionic/angular';
 import { addIcons } from 'ionicons';
+import { environment } from 'src/environments/environment';
 import { WaterGoalModalComponent } from '../../components/water-goal-modal/water-goal-modal.component';
 import {
   addCircle,
@@ -23,7 +24,8 @@ import {
   chevronForward,
   addCircleOutline,
   removeCircleOutline,
-  refreshCircleOutline
+  refreshCircleOutline,
+  listOutline
 } from 'ionicons/icons';
 
 register();
@@ -41,7 +43,8 @@ addIcons({
   'chevron-forward-circle-outline': chevronForwardCircleOutline,
   'chevron-down-circle-outline': chevronDownCircleOutline,
   'calendar-outline': calendarOutline,
-  'chevron-forward': chevronForward
+  'chevron-forward': chevronForward,
+  listOutline
 });
 
 @Component({
@@ -59,6 +62,9 @@ export class DashboardPage implements OnInit {
   userHasCompletedIntakeForm = true;
   userHasMealPlans = false;
   customer: any;
+
+  profileImgPath: string = "";
+  userImgDir = environment.api_base_url + "/uploads/user/";
 
   // Variables for water intake tracking
   waterGoal: number = 8; // Default goal
@@ -109,6 +115,11 @@ export class DashboardPage implements OnInit {
    ngOnInit() {
     this.authService.customerData$.subscribe((res: any) => {
       this.customer = res;
+      if (res.user?.profileImg) {
+        this.profileImgPath = res.user.profileImg;
+      } else {
+        this.userImgDir = 'assets/imgs/default-profile.png';
+      }
     });
 
     // Load stored water goal and intake from storage
