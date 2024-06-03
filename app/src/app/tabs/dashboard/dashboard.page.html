@@ -38,25 +38,29 @@
     </div>    
 
     <div class="card meal-plan-card" (click)="navigateToMealsPage()">
-      <ion-icon name="nutrition-outline"></ion-icon>
-      <p class="card-description">Meal Plans</p>
-      <!-- <p class="card-description">Select and save the meals you eat while following your meal plan</p> -->
+      <div class="card-header">
+        <h1 class="card-title">Meal Plans</h1>
+        <ion-icon name="nutrition-outline"></ion-icon>
+      </div>
+      <p class="card-description">Select and save the meals you eat while following your meal plan</p>
     </div>
 
     <div class="card recipes-card" (click)="navigateToRecipesPage()">
-      <ion-icon name="list-outline"></ion-icon>
-      <p class="card-description">Recipes</p>
-      <!-- <p class="card-description">Browse recipes for the meals in your meal plan</p> -->
+      <div class="card-header">
+        <h1 class="card-title">Recipes</h1>
+        <ion-icon name="list-outline"></ion-icon>
+      </div>
+      <p class="card-description">Browse recipes for the meals in your meal plan</p>
     </div>
 
-    <div class="card account-details-card" (click)="navigateToProfilePage()">
+    <div class="card small-card account-details-card" (click)="navigateToProfilePage()">
       <ion-icon class="card-ion" name="person-circle-outline"></ion-icon>
-      <p class="card-description">Account</p>
+      <h1 class="card-title">Account</h1>
     </div>
 
-    <div class="card nutritionist-details-card" (click)="navigateToProfessionalPage()">
+    <div class="card small-card nutritionist-details-card" (click)="navigateToProfessionalPage()">
       <ion-icon class="card-ion" name="happy-outline"></ion-icon>
-      <p class="card-description">Nutritionist</p> 
+      <h1 class="card-title">Nutritionist</h1> 
     </div>
   </div>
 
