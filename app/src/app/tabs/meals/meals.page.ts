@@ -196,6 +196,10 @@ export class MealsPage implements OnInit, OnDestroy {
     }, 1000);
   }
 
+  navigateToProfessionalPage() {
+    this.router.navigateByUrl('customer/settings/professional')
+  }
+
   //takes the date from when a user clicks the calendar
   //turns that date into a date object, which is used as an argument to provide meal plan info for specific dates
   onDateChange(event: any) {
