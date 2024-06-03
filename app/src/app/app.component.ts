@@ -14,8 +14,8 @@ export class AppComponent {
   constructor(private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.notificationService.requestPermissions();
-    this.notificationService.scheduleNotification();
+    // this.notificationService.requestPermissions();
+    // this.notificationService.scheduleNotification();
   }
 
 }
