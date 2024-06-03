@@ -28,7 +28,7 @@
           <div class="progress" [style.width.%]="(waterIntake / waterGoal) * 100"></div>
         </div> 
         <div class="hydration-tips" *ngIf="hydrationTips.enabled">
-          <p>{{ currentTip }}</p>
+          <p><span style="font-weight: 700;">Tip:</span> {{  currentTip }}</p>
         </div>
         <div class="icon-buttons">
           <ion-icon name="add-circle-outline" (click)="incrementWaterIntake()"></ion-icon>
