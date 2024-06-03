@@ -29,12 +29,13 @@
 * {
     font-family: Inter;
 }
+
 :root {
---ion-color-color1: #98B66E; //changes the color for header, tabs, login button, logout button, meal plan selected (check button), password hide
---ion-color-color2: #C5E5A5; //changes the color for option heading, recipe heading
---ion-color-color3: #F9D876; //changes the color for date-time (on meal plan page)
---ion-color-color4: #006400; //changes the text color on profile, contact details(aka professional), privacy policy, terms & conds.
-// --ion-color-green: #98B66E;
+    --ion-color-color1: #44aa79; //changes the color for header, tabs, login button, logout button, meal plan selected (check button), password hide
+    --ion-color-color2: #1eae77; //changes the color for option heading, recipe heading
+    --ion-color-color3: #40b53e; //changes the color for date-time (on meal plan page)
+    --ion-color-color4: #006400; //changes the text color on profile, contact details(aka professional), privacy policy, terms & conds.
+    // --ion-color-green: #98B66E;
 }
 
 /* For responsiveness across screens
@@ -45,48 +46,62 @@ by setting this up, we can use rem,em,%,vh units in app to change dynamically
 */
 html {
     font-size: 100%;
+
     @media (max-width: 289px) {
         font-size: 45%;
     }
+
     @media (min-width: 290px) {
         font-size: 50%;
     }
+
     @media (min-width: 300px) {
         font-size: 52.5%;
     }
+
     @media (min-width: 320px) {
         font-size: 55.5%;
     }
+
     @media (min-width: 325px) {
         font-size: 56.5%;
     }
+
     @media (min-width: 326px) {
         font-size: 57%;
     }
+
     @media (min-width: 330px) {
         font-size: 59%;
     }
+
     @media (min-width: 360px) {
         font-size: 62.5%;
     }
+
     @media (min-width: 411px) {
         font-size: 70%;
     }
+
     @media (min-width: 500px) {
         font-size: 85%;
     }
+
     @media (min-width: 720px) {
         font-size: 100%;
     }
+
     @media (min-width: 1000px) {
         font-size: 110%;
     }
-  }
-  html.ios {
+}
+
+html.ios {
     @media (max-width: 359px) and (min-width: 320px) {
         font-size: 59%;
     }
-  }
+}
+
 ion-content {
     // color: var(--ion-text-color); // Text color will change based on mode
     // background-color: var(--ion-background-color); // Background color will change based on mode
@@ -95,6 +110,7 @@ ion-content {
     --padding-start: 3rem;
     --padding-end: 3rem;
 }
+
 // p, ion-text, h1, h2, h3, h4, h5, h6 {
 //     // color: var(--ion-text-color);
 //   }
@@ -106,18 +122,22 @@ ion-content {
 
 /* Customizing Alert buttons and title */
 .custom-select-options .alert-button {
-    font-size: 16px; /* Change the font size of the buttons */
-    height: 45px; /* Change the height of the buttons */
+    font-size: 16px;
+    /* Change the font size of the buttons */
+    height: 45px;
+    /* Change the height of the buttons */
 }
+
 .custom-select-options .alert-title {
-    font-size: 16px; /* Change the font size of the title */
+    font-size: 16px;
+    /* Change the font size of the title */
     font-weight: 600;
 }
 
 
 
-  
-  
+
+
 
 ion-header {
     ion-toolbar {
@@ -127,13 +147,14 @@ ion-header {
 
         --padding-top: 10px;
         --padding-bottom: 10px;
-        ion-title {
 
-        }
+        ion-title {}
+
         ion-icon {
             font-size: 40px;
             color: rgb(255, 255, 255);
         }
+
         .logo {
             margin: 0 auto;
             background-color: rgb(219, 243, 219);
