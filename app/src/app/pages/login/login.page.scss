@@ -81,11 +81,11 @@ form {
             margin-bottom: 1rem;
             --padding-start: 2rem;
             --border-radius: 10px;
-            ion-button {
-                ion-icon {
-                color:  #44aa79;
-                }
-            }
+            // ion-button {
+            //     ion-icon {
+            //     color:  #44aa79;
+            //     }
+            // }
         }
         //password field
         ion-input {
@@ -96,7 +96,7 @@ form {
             ion-button {
                 ion-icon {
                 font-size: 2.7em;
-                color: var(--ion-color-green);
+                color: var(--ion-color-color1);               
                 }
             }
         }
