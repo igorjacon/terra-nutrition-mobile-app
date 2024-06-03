@@ -280,7 +280,7 @@
 
 ion-content {
   .welcome-customer-div {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
      display: grid;
      grid-template-columns: 1fr 2fr;
      column-gap: 2rem;
@@ -309,7 +309,8 @@ ion-content {
  
        p {
         margin-top: 1rem;
-         font-size: 1.4em;
+         font-size: 1.35em;
+         width: 93%;
        }
      }
    }
@@ -356,7 +357,7 @@ ion-content {
 
 
     .water-intake-card {
-      padding: 2rem 2rem 1rem 2rem;     
+      padding: 2rem;   
       border-radius: 20px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
