@@ -7,7 +7,27 @@
 
 ion-content {
 .page-content {
-    margin-top: 4vh;
+    margin-top: 20vh;
+    h1 {
+        font-size: 2.8rem;
+    }
+    h4 {
+        font-size: 1.8rem;
+    }
+    p {
+        font-size: 1.8rem;
+    }
+    small {
+        font-size: 1.5rem;
+    }
+    p.login {
+        text-align: center;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    a {
+        text-decoration: underline;
+    }
 }
 }
 

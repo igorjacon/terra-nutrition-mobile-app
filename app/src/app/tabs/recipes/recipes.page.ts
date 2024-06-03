@@ -70,6 +70,11 @@ export class RecipesPage implements OnInit {
     return itemObject.id;
   }
 
+  navigateToProfessionalPage() {
+    this.router.navigateByUrl('customer/settings/professional')
+  }
+
+
   doRefresh(event: any) {
     this.loaded = false;
     this.loadData();
