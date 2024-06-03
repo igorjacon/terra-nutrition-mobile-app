@@ -13,7 +13,7 @@ import { IonToggle } from '@ionic/angular/standalone';
   templateUrl: './water-goal-modal.component.html',
   styleUrls: ['./water-goal-modal.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, IonToggle]
+  imports: [IonicModule, CommonModule, FormsModule]
 })
 export class WaterGoalModalComponent {
   @Input() currentGoal!: number;
