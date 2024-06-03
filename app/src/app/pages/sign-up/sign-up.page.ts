@@ -101,8 +101,8 @@ export class SignUpPage implements OnInit {
 
   signUp(event: Event) {
     event.preventDefault();
-    if (!this.signupForm.valid) {
-      const errors = this.signupForm.errors;
+    const errors = this.signupForm.errors;
+    if (!this.signupForm.valid && errors !== null) {
       if(!this.signupForm.value.email || !this.signupForm.value.password || !this.signupForm.value.confirmPassword ) {
         this.errorToastText = "You must fill out all fields before signing up.";
         this.showErrorToast = true;
@@ -140,7 +140,7 @@ export class SignUpPage implements OnInit {
             'country': this.signupForm.value.addressCountry,
           },
         },
-        'height': this.signupForm.value.height + " m",
+        'height': this.signupForm.value.height + " cm",
         'weight': this.signupForm.value.weight + " kg",
         'goalWeight': this.signupForm.value.goalWeight + " kg",
         'dob': this.dob,

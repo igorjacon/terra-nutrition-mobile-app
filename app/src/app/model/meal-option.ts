@@ -6,4 +6,9 @@ export interface MealOption {
     description : string;
     notes : string;
     isChecked: boolean;
+    totalQuantity: number;
+    totalProtein: number;
+    totalCarbs: number;
+    totalFat: number;
+    totalCalories: number;
 }

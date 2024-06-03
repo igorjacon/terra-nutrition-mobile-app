@@ -87,7 +87,9 @@
         <ion-list *ngFor="let option of selectedMealPlan.meals[currentSlideIndex]?.options; let i = index; trackBy:trackItems">
 
           <ion-item mode="ios" lines="none" class="list-header">
-            <ion-label><h2>Option {{ i + 1 }}</h2></ion-label>
+            <ion-label>
+              <h2>Option {{ i + 1 }}</h2>
+            </ion-label>
             <ion-checkbox (ionChange)="onCheckboxChange($event, option, selectedMealPlan.meals[currentSlideIndex])"
                           [disabled]="lockOptions"
                           [(ngModel)]="option.isChecked"
@@ -108,7 +110,6 @@
               <ion-label class="break-line">
                 <h2>
                   {{ option.description }}
-
                 </h2>
               </ion-label>
           </ion-item>

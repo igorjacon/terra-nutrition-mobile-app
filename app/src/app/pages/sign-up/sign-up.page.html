@@ -213,7 +213,12 @@
       <h1>Goals and Preferences</h1>
       <ion-list class="diet">
         <ion-item lines="none" class="diet-item">
-          <ion-select label="Dietary Preference" class="diet-select" aria-label="diet" placeholder="Preference">
+          <ion-select label="Dietary Preference"
+              formControlName="dietaryPreference"
+              name="dietaryPreference"
+              class="diet-select" 
+              aria-label="diet" 
+              placeholder="Preference">
             <ion-select-option value="omnivore">Omnivore</ion-select-option>
             <ion-select-option value="pescatarian">Pescatarian</ion-select-option>
             <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
@@ -225,7 +230,11 @@
 
       <ion-list class="goals">
         <ion-item lines="none" class="goals-item">
-          <ion-select label="Dietary Goals" aria-label="goals" placeholder="Goals">
+          <ion-select label="Dietary Goals" 
+              formControlName="goals"
+              name="goals"
+              aria-label="goals" 
+              placeholder="Goals">
             <ion-select-option value="lose-weight">Lose weight</ion-select-option>
             <ion-select-option value="gain-weight">Gain weight</ion-select-option>
             <ion-select-option value="energy-and-vitality">Energy and vitality</ion-select-option>
