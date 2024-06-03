@@ -14,22 +14,22 @@ export class NotificationService {
   }
 
 
-  async scheduleNotification() {
-    await LocalNotifications.schedule({
-      notifications: [
-        {
-          title: "Test Notification",
-          body: "This is a test notification",
-          id: 1,
-          schedule: { at: new Date(Date.now() + 1000 * 60 * 1) }, // 1 minutes from now
-          // sound: null,
-          // attachments: null,
-          actionTypeId: "",
-          extra: null
-        }
-      ]
-    });
-  }
+  // async scheduleNotification() {
+  //   await LocalNotifications.schedule({
+  //     notifications: [
+  //       {
+  //         title: "Test Notification",
+  //         body: "This is a test notification",
+  //         id: 1,
+  //         schedule: { at: new Date(Date.now() + 1000 * 60 * 1) }, // 1 minutes from now
+  //         // sound: null,
+  //         // attachments: null,
+  //         actionTypeId: "",
+  //         extra: null
+  //       }
+  //     ]
+  //   });
+  // }
   
   // LocalNotifications.addListener('localNotificationReceived', (notification) => {
   //   console.log('Notification received:', notification);
