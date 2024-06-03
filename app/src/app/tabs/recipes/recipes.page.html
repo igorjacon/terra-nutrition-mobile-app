@@ -42,7 +42,7 @@
               <ion-button expand="block" color="light" (click)="toggleInstructions(recipe.id.toString())" class="ion-activatable ripple-parent">
                 {{ instructions[recipe.id.toString()] ? 'Hide Instructions' : 'Show Instructions' }}
               </ion-button>
-              <div *ngIf="instructions[recipe.id.toString()]" class="instructions">
+              <div *ngIf="instructions[recipe.id.toString()]">
                 <div class="instructions" [innerHTML]="sanitizeHTML(recipe?.instructions)"></div>
               </div>
             </ion-card-content>

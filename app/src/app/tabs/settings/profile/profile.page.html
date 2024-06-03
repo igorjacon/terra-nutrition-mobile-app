@@ -16,8 +16,8 @@
     <ion-button color="success" (click)="getPicture()">Change Photo</ion-button>
     <div class="profile-details">
       <h2 class="customer-name">{{ customer.user?.firstName }} {{ customer.user?.lastName }}</h2>
-      <p class="customer-email" style="color: #006400;">{{ customer.user?.email }}</p>
-      <p class="customer-number" style="color: #006400;">{{ customer.user?.phones[0].number }}</p>
+      <p class="customer-email" style="color: var(--ion-color-color4);">{{ customer.user?.email }}</p>
+      <p class="customer-number" style="color: var(--ion-color-color4);">{{ customer.user?.phones[0].number }}</p>
     </div>
   </div>
   <div class="info-card">
