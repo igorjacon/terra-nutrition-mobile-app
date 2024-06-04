@@ -46,7 +46,7 @@ register();
     IonLabel,
     IonCheckbox,
     IonAvatar,
-    IonRefresher, IonRefresherContent, IonSpinner, 
+    IonRefresher, IonRefresherContent, IonSpinner,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
@@ -83,7 +83,7 @@ export class MealsPage implements OnInit, OnDestroy {
   lockOptions: boolean = false;
 
   customSelectOptions: any = {
-    cssClass: 'custom-select-options' 
+    cssClass: 'custom-select-options'
   };
 
 
@@ -135,7 +135,7 @@ export class MealsPage implements OnInit, OnDestroy {
       let dateObject = new Date(this.selectedDate);
       today = dateObject.getDay();
     }
-    
+
     this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
       this.token = token;
       this.mealPlanService.getMealPlans(token, today).pipe(
@@ -175,7 +175,7 @@ export class MealsPage implements OnInit, OnDestroy {
           })
         });
       }
-      
+
     });
   }
 
@@ -261,12 +261,9 @@ export class MealsPage implements OnInit, OnDestroy {
       }
       // Register selected meal in database
       const isChecked = event.detail.checked;
-      console.log(isChecked)
-      
+
       this.httpService.post("/api/meal-history/new", data, this.token).subscribe(res => {
-        console.log(res);
         const isChecked = event.detail.checked;
-        // console.log('show toast');
         if (isChecked) {
           this.showMealSavedToast = true;
         } else {
