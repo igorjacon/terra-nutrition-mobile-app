@@ -18,12 +18,16 @@
     <ion-item lines="none">
       <ion-input [(ngModel)]="goal" type="number" label="{{ unitLabel }}"></ion-input>
     </ion-item>
+    <br>
+    
 
     <ion-item class="list-header">Reminders</ion-item>
     <ion-item lines="none">
       <ion-toggle [(ngModel)]="reminders.enabled" aria-label="Enable Reminders"></ion-toggle>
       <ion-label>Enable Reminders</ion-label>
     </ion-item>
+    <br>
+    
     <ion-item lines="none" *ngIf="reminders.enabled">
       <ion-label>
         Reminders will be sent at the following times if you haven't reached the corresponding percentages of your goal:
@@ -43,12 +47,15 @@
         <ion-select-option value="glasses">Glasses</ion-select-option>
       </ion-select>
     </ion-item>
+    <br>
+    
 
     <ion-item class="list-header">Hydration Tips</ion-item>
     <ion-item lines="none">
       <ion-toggle [(ngModel)]="hydrationTips.enabled" aria-label="Enable Hydration Tips"></ion-toggle>
       <ion-label>Enable Tips</ion-label>
     </ion-item>
+    <br>
     <ion-item lines="none" *ngIf="hydrationTips.enabled">
       <ion-input [(ngModel)]="hydrationTips.frequency" type="number" label="Tips Frequency (times/day)"></ion-input>
     </ion-item>
@@ -75,6 +82,6 @@
       <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="weeklyReport.time"></ion-datetime>
     </ion-item> -->
   </ion-list>
-  
-  <ion-button class="save-button" (click)="saveSettings()">Save</ion-button>
+  <!-- <ion-button>Save</ion-button> -->
+  <ion-button size="large" expand="block" class="save-button" (click)="saveSettings()">Save</ion-button>
 </ion-content>

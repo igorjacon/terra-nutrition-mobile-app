@@ -5,6 +5,7 @@ ion-content {
 }
 
 
+
 .selection-box-description {
   color: #464646;
   margin-bottom: 2rem;
@@ -142,7 +143,7 @@ swiper-container {
       // font-size: 4rem;
       // --background: #44aa79;
       --background: var(--ion-color-color2);
-      color: white;
+      // color: white;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
     }
@@ -179,10 +180,10 @@ swiper-container {
         }
       }
       ion-checkbox {
-        --checkmark-color: rgb(37, 87, 29);
+        // --checkmark-color: rgb(37, 87, 29);
         --checkbox-background-checked: var(--ion-color-color1);
-        --border-color: white;
-        --border-color-checked: white;
+        --border-color: transparent;
+        --border-color-checked: transparent;
         --size: 2.3rem;
       }
 

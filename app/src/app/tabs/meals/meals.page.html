@@ -20,7 +20,7 @@
   <ion-toast
   class="meal-unselected-toast"
   isOpen="{{showMealUnselectedToast}}"
-  message="Meal unselected."
+  message="Meal removed."
   duration="1000"
   position="top"
   (ionToastDidDismiss)="showMealUnselectedToast = false">
@@ -114,7 +114,7 @@
 
           <ion-item mode="ios" lines="none" class="list-header">
             <ion-label>
-              <h2>Option {{ i + 1 }}</h2>
+              <h2 class="option-heading">Option {{ i + 1 }}</h2>
             </ion-label>
             <ion-checkbox (ionChange)="onCheckboxChange($event, option, selectedMealPlan.meals[currentSlideIndex])"
                           [disabled]="lockOptions"

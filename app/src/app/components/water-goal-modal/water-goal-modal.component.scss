@@ -32,7 +32,7 @@ ion-toolbar {
     }
   
     .water-settings-list {
-      margin-bottom: 1.4rem;
+      // margin-bottom: 2rem;
   
       .list-header {
         font-size: 1.5rem;
@@ -70,12 +70,14 @@ ion-toolbar {
     }
   
     .save-button {
-      --background: var(--ion-color-green);
+      --background: var(--ion-color-color1);
       --background-activated: #60b48b;
-      width: 90%;
-      height: 50px;
+      // width: 90%;
+      // height: 50px;
+      letter-spacing: 0;
+      font-size: 1.7rem;
       text-align: center;
-      margin: 20px auto;
+      margin: 2rem 0;
       display: block;
       font-size: 1.6rem;
     }
