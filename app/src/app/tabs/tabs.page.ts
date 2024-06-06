@@ -27,6 +27,7 @@ export class TabsPage implements OnInit {
   settingsPage() {
     this.router.navigate(['/customer/settings'])
   }
+  
 
   ngOnInit() {}
 

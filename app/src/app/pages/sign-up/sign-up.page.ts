@@ -183,6 +183,7 @@ export class SignUpPage implements OnInit {
       this.showSuccessToast = true;
     }
   }
+  
 }
 
 
