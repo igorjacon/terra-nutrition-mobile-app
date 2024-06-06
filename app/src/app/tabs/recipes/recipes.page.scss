@@ -81,7 +81,8 @@ ion-content {
             margin: 0; // Standardize margin to 0
             ion-col {
                 padding: 0;
-                margin-bottom: 0.9rem; // Reduce bottom margin to bring rows closer together
+                // margin-bottom: 0.9rem; // Reduce bottom margin to bring rows closer together
+                margin-bottom: 2rem;
                 .recipe-card {
                     background: #fff;
                     border-radius: 20px;
