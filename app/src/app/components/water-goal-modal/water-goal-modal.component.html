@@ -42,7 +42,6 @@
     <ion-item class="list-header">Units</ion-item>
     <ion-item lines="none">
       <ion-select [(ngModel)]="unitPreference" (ionChange)="updateUnitLabel()" aria-label="Preferred Unit">
-        <ion-select-option value="ml">Milliliters (ml)</ion-select-option>
         <ion-select-option value="L">Liters (L)</ion-select-option>
         <ion-select-option value="glasses">Glasses</ion-select-option>
       </ion-select>
@@ -58,6 +57,8 @@
     <br>
     <ion-item lines="none" *ngIf="hydrationTips.enabled">
       <ion-input [(ngModel)]="hydrationTips.frequency" type="number" label="Tips Frequency (times/day)"></ion-input>
+      <br>
+      <br>
     </ion-item>
 
     <!-- <ion-item class="list-header">Weekly Report</ion-item>

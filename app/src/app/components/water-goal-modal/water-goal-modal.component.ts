@@ -177,9 +177,7 @@ export class WaterGoalModalComponent {
   }
 
   updateUnitLabel() {
-    if (this.unitPreference === 'ml') {
-      this.unitLabel = 'milliliters (ml)';
-    } else if (this.unitPreference === 'L') {
+    if (this.unitPreference === 'L') {
       this.unitLabel = 'liters (L)';
     } else {
       this.unitLabel = 'glasses';
