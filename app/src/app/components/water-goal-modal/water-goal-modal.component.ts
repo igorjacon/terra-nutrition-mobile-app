@@ -7,6 +7,7 @@ import { arrowBackOutline, chevronBackOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { LocalNotifications, PermissionStatus } from '@capacitor/local-notifications';
 import { IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonList, IonItem, IonInput, IonToggle, IonLabel, IonSelect, IonSelectOption, IonDatetime, IonButton } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-water-goal-modal',
   templateUrl: './water-goal-modal.component.html',
@@ -56,12 +57,17 @@ export class WaterGoalModalComponent {
     private modalController: ModalController,
     private storageService: StorageService,
     private alertController: AlertController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {
     addIcons({
       arrowBackOutline,
       chevronBackOutline
     });
+  }
+
+  navigateToDashboard() {
+    this.router.navigateByUrl('customer/dashboard')
   }
 
   async ngOnInit() {
