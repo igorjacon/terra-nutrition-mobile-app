@@ -42,6 +42,26 @@ ion-header {
     border-radius: 100px;
     margin-bottom: 15px;
   }
+
+  .photo-div {
+    background-color: rgb(181, 234, 179);
+    padding: 1rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 11rem;
+    right: 13rem;
+    .photo-icon {
+      // color: green;
+      // color: white;
+      font-size: 2rem;
+      // font-weight: 800;
+      position: relative;
+      right: 0;
+    }
+  }
   
   .profile-details {
     text-align: center;

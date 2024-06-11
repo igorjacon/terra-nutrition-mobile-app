@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { AuthConstants } from 'src/app/config/auth-constants';
-import { arrowBackOutline, chevronBackOutline, save } from 'ionicons/icons';
+import { arrowBackOutline, chevronBackOutline, cameraOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
@@ -39,7 +39,8 @@ export class ProfilePage implements OnInit {
   ) {
     addIcons({
       arrowBackOutline,
-      chevronBackOutline
+      chevronBackOutline,
+      cameraOutline
     })
   }
 

@@ -13,7 +13,10 @@
 <ion-content>
   <div class="profile-card">
     <img [src]="userImgDir + profileImgPath" class="profile-image" alt="Profile Picture">
-    <ion-button color="success" (click)="getPicture()">Change Photo</ion-button>
+    <div class="photo-div">
+      <ion-icon (click)="getPicture()" class="photo-icon" name="camera-outline"></ion-icon>
+    </div>
+    <!-- <ion-button color="success" (click)="getPicture()">Change Photo</ion-button> -->
     <div class="profile-details">
       <h2 class="customer-name">{{ customer.user?.firstName }} {{ customer.user?.lastName }}</h2>
       <p class="customer-email" style="color: var(--ion-color-color4);">{{ customer.user?.email }}</p>
