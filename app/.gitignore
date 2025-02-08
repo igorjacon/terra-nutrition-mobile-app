@@ -38,6 +38,7 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
+../.idea/*
 .project
 .classpath
 .c9/
@@ -45,7 +46,6 @@ yarn-error.log
 .settings/
 *.sublime-project
 *.sublime-workspace
-
 
 # Visual Studio Code
 .vscode
@@ -60,13 +60,13 @@ yarn-error.log
 /.angular/cache
 .sass-cache/
 /connect.lock
-/coverage
 /libpeerconnection.log
 testem.log
 /typings
 ios/*
 app/ios/
 ../.DS_Store
+../.idea/
 
 # System files
 .DS_Store
