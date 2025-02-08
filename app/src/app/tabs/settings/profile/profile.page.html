@@ -58,4 +58,15 @@
       <div class="info-value">{{ customer.user?.address?.lineOne }}, {{ customer.user?.address?.city }}, {{ customer.user?.address?.zipCode }}</div>
     </div>
   </div>
+
+  <!-- <ion-item>
+    To permanently delete my account.
+  </ion-item> -->
+  <ion-button class="remove-button" id="remove-alert" color="danger">Delete Account</ion-button>
+  <ion-alert
+    trigger="remove-alert"
+    header="Terminate Account"
+    message="This will permanently remove your account from our database. Are you sure you want to continue?"
+    [buttons]="alertButtons"
+  ></ion-alert>
 </ion-content>

@@ -39,6 +39,10 @@ export const routes: Routes = [
         loadComponent: () => import('./settings/profile/profile.page').then((m) => m.ProfilePage)
       },
       {
+        path: 'settings/information',
+        loadComponent: () => import('./settings/information/information.component').then((m) => m.InformationComponent)
+      },
+      {
         path: 'settings/terms-and-conditions',
         loadComponent: () => import('./settings/terms-and-conditions/terms-and-conditions.page').then((m) => m.TermsAndConditionsPage)
       },

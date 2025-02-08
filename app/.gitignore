@@ -22,6 +22,8 @@ log.txt
 /www
 /platforms
 /plugins
+/ios
+
 
 # Compiled output
 /dist
@@ -62,6 +64,7 @@ yarn-error.log
 testem.log
 /typings
 ios/*
+app/ios/
 ../.DS_Store
 
 # System files

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="customer/settings" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    
+    <div class="logo" (click)="goToDashboard()">
+      <img src="assets/imgs/logo.png">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="information-card">
+    <ion-card-header>
+      <ion-card-title>Information & Sources</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="information-content">
+      
+        <p>We are committed to providing accurate and reliable nutritional information in our meal plans. Below, you will find the primary sources of data and guidelines used in the app. We encourage users to review these resources for more detailed information.</p>
+        
+        <h2>1. Australian Food Standards</h2>
+        <p>Our meal plans and ingredient information are aligned with the guidelines and standards provided by Food Standards Australia New Zealand (FSANZ). FSANZ is a statutory authority responsible for developing food standards for Australia and New Zealand. You can learn more about their regulations and guidelines here:</p>
+        <ul>
+          <li><a href="https://www.foodstandards.gov.au">Food Standards Australia New Zealand (FSANZ) - Official Website</a></li>
+        </ul>
+        
+        <h2>2. Nutritional Databases</h2>
+        <p>We use reliable nutritional databases to ensure the accuracy of the nutritional information provided for each meal. These sources are recognized for their comprehensive food composition data:</p>
+        <ul>
+          <li><a href="https://afcd.foodstandards.gov.au/default.aspx">AFCD, previously known as NUTTAB</a></li>
+          <li><a href="https://www.foodstandards.gov.au/science-data/monitoringnutrients/afcd/australian-food-composition-database-download-excel-files">Australian Food Composition Database</a></li>
+        </ul>
+        
+        <h2>3. Disclaimer</h2>
+        <p>This app is designed for use by registered dietitians and other healthcare professionals. The meal plans and nutritional information provided are based on current standards and guidelines. While we strive to ensure the accuracy of the information, it is the responsibility of the healthcare provider to make individualized dietary recommendations based on their professional expertise and knowledge of the client’s specific needs.</p>
+        <h2>4. Contact Us</h2>
+        <p>If you have any questions or would like more information about the sources we use, feel free to contact us at camila.ferraz&#64;terranutri.net</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

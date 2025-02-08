@@ -43,6 +43,23 @@ export class ProfilePage implements OnInit {
     })
   }
 
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'Yes',
+      role: 'confirm',
+      handler: () => {
+        this.deleteAccount();
+      },
+    },
+  ];
+
   goToDashboard() {
     this.router.navigateByUrl('customer/dashboard')
   }
@@ -68,6 +85,20 @@ export class ProfilePage implements OnInit {
         this.formattedPhoneNumber = this.getFormattedPhone(this.customer.user.phones);
       }
     });
+  }
+
+  async deleteAccount() {
+    this.storageService.get(AuthConstants.ACCESS_TOKEN).then((token) => {
+      this.httpService.del("/api/customers/"+this.customer.user.id, token).subscribe(
+        (response) => {
+          this.storageService.get(AuthConstants.REFRESH_TOKEN).then(res => {
+            this.authService.logout(res);
+          });
+        },
+        (error) => {
+        }
+      );
+    })
   }
 
   getFormattedPhone(phones: Array<{ prefix: string, number: string }>): string {

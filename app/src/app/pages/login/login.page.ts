@@ -32,7 +32,6 @@ export class LoginPage implements OnInit {
   errorToastText = ""; //the text that will be used in the errorToast
   // showSuccessToast = false; //boolean value on whether or not to show the successToast
   // successToastText = ""; //the text that will be used in the successToast
-  loading: HTMLIonLoadingElement | null = null;
   //representation of form controls that make up a form
   loginForm = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -58,11 +57,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   async showLoading() {
-    this.loading = await this.loadingCtrl.create({
+    const loading = await this.loadingCtrl.create({
       message: 'Loading...'
     });
 
-    this.loading.present();
+    await loading.present();
+    return loading;
   }
 
   /* The changeEyeIcon method
@@ -78,7 +78,6 @@ export class LoginPage implements OnInit {
 
 
   async loginAction(event: Event) {
-    this.showLoading();
     event.preventDefault();
     if(!this.loginForm.value.email || !this.loginForm.value.password) {
       this.isInvalid = true;
@@ -109,14 +108,14 @@ export class LoginPage implements OnInit {
               this.storageService.store(AuthConstants.CUSTOMER_DATA, res);
               // Redirect user to dashboard
               this.router.navigate(['/customer/dashboard']);
-              this.loading?.dismiss();
+              // loading.dismiss();
             } else {
-              this.loading?.dismiss();
+              // loading.dismiss();
             }
           });
         },
         (error) => {
-          this.loading?.dismiss();
+          // loading.dismiss();
           // Handle authentication error
           this.isInvalid = true;
           this.errorMsg = error.error.message;

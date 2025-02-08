@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonRow, IonText,
   IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
-import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline, personAddOutline} from 'ionicons/icons';
+import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline, personAddOutline, calendar} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -10,6 +10,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
 import { MaskitoModule } from '@maskito/angular';
 import { LoadingController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { LoadingController } from '@ionic/angular';
   standalone: true,
   imports: [IonContent, IonToast, RouterLink, ReactiveFormsModule, IonButton, IonInput, MaskitoModule, IonModal, IonTextarea,
     IonDatetimeButton, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem, IonDatetime,
-    IonSelect, IonSelectOption, IonList,   
+    IonSelect, IonSelectOption, IonList, CommonModule
   ]
 })
 export class SignUpPage implements OnInit {
@@ -32,6 +33,7 @@ export class SignUpPage implements OnInit {
   showPasswordToast = false;
   passwordToastText = "";
   dob = "";
+  selectedDate: string | null = null;
   loading: HTMLIonLoadingElement | null = null;
   
   // readonly phoneMask: MaskitoOptions = {
@@ -52,11 +54,20 @@ export class SignUpPage implements OnInit {
       personCircleOutline,
       eyeOutline,
       eyeOffOutline,
-      personAddOutline
+      personAddOutline,
+      calendar
     });
   }
 
   ngOnInit() {
+  }
+
+  openPicker() {
+    this.selectedDate = new Date().toISOString(); // Temporarily set the date when opening
+  }
+
+  clearDate() {
+    this.selectedDate = null; // Reset the value when canceled
   }
 
   async showLoading() {
@@ -72,30 +83,30 @@ export class SignUpPage implements OnInit {
   }
 
   onDateChange(event: any) {
-    this.dob = event.detail.value;
+    this.selectedDate = event.detail.value;
   }
   //Form related
   signupForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
-    phoneNumber: new FormControl('', Validators.required),
-    email: new FormControl(null, [Validators.required, Validators.pattern(this.formValidator.emailRegex)]),
-    addressLineOne: new FormControl('', Validators.required),
-    addressLineTwo: new FormControl(''),
-    addressCity: new FormControl('', Validators.required),
-    addressZipCode: new FormControl('', Validators.required),
-    addressState: new FormControl('', Validators.required),
-    addressCountry: new FormControl('', Validators.required),
+    // dob: new FormControl(''),
+    phoneNumber: new FormControl(''),
+    occupation: new FormControl(''),
+    addressLineOne: new FormControl(null),
+    addressLineTwo: new FormControl(null),
+    addressCity: new FormControl(null),
+    addressZipCode: new FormControl(null),
+    addressState: new FormControl(null),
+    addressCountry: new FormControl(null),
     height: new FormControl('', Validators.required),
     weight: new FormControl('', Validators.required),
     goalWeight: new FormControl('', Validators.required),
-    dob: new FormControl(''),
-    occupation: new FormControl('', Validators.required),
     dietaryPreference: new FormControl('', Validators.required),
     goals: new FormControl('', Validators.required),
     reasonSeekProfessional: new FormControl('', Validators.required),
     currExerciseRoutine: new FormControl(''),
     medicalInfo: new FormControl(''),
+    email: new FormControl(null, [Validators.required, Validators.pattern(this.formValidator.emailRegex)]),
     password: new FormControl(null, Validators.required),
     confirmPassword: new FormControl(null, Validators.required),
   },
@@ -112,25 +123,17 @@ export class SignUpPage implements OnInit {
   }
 
   signUp(event: Event) {
-    this.showLoading();
+    // await this.showLoading();
     event.preventDefault();
     const errors = this.signupForm.errors;
-    if (!this.signupForm.valid && errors !== null) {
-      if(!this.signupForm.value.email || !this.signupForm.value.password || !this.signupForm.value.confirmPassword ) {
-        this.errorToastText = "You must fill out all fields before signing up.";
-        this.showErrorToast = true;
-      } else if (errors?.['passwordmatcherror']) {
+    if (!this.signupForm.valid || errors !== null) {
+      this.errorToastText = "Please fill in the required fields.";
+      if (errors?.['passwordmatcherror']) {
         this.errorToastText = "Your passwords do not match.";
-        this.showErrorToast = true;
-      } else if (errors?.['invalidemailerror']) {
-        this.errorToastText = "Invalid email format.";
-        this.showErrorToast = true;
       }
-      // else if (errors?.['passwordstrengtherror']) {
-      //   this.passwordToastText = "Your password requires a minimum length of 8 characters and needs an uppercase and lowercase character.";
-      //   this.showPasswordToast = true;
-      // }
-      this.loading?.dismiss();
+      this.showErrorToast = true;
+      this.signupForm.markAllAsTouched();
+      // this.loading?.dismiss();
     } else {
       const payload = {
         'user': {
@@ -156,7 +159,7 @@ export class SignUpPage implements OnInit {
         'height': this.signupForm.value.height + " cm",
         'weight': this.signupForm.value.weight + " kg",
         'goalWeight': this.signupForm.value.goalWeight + " kg",
-        'dob': this.dob,
+        'dob': this.selectedDate,
         'occupation': this.signupForm.value.occupation,
         'dietaryPreference': this.signupForm.value.dietaryPreference,
         'goals': this.signupForm.value.goals,
@@ -169,18 +172,17 @@ export class SignUpPage implements OnInit {
         (response) => {
           // Redirect user to registration complete page
           this.router.navigate(['/registration-complete']);
-          this.loading?.dismiss();
+          // this.loading?.dismiss();
+          this.successToastText = "Registration Complete."
+          this.showSuccessToast = true;
         },
         (error) => {
-          this.loading?.dismiss();
+          // this.loading?.dismiss();
           // Handle authentication error
-          this.errorToastText = "An error occurred. Please try again later."
-          this.showErrorToast = true;
+          // this.errorToastText = "An error occurred. Please try again later."
+          // this.showErrorToast = true;
         }
       );
-
-      this.successToastText = "Registration Complete."
-      this.showSuccessToast = true;
     }
   }
   

@@ -44,6 +44,19 @@ export class HttpService {
     }));
   }
 
+  del(serviceName: string, token: string) {
+    let headers = {}
+    if (token) {
+      headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+    }
+    const options = { headers: headers};
+    const url = environment.api_base_url + serviceName;
+
+    return this.http.delete(url, options);
+  }
+
   async refresh(serviceName:string) {
     const refreshToken = await this.storageService.get(AuthConstants.REFRESH_TOKEN);
     const url = environment.api_base_url + "/api/token/refresh";

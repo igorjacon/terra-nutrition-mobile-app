@@ -92,4 +92,20 @@ ion-header {
     margin-bottom: 2rem;
     font-size: 1.4rem;
   }
+
+  .remove-button {
+    // --background: var(--danger);
+    // --background-activated: #60b48b;
+    // position: fixed;
+    left: 0;
+    bottom: 2.1rem;
+    width: 98%;
+    text-align: center;
+    font-size: 1.6rem;
+    --border-radius: 10px;
+    letter-spacing: 0;
+    font-size: 1.7rem;
+    text-transform: none;
+    margin-top: 2rem;
+}
   

@@ -53,27 +53,26 @@
         formControlName="firstName"
         id="firstName"
         mode="md"
-        label="First Name"
         label-placement="floating"
         name="firstName"
         fill="outline"
         type="text"
-      ></ion-input>
+      ><div slot="label">First Name <ion-text color="danger">(Required)</ion-text></div></ion-input>
       <ion-input
         formControlName="lastName"
         id="lastName"
         mode="md"
         name="lastName"
-        label="Last Name"
         label-placement="floating"
         fill="outline"
         type="text"
-      ></ion-input>
+      ><div slot="label">Last Name <ion-text color="danger">(Required)</ion-text></div></ion-input>
 
       <!-- Date  -->
       <ion-item class="dob" lines="none">
         <ion-label>Date of Birth</ion-label>
-        <ion-datetime-button datetime="dob"></ion-datetime-button>
+        <ion-datetime-button *ngIf="selectedDate" datetime="dob"></ion-datetime-button>
+        <ion-button *ngIf="!selectedDate" (click)="openPicker()">Select Date</ion-button>
         <ion-modal
         style="--background: transparent;"
         [keepContentsMounted]="true">
@@ -85,7 +84,11 @@
             id="dob"
             color="success"
             presentation="date"
-            (ionChange)="onDateChange($event)"></ion-datetime>
+            [preferWheel]="true"
+            [showDefaultButtons]="true"
+            (ionCancel)="clearDate()"
+            (ionChange)="onDateChange($event)">
+          </ion-datetime>
           </ng-template>
         </ion-modal>
       </ion-item>
@@ -183,10 +186,10 @@
         label-placement="floating"
         id="height"
         mode="md"
-        label="Height"
         name="height"
         fill="outline"
       >
+        <div slot="label">Height <ion-text color="danger">(Required)</ion-text></div>
         <ion-label slot="end">cm</ion-label>
       </ion-input>
       <ion-input
@@ -194,11 +197,11 @@
         label-placement="floating"
         id="weight"
         mode="md"
-        label="Weight"
         name="weight"
         fill="outline"
         type="text"
       >
+        <div slot="label">Weight <ion-text color="danger">(Required)</ion-text></div>
         <ion-label slot="end">kg</ion-label>
       </ion-input>
       <ion-input
@@ -206,11 +209,11 @@
         label-placement="floating"
         id="goalWeight"
         mode="md"
-        label="Goal Weight"
         name="goalWeight"
         fill="outline"
         type="text"
       >
+        <div slot="label">Goal Weight <ion-text color="danger">(Required)</ion-text></div>
         <ion-label slot="end">kg</ion-label>
       </ion-input>
     </div>
@@ -219,34 +222,36 @@
       <h1>Goals and Preferences</h1>
       <ion-list class="diet">
         <ion-item lines="none" class="diet-item">
-          <ion-select label="Dietary Preference"
+          <ion-select
               formControlName="dietaryPreference"
               name="dietaryPreference"
               class="diet-select" 
-              aria-label="diet" 
-              placeholder="Preference">
+              aria-label="diet"
+              label-placement="floating">
             <ion-select-option value="omnivore">Omnivore</ion-select-option>
             <ion-select-option value="pescatarian">Pescatarian</ion-select-option>
             <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
             <ion-select-option value="vegan">Vegan</ion-select-option>
             <ion-select-option value="other">Other</ion-select-option>
+            <div slot="label">Dietary Preference <ion-text color="danger">(Required)</ion-text></div>
           </ion-select>
         </ion-item>
       </ion-list>
 
       <ion-list class="goals">
         <ion-item lines="none" class="goals-item">
-          <ion-select label="Dietary Goals" 
+          <ion-select 
               formControlName="goals"
               name="goals"
-              aria-label="goals" 
-              placeholder="Goals">
+              aria-label="goals"
+              label-placement="floating">
             <ion-select-option value="lose-weight">Lose weight</ion-select-option>
             <ion-select-option value="gain-weight">Gain weight</ion-select-option>
             <ion-select-option value="energy-and-vitality">Energy and vitality</ion-select-option>
             <ion-select-option value="eat-healthier">Eat healthier</ion-select-option>
             <ion-select-option value="pregnancy">Pregnancy</ion-select-option>
             <ion-select-option value="other">Other</ion-select-option>
+            <div slot="label">Dietary Goals <ion-text color="danger">(Required)</ion-text></div>
           </ion-select>
         </ion-item>
       </ion-list>
@@ -260,9 +265,9 @@
       id="reasonSeekProfessional"
       mode="md"
       name="reasonSeekProfessional"
-      label="Reason for seeking a professional" 
       labelPlacement="floating" 
       fill="outline">
+      <div slot="label">Reason for seeking a professional <ion-text color="danger">(Required)</ion-text></div>
     </ion-textarea>
       <!-- <ion-textarea
         formControlName="currExerciseRoutine"
@@ -307,21 +312,19 @@
     id="email"
     mode="md"
     name="email"
-
-
     fill="outline"
-    placeholder="Email"
     type="email"
-  ></ion-input>
+    label-placement="floating"
+  ><div slot="label">Email <ion-text color="danger">(Required)</ion-text></div></ion-input>
     <ion-input
       formControlName="password"
       id="password"
       mode="md"
       fill="outline"
-      placeholder="Password"
       type="password"
+      label-placement="floating"
       [type]="passIsVisible ? 'text' : 'password'"
-    >
+    ><div slot="label">Password <ion-text color="danger">(Required)</ion-text></div>
       <ion-button (click)="changeEyeIcon()" fill="clear" slot="end" aria-label="Show/hide">
         <ion-icon slot="icon-only" name="{{currentIconName}}"></ion-icon>
       </ion-button>
@@ -331,9 +334,9 @@
       id="confirmPassword"
       mode="md"
       fill="outline"
-      placeholder="Confirm Password"
       type="password"
-    ></ion-input>
+      label-placement="floating"
+    ><div slot="label">Confirm Password <ion-text color="danger">(Required)</ion-text></div></ion-input>
     <!-- END PASSWORD -->
 
     <ion-button type="submit" class="sign-up" size="large" expand="block">Sign Up</ion-button>
