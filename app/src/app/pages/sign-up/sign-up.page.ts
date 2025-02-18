@@ -161,8 +161,7 @@ export class SignUpPage implements OnInit {
           // Redirect user to registration complete page
           this.router.navigate(['/registration-complete']);
           this.loading = false;
-          this.successToastText = "Registration Complete."
-          this.showSuccessToast = true;
+          this.signupForm.reset();
         },
         (error) => {
           this.loading = false;
