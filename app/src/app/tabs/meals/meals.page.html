@@ -124,6 +124,34 @@
             </ion-checkbox>
           </ion-item>
 
+            <!-- Calorie information -->
+            <ion-item class="calorie-item">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                    Protein
+                    <br>
+                    {{ option.totalProtein }} g
+                  </ion-col>
+                  <ion-col>
+                    Carbs
+                    <br>
+                    {{ option.totalCarbs }} g
+                  </ion-col>
+                  <ion-col>
+                    Fat
+                    <br>
+                    {{ option.totalFat }} g
+                  </ion-col>
+                  <ion-col class="kcal">
+                    Calories
+                    <br>
+                    {{ option.totalCalories }} g
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+
           <ion-item lines="none" *ngFor="let itemEntry of option.foodItemEntries; trackBy:trackItems">
             <ion-label>
               <h2>{{ itemEntry?.foodItem?.name }}</h2>
@@ -132,7 +160,6 @@
           </ion-item>
 
           <ion-item lines="none" *ngIf="option.description">
-
               <ion-label class="break-line">
                 <h2>
                   {{ option.description }}

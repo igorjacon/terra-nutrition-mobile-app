@@ -1,15 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonRow, IonText,
-  IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
+  IonTitle, IonToast, IonToolbar, IonDatetime, IonDatetimeButton, IonModal, IonTextarea, IonList, IonSelect, IonSelectOption, IonSpinner } from '@ionic/angular/standalone';
 import {personOutline, personCircleOutline, eyeOutline, eyeOffOutline, personAddOutline, calendar} from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import { FormValidationService } from 'src/app/services/form-validation.service';
 import { HttpService } from 'src/app/services/http.service';
-import { MaskitoOptions, MaskitoElementPredicate, maskitoTransform } from '@maskito/core';
-import { MaskitoModule } from '@maskito/angular';
-import { LoadingController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 
 
@@ -18,9 +15,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sign-up.page.html',
   styleUrls: ['./sign-up.page.scss'],
   standalone: true,
-  imports: [IonContent, IonToast, RouterLink, ReactiveFormsModule, IonButton, IonInput, MaskitoModule, IonModal, IonTextarea,
+  imports: [IonContent, IonToast, RouterLink, ReactiveFormsModule, IonButton, IonInput, IonModal, IonTextarea,
     IonDatetimeButton, IonRow, IonCol, IonLabel, IonHeader, IonToolbar, IonTitle, IonIcon, IonText, IonItem, IonDatetime,
-    IonSelect, IonSelectOption, IonList, CommonModule
+    IonSelect, IonSelectOption, IonList, CommonModule, IonSpinner
   ]
 })
 export class SignUpPage implements OnInit {
@@ -34,7 +31,7 @@ export class SignUpPage implements OnInit {
   passwordToastText = "";
   dob = "";
   selectedDate: string | null = null;
-  loading: HTMLIonLoadingElement | null = null;
+  loading = false;
   
   // readonly phoneMask: MaskitoOptions = {
   //   mask: ['+', '61', ' ', '(', /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/],
@@ -46,8 +43,7 @@ export class SignUpPage implements OnInit {
     private formBuilder: FormBuilder,
     private formValidator: FormValidationService,
     private httpService: HttpService,
-    private router: Router,
-    private loadingCtrl: LoadingController
+    private router: Router
   ) {
     addIcons({
       personOutline,
@@ -68,14 +64,6 @@ export class SignUpPage implements OnInit {
 
   clearDate() {
     this.selectedDate = null; // Reset the value when canceled
-  }
-
-  async showLoading() {
-    this.loading = await this.loadingCtrl.create({
-      message: 'Loading...'
-    });
-
-    this.loading.present();
   }
 
   navigateToLoginPage() {
@@ -123,7 +111,7 @@ export class SignUpPage implements OnInit {
   }
 
   signUp(event: Event) {
-    // await this.showLoading();
+    this.loading = true;
     event.preventDefault();
     const errors = this.signupForm.errors;
     if (!this.signupForm.valid || errors !== null) {
@@ -133,7 +121,7 @@ export class SignUpPage implements OnInit {
       }
       this.showErrorToast = true;
       this.signupForm.markAllAsTouched();
-      // this.loading?.dismiss();
+      this.loading = false;
     } else {
       const payload = {
         'user': {
@@ -172,15 +160,15 @@ export class SignUpPage implements OnInit {
         (response) => {
           // Redirect user to registration complete page
           this.router.navigate(['/registration-complete']);
-          // this.loading?.dismiss();
+          this.loading = false;
           this.successToastText = "Registration Complete."
           this.showSuccessToast = true;
         },
         (error) => {
-          // this.loading?.dismiss();
+          this.loading = false;
           // Handle authentication error
-          // this.errorToastText = "An error occurred. Please try again later."
-          // this.showErrorToast = true;
+          this.errorToastText = "An error occurred. Please try again later."
+          this.showErrorToast = true;
         }
       );
     }

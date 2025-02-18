@@ -339,7 +339,10 @@
     ><div slot="label">Confirm Password <ion-text color="danger">(Required)</ion-text></div></ion-input>
     <!-- END PASSWORD -->
 
-    <ion-button type="submit" class="sign-up" size="large" expand="block">Sign Up</ion-button>
+    <ion-button [disabled]="loading" type="submit" class="sign-up" size="large" expand="block">
+      <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+      <span *ngIf="!loading">Sign Up</span>
+    </ion-button>
   </form>
    
   <ion-row class="log-in">

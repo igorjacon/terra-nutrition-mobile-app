@@ -1,10 +1,22 @@
 //header set in global css
-
-ion-content {
-
+.calorie-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
 }
-
-
+ion-grid {
+  padding: 0px;
+}
+ion-col {
+  padding: 10px;
+  background-color: #95d1a3;
+  // border: solid 1px #fff;
+  color: #000;
+  text-align: center;
+}
+.kcal {
+  background-color: #006400;
+  color: #fff;
+}
 
 .selection-box-description {
   color: #464646;
