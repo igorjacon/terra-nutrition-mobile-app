@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'net.terranutri',
-  appName: 'Terra Nutri',
+  appId: 'terranutri.net',
+  appName: 'TERRA WELLNESS & NUTRITION',
   webDir: 'www/browser',
   server: {
     androidScheme: 'https'
