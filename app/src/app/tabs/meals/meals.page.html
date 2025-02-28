@@ -125,7 +125,7 @@
           </ion-item>
 
             <!-- Calorie information -->
-            <ion-item class="calorie-item">
+            <ion-item class="calorie-item" *ngIf="option.totalCalories">
               <ion-grid>
                 <ion-row>
                   <ion-col>
@@ -148,6 +148,14 @@
                     <br>
                     {{ option.totalCalories }} kcal
                   </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+
+            <ion-item class="calorie-item" *ngIf="!option.totalCalories">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>No nutritional value was included for this meal</ion-col>
                 </ion-row>
               </ion-grid>
             </ion-item>

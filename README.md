@@ -105,3 +105,13 @@ npx cap sync
 ```
 npx cap run ios
 ```
+
+### ios camera permission
+```
+<key>NSCameraUsageDescription</key>
+<string>We need access to your camera to enable you to update your profile picture.</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>We need access to your photo library to save photos of your meals.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>We need access to your photo library to let you track your progress with photos and videos.</string>
+```

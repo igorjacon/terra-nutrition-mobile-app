@@ -2,20 +2,20 @@
 .calorie-item {
   --padding-start: 0;
   --inner-padding-end: 0;
+  --min-height: auto;
 }
 ion-grid {
   padding: 0px;
 }
 ion-col {
   padding: 10px;
-  background-color: #95d1a3;
-  // border: solid 1px #fff;
-  color: #000;
+  background-color: #c5e5a5;
+  color: var(--ion-color-color4);
   text-align: center;
 }
 .kcal {
-  background-color: #006400;
-  color: #fff;
+  background-color: var(--ion-color-yellow);
+  color: var(--ion-color-color4);
 }
 
 .selection-box-description {
